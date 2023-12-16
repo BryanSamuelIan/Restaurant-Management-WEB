@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
+    public $timestamps = true;
 
     protected $fillable = [
         'status_state'

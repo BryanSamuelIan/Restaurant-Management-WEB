@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('sallary');
             $table->integer('ktp')->nullable();
             $table->boolean('is_active');
+            $table->timestamps();
         });
     }
 

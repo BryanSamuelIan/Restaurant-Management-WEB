@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction_menu extends Model
 {
     use HasFactory;
+    public $timestamps = true;
 
     protected $fillable = [
         'transaction_id',

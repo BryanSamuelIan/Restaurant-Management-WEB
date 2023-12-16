@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,12 +17,13 @@ return new class extends Migration
                 ->references('id')
                 ->on('transactions')
                 ->onDelete('cascade');
-                $table->unsignedBigInteger('menu_id');
+            $table->unsignedBigInteger('menu_id');
             $table->foreign('menu_id')
                 ->references('id')
                 ->on('menus')
                 ->onDelete('cascade');
             $table->integer('amount');
+            $table->timestamps();
         });
     }
 

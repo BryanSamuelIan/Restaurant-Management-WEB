@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('banner');
             $table->boolean('is_active');
+            $table->timestamps();
         });
     }
 

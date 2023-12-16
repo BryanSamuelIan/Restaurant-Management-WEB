@@ -14,10 +14,11 @@ class EmployeeSeeder extends Seeder
     public function run(): void
     {
         Employee::create([
-            'name' => 'anita',
+            ['name' => 'anita',
             'phone' => 1234567,
             'sallary' => 10000,
-            'is_active' => true
+            'is_active' => true],
+
         ]);
     }
 }

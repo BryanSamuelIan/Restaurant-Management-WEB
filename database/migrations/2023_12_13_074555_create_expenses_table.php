@@ -23,6 +23,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->timestamp('transaction_time')->nullable();
             $table->string('payment');
+            $table->timestamps();
         });
     }
 
