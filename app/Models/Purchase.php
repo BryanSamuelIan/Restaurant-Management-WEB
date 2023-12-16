@@ -21,4 +21,8 @@ class Purchase extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function menu_purchased() {
+        return $this->hasMany(Menu_purchased::class);
+    }
 }

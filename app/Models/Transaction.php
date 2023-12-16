@@ -17,4 +17,16 @@ class Transaction extends Model
         'subtotal',
         'total'
     ];
+
+    public function transaction_menus() {
+        return $this->hasMany(Transaction_menu::class);
+    }
+
+    public function payment_type() {
+        return $this->belongsTo(Payment_type::class);
+    }
+
+    public function status() {
+        return $this->belongsTo(Status::class);
+    }
 }

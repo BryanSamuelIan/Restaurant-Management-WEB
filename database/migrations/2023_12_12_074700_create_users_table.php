@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('password');
+            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->foreign('employee_id')
+                ->references('id')
+                ->on('employees')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
                 ->references('id')

@@ -11,10 +11,19 @@ class Menu extends Model
 
     protected $fillable = [
         'category_id',
+        'supplier_id',
         'name',
         'description',
         'price',
         'alcohol%',
         'photo'
     ];
+
+    public function menu_purchaseds() {
+        return $this->hasMany(Menu_purchased::class);
+    }
+
+    public function transaction_menu() {
+        return $this->hasMany(Transaction_menu::class);
+    }
 }

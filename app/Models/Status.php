@@ -12,4 +12,8 @@ class Status extends Model
     protected $fillable = [
         'status_state'
     ];
+
+    public function transactions() {
+        return $this->hasMany(Transaction::class);
+    }
 }

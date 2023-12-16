@@ -15,4 +15,12 @@ class Menu_purchased extends Model
         'price',
         'quantity'
     ];
+
+    public function menu() {
+        return $this->belongsTo(Menu::class);
+    }
+
+    public function purchase() {
+        return $this->belongsTo(Purchase::class);
+    }
 }

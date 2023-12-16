@@ -14,4 +14,12 @@ class Transaction_menu extends Model
         'menu_id',
         'amount'
     ];
+
+    public function menu() {
+        return $this->belongsTo(Menu::class);
+    }
+
+    public function transaction() {
+        return $this->belongsTo(Transaction::class);
+    }
 }

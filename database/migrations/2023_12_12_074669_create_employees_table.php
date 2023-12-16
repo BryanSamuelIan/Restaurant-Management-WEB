@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('phone');
             $table->integer('sallary');
-            $table->integer('ktp');
+            $table->integer('ktp')->nullable();
             $table->boolean('is_active');
         });
     }

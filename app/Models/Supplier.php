@@ -15,4 +15,8 @@ class Supplier extends Model
         'phone',
         'email'
     ];
+
+    public function menus() {
+        return $this->hasMany(Menu::class);
+    }
 }

@@ -18,6 +18,11 @@ return new class extends Migration
                 ->references('id')
                 ->on('categories')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('supplier_id')->nullable();
+            $table->foreign('supplier_id')
+                ->references('id')
+                ->on('suppliers')
+                ->onDelete('cascade');
             $table->string('name');
             $table->string('desription');
             $table->integer('price');

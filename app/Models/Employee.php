@@ -16,4 +16,8 @@ class Employee extends Model
         'ktp',
         'is_active'
     ];
+
+    public function user() {
+        return $this->hasOne(User::class);
+    }
 }
