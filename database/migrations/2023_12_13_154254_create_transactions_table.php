@@ -31,6 +31,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('subtotal');
             $table->integer('total');
+            $table->timestamps();
         });
     }
 

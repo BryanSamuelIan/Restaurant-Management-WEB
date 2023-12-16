@@ -25,6 +25,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('price');
             $table->integer('quantity');
+            $table->timestamps();
         });
     }
 

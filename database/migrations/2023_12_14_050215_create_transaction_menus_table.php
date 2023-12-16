@@ -24,6 +24,7 @@ return new class extends Migration
                 ->on('menus')
                 ->onDelete('cascade');
             $table->integer('amount');
+            $table->timestamps();
         });
     }
 

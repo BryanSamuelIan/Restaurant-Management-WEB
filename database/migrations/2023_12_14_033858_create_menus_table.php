@@ -28,6 +28,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('alcohol%');
             $table->string('photo');
+            $table->timestamps();
         });
     }
 
