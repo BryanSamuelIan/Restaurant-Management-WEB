@@ -554,7 +554,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 40,
                 'photo' => 'images/21.png',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 1,
                 'name' => '4 Prost Alster',
                 'description' => '4 Bir Prost Alster 330ml',
@@ -562,7 +562,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 2,
                 'photo' => 'images/23.jpg',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 3,
                 'name' => '4 Radler',
                 'description' => '4 Bir Bintang Radler 330ml',
@@ -570,7 +570,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 0,
                 'photo' => 'images/24.png',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 1,
                 'name' => '4 Guiness',
                 'description' => '4 Bir Guiness 330ml',
@@ -578,7 +578,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.2,
                 'photo' => 'images/25.jpg',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 3,
                 'name' => '3 Bintang',
                 'description' => '3 Bir Bintang 620ml',
@@ -586,7 +586,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.7,
                 'photo' => 'images/27.jpeg',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 1,
                 'name' => '3 Draft',
                 'description' => '3 Draft Beer 620ml',
@@ -594,7 +594,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.9,
                 'photo' => 'images/26.jpg',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 1,
                 'name' => '3 Heinekken',
                 'description' => '3 Bir Heinekken 620ml',
@@ -602,7 +602,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.9,
                 'photo' => 'images/28.jpg',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 1,
                 'name' => '3 Prost Biru',
                 'description' => '3 Bir Prost Biru 620ml',
@@ -610,7 +610,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.8,
                 'photo' => 'images/29.jpg',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 1,
                 'name' => '3 Prost',
                 'description' => '3 Bir Prost Merah 620ml',
@@ -618,7 +618,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.8,
                 'photo' => 'images/30.jpg',
             ], [
-                'category_id' => 10,
+                'category_id' => 11,
                 'supplier_id' => 4,
                 'name' => '3 Singaraja',
                 'description' => '3 Bir Singaraja 620ml',
@@ -626,7 +626,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.8,
                 'photo' => 'images/31.png',
             ], [
-                'category_id' => 10,
+                'category_id' => 12,
                 'supplier_id' => 3,
                 'name' => '4 Bintang',
                 'description' => '4 Bir Bintang 620ml',
@@ -634,7 +634,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.7,
                 'photo' => 'images/32.jpeg',
             ], [
-                'category_id' => 10,
+                'category_id' => 12,
                 'supplier_id' => 1,
                 'name' => '4 Prost Biru',
                 'description' => '4 Bir Prost Biru 620ml',
@@ -642,7 +642,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.8,
                 'photo' => 'images/33.jpg',
             ], [
-                'category_id' => 10,
+                'category_id' => 12,
                 'supplier_id' => 1,
                 'name' => '4 Prost',
                 'description' => '4 Bir Prost Merah 620ml',
@@ -650,7 +650,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.8,
                 'photo' => 'images/34.jpg',
             ], [
-                'category_id' => 10,
+                'category_id' => 12,
                 'supplier_id' => 4,
                 'name' => '4 Singaraja',
                 'description' => '4 Bir Singaraja 620ml',
@@ -658,7 +658,7 @@ class MenuSeeder extends Seeder
                 'alcohol%' => 4.8,
                 'photo' => 'images/35.png',
             ], [
-                'category_id' => 10,
+                'category_id' => 12,
                 'supplier_id' => 1,
                 'name' => '4 Heinekken',
                 'description' => '4 Bir Heinekken 620ml',
