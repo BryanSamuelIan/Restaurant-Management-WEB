@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('desription');
             $table->integer('price');
             $table->integer('alcohol%');
-            $table->string('photo');
+            $table->string('photo')->nullable();
         });
     }
 
