@@ -23,9 +23,9 @@ return new class extends Migration {
                 ->on('suppliers')
                 ->onDelete('cascade');
             $table->string('name');
-            $table->string('desription');
+            $table->string('description');
             $table->integer('price');
-            $table->integer('alcohol%');
+            $table->integer('alcohol%')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
         });

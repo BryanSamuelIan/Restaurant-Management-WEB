@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
+            SupplierSeeder::class,
             MenuSeeder::class,
 
 
