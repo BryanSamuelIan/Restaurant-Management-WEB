@@ -25,14 +25,18 @@
                             <!-- List -->
                             <ul class="flex items-center">
                                 <li class="{{ request()->is('/') ? 'text-black-500' : '' }} px-2 lg:px-8">
-                                    <a href="/" class="text-stone-800 text-extrabold hover:text-white">HOME</a>
+                                    <a href="/" class="text-stone-800 text-extrabold hover:text-white">Home</a>
                                 </li>
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('menu.index') }}" class="text-stone-800 text-extrabold hover:text-white">Menu</a>
                                 </li>
                                 <li class="px-2 lg:px-8">
                                     <a href="{{ route('about') }}"
-                                        class="text-stone-800 text-extrabold hover:text-stone-white">About</a>
+                                        class="text-stone-800 text-extrabold hover:text-stone-white">About Us</a>
+                                </li>
+                                <li class="px-2 lg:px-8">
+                                    <a href="{{ route('contact') }}"
+                                        class="text-stone-800 text-extrabold hover:text-stone-white">Contact Us</a>
                                 </li>
 
                                 {{-- Employee --}}
@@ -96,6 +100,7 @@
             </header>
 
             <main>
+                <h1 class="text-4xl text-green-tosca font-bold mb-12 text-center pt-8">{{$pagetitle }}</h1>
 
                 @yield('content')
             </main>

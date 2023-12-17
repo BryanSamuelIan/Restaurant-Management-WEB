@@ -28,6 +28,11 @@ Route::get('about', function () {
         "pagetitle" => "About Us"
     ]);
 })->name('about');
+Route::get('contact', function () {
+    return view('contact', [
+        "pagetitle" => "Contact Us"
+    ]);
+})->name('contact');
 
 Auth::routes();
 //guest
