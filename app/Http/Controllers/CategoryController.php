@@ -13,7 +13,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('layouts.template', [
+            "pagetitle" => "categories",
+            "maintitle" => "categories",
+            "categories" => $categories
+        ]);
     }
 
     /**
