@@ -17,9 +17,34 @@ class MenuController extends Controller
         return view('menu.index', [
             "pagetitle" => "Menu",
             "maintitle" => "Order Menu",
-            "menus" => $menus
+            "menus" => $menus,
+            'category' => "all"
         ]);
     }
+
+    public function listFood()
+    {
+        $menus = Menu::whereIn('category_id', [1, 2, 3, 4])->get();;
+
+        return view('menu.index', ['menus' => $menus, 'category' => "food"]);
+    }
+
+    public function listBeverage()
+    {
+        $menus = Menu::whereIn('category_id', [5, 6, 7, 8, 9])->get();;
+
+        return view('menu.index', ['menus' => $menus, 'category' => "beverage"]);
+    }
+
+    public function listAlcohol()
+    {
+        $menus = Menu::whereIn('category_id', [10, 11, 12])->get();;
+
+        return view('menu.index', ['menus' => $menus, 'category' => "alcohol"]);
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

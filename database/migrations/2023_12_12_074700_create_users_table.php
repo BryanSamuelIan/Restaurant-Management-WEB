@@ -25,6 +25,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('roles')
                 ->onDelete('cascade');
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -30,7 +31,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ __('Master') }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" href="{{ route('users') }}">{{ __('Data User') }}</a>
+                                <a class="nav-link" href="{{ route('employees') }}">{{ __('Data Karyawan') }}</a>
+                                <a class="nav-link" href="{{ route('menus') }}">{{ __('Data Menu') }}</a>
+                                <a class="nav-link" href="{{ route('suppliers') }}">{{ __('Data Supplier') }}</a>
+                                <a class="nav-link" href="{{ route('events') }}">{{ __('Data Event') }}</a>
+                                <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
+                                <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
+                                <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,5 +91,4 @@
             @yield('content')
         </main>
     </div>
-</body>
 </html>

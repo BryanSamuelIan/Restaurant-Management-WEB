@@ -27,4 +27,12 @@ class Menu extends Model
     public function transaction_menu() {
         return $this->hasMany(Transaction_menu::class);
     }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function supplier() {
+        return $this->belongsTo(Supplier::class);
+    }
 }
