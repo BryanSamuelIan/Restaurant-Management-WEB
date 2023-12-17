@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-    
+
     }
 
     /**
@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
 {
-    $events = Event::all();
+    $events = Event::where('is_active', 1)->get();
 
     return view('home', ['events' => $events, 'pagetitle' => 'Home']);
 }

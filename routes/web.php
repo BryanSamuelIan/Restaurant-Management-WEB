@@ -50,7 +50,7 @@ Route::get('/transactionIn', [HomeController::class, 'index'])->name('transactio
 //admin
 Route::get('/transactionOut', [HomeController::class, 'index'])->name('transactionOUT');
 Route::get('/menuEdit', [MenuController::class, 'index'])->name('menuEdit');
-Route::get('/eventEdit', [EventController::class, 'index'])->name('eventEdit');
+Route::get('/event', [EventController::class, 'index'])->name('event');
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
 
 //owner

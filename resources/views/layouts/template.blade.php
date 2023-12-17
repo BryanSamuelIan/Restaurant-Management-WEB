@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Onoe'Iki Cafe</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />
+    @vite(['resources/css/app.css','resources/js/app.js'])
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </head>
 
 <body class="bg-stone-200">
@@ -54,7 +57,7 @@
                                 </li>
                                 {{-- basicly menu yang isa diedit, blm ambil index --}}
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('eventEdit') }}" class="text-stone-800 text-extrabold hover:text-white">Event</a>{{-- edit Event --}}
+                                    <a href="{{ route('event') }}" class="text-stone-800 text-extrabold hover:text-white">Event</a>{{-- edit Event --}}
                                 </li>
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('supplier.index') }}" class="text-stone-800 text-extrabold hover:text-white">Supplier</a>
