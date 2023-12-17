@@ -1,5 +1,12 @@
+@extends('layouts.template')
+
 @section('content')
-    <div class="container mt-4">
+
+
+
+
+
+    {{-- <div class="container mt-4">
         <table id="myTable" class="display">
             <thead>
                 <tr>
@@ -32,5 +39,5 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
+    </div> --}}
 @endsection

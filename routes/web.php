@@ -20,11 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        "pagetitle" => "Home"
-    ]);
-})->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('about', function () {
     return view('about', [
@@ -40,11 +38,12 @@ Route::get('contact', function () {
         "pagetitle" => "Contact Us"
     ]);
 })->name('contact');
-Auth::routes();
+
 //guest
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Auth::routes();
 //employee
 Route::get('/transactionIn', [HomeController::class, 'index'])->name('transactionIN');
 

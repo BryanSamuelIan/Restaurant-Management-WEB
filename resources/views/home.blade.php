@@ -6,19 +6,19 @@
         <!-- Carousel wrapper -->
         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
             <!-- Item  -->
-            @foreach ($promotions as $promotion)
+            @foreach ($events as $event)
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <a href="{{ route('promotionDetail', ['id' => $promotion->id]) }}">
-                        <img src="/images/{{ $promotion['image_banner'] }}"
+
+                        <img src="/images/{{ $event['banner'] }}"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                    </a>
+
                 </div>
             @endforeach
 
         </div>
         <!-- Slider indicators -->
         <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-            @foreach ($promotions as $index => $promotion)
+            @foreach ($events as $index => $event)
                 <button type="button"
                     class="w-3 h-3 rounded-full @if ($index === 0) bg-white @else bg-gray-800 @endif"
                     aria-current="{{ $index === 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index }}"
