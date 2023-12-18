@@ -57,11 +57,10 @@ Route::get('analitics', function () {
     ]);
 })->name('analitics');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('admin/users', [UserController::class, 'index'])->name('users');
 Route::get('admin/employees', [EmployeeController::class, 'index'])->name('employees');
-Route::get('admin/menus', [MenuController::class, 'index'])->name('menus');
+Route::get('admin/menus', [MenuController::class, 'listMenu'])->name('menus');
 Route::get('admin/suppliers', [SupplierController::class, 'index'])->name('suppliers');
 Route::get('admin/events', [EventController::class, 'index'])->name('events');
 
