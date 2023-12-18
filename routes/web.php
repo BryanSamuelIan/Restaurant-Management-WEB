@@ -20,33 +20,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        "pagetitle" => "Home"
-    ]);
-})->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 Route::get('about', function () {
     return view('about', [
         "pagetitle" => "About Us"
     ]);
 })->name('about');
+
 Route::get('/admin', function () {
     return redirect('/login');
 });
+Route::get('contact', function () {
+    return view('contact', [
+        "pagetitle" => "Contact Us"
+    ]);
+})->name('contact');
 
-Auth::routes();
 //guest
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Auth::routes();
 //employee
 Route::get('/transactionIn', [HomeController::class, 'index'])->name('transactionIN');
 
 //admin
 Route::get('/transactionOut', [HomeController::class, 'index'])->name('transactionOUT');
 Route::get('/menuEdit', [MenuController::class, 'index'])->name('menuEdit');
-Route::get('/eventEdit', [EventController::class, 'index'])->name('eventEdit');
+Route::get('/event', [EventController::class, 'index'])->name('event');
 Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
 
 //owner

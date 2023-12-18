@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Menu;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
@@ -14,10 +15,12 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::all();
+        $categories=Category::all();
         return view('menu.index', [
-            "pagetitle" => "Menu",
-            "maintitle" => "Order Menu",
-            "menus" => $menus
+            "pagetitle" => "Order Menu",
+            "maintitle" => "Menu",
+            "menus" => $menus,
+            "categories"=>$categories
         ]);
     }
 

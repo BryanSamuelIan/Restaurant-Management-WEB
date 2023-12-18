@@ -16,6 +16,7 @@ class Menu extends Model
         'name',
         'description',
         'price',
+        'is_alcohol',
         'alcohol%',
         'photo'
     ];
