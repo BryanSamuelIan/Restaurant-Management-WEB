@@ -42,35 +42,35 @@
                                         class="text-stone-800 text-extrabold hover:text-stone-white">Contact Us</a>
                                 </li>
 
-                                {{-- Employee --}}
+                                {{-- Employee
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('transactionIN') }}" class="text-stone-800 text-extrabold hover:text-white">Order In</a>
                                 </li>
 
-                                {{-- admin --}}
+                                admin
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('transactionOUT') }}" class="text-stone-800 text-extrabold hover:text-white">Transaction Out</a>{{-- purchase and expense --}}
-                                </li>
+                                {{-- </li>
 
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('menuEdit') }}" class="text-stone-800 text-extrabold hover:text-white">Edit Menu</a>
                                 </li>
-                                {{-- basicly menu yang isa diedit, blm ambil index --}}
+                                basicly menu yang isa diedit, blm ambil index
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('event') }}" class="text-stone-800 text-extrabold hover:text-white">Event</a>{{-- edit Event --}}
-                                </li>
+                                {{-- </li>
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('supplier.index') }}" class="text-stone-800 text-extrabold hover:text-white">Supplier</a>
                                 </li>
 
-                                {{-- owner --}}
+                                owner
 
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('employeesUser') }}" class="text-stone-800 text-extrabold hover:text-white">Employees</a>{{-- and user --}}
+                                    <a href="{{ route('employeesUser') }}" class="text-stone-800 text-extrabold hover:text-white">Employees</a>and user
                                 </li>
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('analitics') }}" class="text-stone-800 text-extrabold hover:text-white">Analitics</a>
-                                </li>
+                                </li> --}} 
 
 
                                 {{-- <li class="px-4 lg:px-12">

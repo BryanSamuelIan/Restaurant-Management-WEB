@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container mx-auto mt-8 mb-16">
-        <div class="mx-20 flex flex-col lg:flex-row lg:h-96 bg-white lg:h-auto border border-gray-300 shadow-lg rounded-lg overflow-hidden">
+        <div class="mx-2 lg:mx-20 flex flex-col lg:flex-row lg:h-96 bg-white lg:h-auto border border-gray-300 shadow-lg rounded-lg overflow-hidden">
             <div class="w-full lg:w-1/2">
                 <div class="h-full p-8">
                     <p class="mb-4 lg:mb-8 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a problem? Want to send feedback? Let us know.</p>

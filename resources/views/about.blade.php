@@ -3,7 +3,7 @@
 @section('content')
     <div id="history" class="container mx-auto py-12">
         <!-- About Section -->
-        <div class="relative bg-amber-300 bg-opacity-10 rounded-md p-2 sm:p-4 md:p-8 lg:p-16 w-11/12 mx-auto flex flex-col lg:flex-row">
+        <div class="relative bg-amber-300 bg-opacity-10 pb-8 rounded-md p-0 sm:p-0 md:p-8 lg:p-16 w-11/12 mx-auto flex flex-col lg:flex-row">
 
             <!-- About Corner Tag -->
             <div class="absolute top-[-8%] left-5 text-7xl md:text-8xl font-semibold text-amber-500 text-opacity-20 p-2 rounded-tl-md rounded-br-md title-animation">
@@ -28,7 +28,7 @@
 
     <div id="vision" class="container mx-auto py-12">
         <!-- Vision and Mission Section -->
-        <div class="relative bg-amber-300 bg-opacity-10 rounded-md p-6 md:p-24 w-11/12 mx-auto flex flex-col md:flex-row">
+        <div class="relative bg-amber-300 bg-opacity-10 rounded-md p-0 pb-8 sm:p-0 md:p-24 w-11/12 mx-auto flex flex-col md:flex-row">
 
             <!-- Vision and Mission Corner Tag -->
             <div class="absolute top-[-8%] left-5 text-7xl md:text-8xl font-semibold text-amber-500 text-opacity-20 p-2 rounded-tl-md rounded-br-md title-animation">

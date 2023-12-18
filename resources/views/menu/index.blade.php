@@ -1,11 +1,11 @@
 
 @extends('layouts.template')
 @section('content')
-    <div class="mx-20 flex flex-col lg:flex-row h-auto space-y-8 lg:space-y-0 lg:space-x-8">
-        <div class="w-full lg:w-1/4">
+    <div class="mx-2 lg:mx-20 flex flex-col lg:flex-row h-auto space-y-8 lg:space-y-0 lg:space-x-8">
+        <div class="w-0 lg:w-1/4">
             <!-- Left Sidebar -->
         </div>
-        <div class="w-auto lg:w-2/4">
+        <div class="w-full lg:w-2/4">
             @foreach ($categories as $category)
                 <div class="bg-white border border-gray-300 shadow-lg rounded-lg p-4 mb-4">
                     <h2 class="text-lg font-semibold mb-2">{{ $category->name }}</h2>
@@ -82,7 +82,7 @@
 
 
         </div>
-        <div class="w-auto lg:w-1/4">
+        <div class="w-0 lg:w-1/4">
             <!-- Left Sidebar -->
         </div>
 
