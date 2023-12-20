@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('content')
-    <div class="mx-2 lg:mx-20 flex flex-col lg:flex-row h-auto space-y-8 lg:space-y-0 lg:space-x-8">
+<div class="mx-2 lg:mx-20 flex flex-col lg:flex-row h-auto lg:mt-12 ">
         <div class="w-0 lg:w-1/4">
             <!-- Left Sidebar -->
         </div>

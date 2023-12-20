@@ -43,7 +43,6 @@ Route::get('contact', function () {
 
 //guest
 Route::get('/ordermenu', [MenuController::class, 'index'])->name('ordermenu');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Auth::routes();

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container mx-auto mt-8 mb-16">
+    <div class="container mx-auto mt-8 mb-16 lg:px-40 lg:mt-12">
         <div class="mx-2 lg:mx-20 flex flex-col lg:flex-row lg:h-96 bg-white lg:h-auto border border-gray-300 shadow-lg rounded-lg overflow-hidden">
             <div class="w-full lg:w-1/2">
                 <div class="h-full p-8">

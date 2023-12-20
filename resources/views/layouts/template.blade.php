@@ -16,80 +16,38 @@
     <div class="flex flex-col min-h-screen">
         <div class="flex-grow">
             <header>
-                <div class="bg-gray-800 text-white text-center y-4 banner" onclick="window.location.href='/'">
-                    <img src="\images\LogoWhite.png" alt="Banner Image" class="max-h-full mx-auto">
+                <div class="bg-gray-800 text-white text-center y-4 banner h-20 overflow-hidden" onclick="window.location.href='/'">
+                    <img src="\images\BannerHeader1.jpeg" alt="Banner Image" class="w-full h-full object-cover" style="object-position: center;">
                 </div>
 
-                <nav class="bg-amber-300 dark:bg-teal-300 shadow-lg p-1">
-                    <div class="container mx-auto py-4 ">
+
+
+                <nav class="bg-amber-300 dark:bg-teal-300 shadow-lg p-1 navbar">
+                    <div class="container mx-auto py-2">
                         <!-- Wrap ul and form in the same div with flex property -->
                         <div class="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:w-full">
+                            <div class="flex flex-row justify-between w-full sm:w-auto">
 
-                            <!-- List -->
-                            <ul class="flex items-center">
-                                <li class="{{ request()->is('/') ? 'text-black-500' : '' }} px-2 lg:px-8">
-                                    <a href="/" class="text-stone-800 text-extrabold hover:text-white">Home</a>
-                                </li>
-                                <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('ordermenu') }}" class="text-stone-800 text-extrabold hover:text-white">Menu</a>
-                                </li>
-                                <li class="px-2 lg:px-8">
-                                    <a href="{{ route('about') }}"
-                                        class="text-stone-800 text-extrabold hover:text-stone-white">About Us</a>
-                                </li>
-                                <li class="px-2 lg:px-8">
-                                    <a href="{{ route('contact') }}"
-                                        class="text-stone-800 text-extrabold hover:text-stone-white">Contact Us</a>
-                                </li>
-
-                                {{-- Employee
-                                <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('transactionIN') }}" class="text-stone-800 text-extrabold hover:text-white">Order In</a>
-                                </li>
-
-                                admin
-                                <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('transactionOUT') }}" class="text-stone-800 text-extrabold hover:text-white">Transaction Out</a>{{-- purchase and expense --}}
-                                {{-- </li>
-
-                                <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('menuEdit') }}" class="text-stone-800 text-extrabold hover:text-white">Edit Menu</a>
-                                </li>
-                                basicly menu yang isa diedit, blm ambil index
-                                <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('event') }}" class="text-stone-800 text-extrabold hover:text-white">Event</a>{{-- edit Event --}}
-                                {{-- </li>
-                                <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('supplier.index') }}" class="text-stone-800 text-extrabold hover:text-white">Supplier</a>
-                                </li>
-
-                                owner
-
-                                <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('employeesUser') }}" class="text-stone-800 text-extrabold hover:text-white">Employees</a>and user
-                                </li>
-                                <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('analitics') }}" class="text-stone-800 text-extrabold hover:text-white">Analitics</a>
-                                </li> --}}
+                                    <img src="/images/LogoYellow.jpeg" alt="logo" class="w-12 h-12 rounded-full hidden sm:block mr-4">
+                                    <!-- Spacer -->
 
 
-                                {{-- <li class="px-4 lg:px-12">
-                                    <a href="{{ route('store', 1) }}"
-                                        class="text-teal-800 text-extrabold hover:text-white">STORES</a>
-                                </li> --}}
-                                {{-- <li class="px-4 lg:px-12 ml-auto">
-                                    <form class="flex items-center" action="{{ route('filter') }}" method="GET">
-                                        <label for="default-search"
-                                            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                                        <input type="search" id="default-search" name="search"
-                                            class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-teal-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-white dark:border-teal-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Search Tanjung..." required>
-                                        <button type="submit"
-                                            class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ml-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">Search</button>
-                                    </form>
-                                </li> --}}
-
-                            </ul>
+                                <!-- List -->
+                                <ul class="flex items-center">
+                                    <li class="{{ request()->is('/') ? 'text-black-500' : '' }} px-2 lg:px-8 {{ request()->is('/') ? 'font-bold' : '' }}">
+                                        <a href="/" class="text-stone-800 text-extrabold hover:text-white">Home</a>
+                                    </li>
+                                    <li class="group relative px-2 lg:px-8 z-50 text-stone-800 {{ request()->is('ordermenu') ? 'font-bold' : '' }}">
+                                        <a href="{{ route('ordermenu') }}" class="text-stone-800 text-extrabold hover:text-white">Menu</a>
+                                    </li>
+                                    <li class="px-2 lg:px-8 {{ request()->is('about') ? 'font-bold' : '' }}">
+                                        <a href="{{ route('about') }}" class="text-stone-800 text-extrabold hover:text-stone-white">About Us</a>
+                                    </li>
+                                    <li class="px-2 lg:px-8 {{ request()->is('contact') ? 'font-bold' : '' }}">
+                                        <a href="{{ route('contact') }}" class="text-stone-800 text-extrabold hover:text-stone-white">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -103,17 +61,17 @@
             </header>
 
             <main>
-                <h1 class="text-4xl text-green-tosca font-bold mb-12 text-center pt-8">{{$pagetitle }}</h1>
+                <h1 class="text-4xl text-green-tosca font-bold mb-4 text-center pt-8 ">{{$pagetitle }}</h1>
 
                 @yield('content')
             </main>
 
-            <footer class="bg-stone-600 dark:bg-gray-900 mt-16 ">
+            <footer class="bg-stone-600 dark:bg-gray-900 mt-16">
                 <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                     <div class="md:flex md:justify-between">
                         <div class="mb-6 md:mb-0">
                             <a href="/" class="flex items-center">
-                                <img src="\images\LogoWhite.png" alt="Company Logo" class="w-24 h-24 rounded-full">
+                                <img src="\images\LogoYellow.jpeg" alt="Company Logo" class="w-24 h-24 rounded-full">
                                 <h2 class="ml-4 font-bold text-xl dark:text-white"
                                     style="font-family: 'Poppins', sans-serif;">Onoe'Iki</h2>
                             </a>
@@ -130,7 +88,7 @@
                                         <a href="{{ route('about') }}#vision" class="hover:underline">Vision</a>
                                     </li>
                                     <li class="mb-4">
-                                        <a href="{{ route('about') }}#vision" class="hover:underline">Mission</a>
+                                        <a href="{{ route('about') }}#mision" class="hover:underline">Mission</a>
                                     </li>
                                     {{-- <li class="mb-4">
                                         <a href="{{ route('about') }}#founder" class="hover:underline">Founder</a>
@@ -218,3 +176,23 @@
     </div>
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            const scroll = $(window).scrollTop();
+            const navbar = $('.navbar');
+            const mainContent = $('main');
+            const scrollTrigger = 80; // Change this value to your desired scroll position
+
+            if (scroll >= scrollTrigger) {
+                navbar.addClass('fixed top-0 w-full z-50');
+                mainContent.addClass('pt-16 lg:pt-20'); // Add padding to main content
+            } else {
+                navbar.removeClass('fixed top-0 w-full z-50');
+                mainContent.removeClass('pt-16 lg:pt-20'); // Remove padding from main content
+            }
+        });
+    });
+</script>
