@@ -18,13 +18,14 @@ class MenuController extends Controller
     {
         $menus = Menu::all();
         $categories=Category::all();
-        return view('menu.index', [
+        return view('ordermenu', [
             "pagetitle" => "Order Menu",
             "maintitle" => "Menu",
             "menus" => $menus,
             "categories"=>$categories
         ]);
     }
+
 
     public function listMenu() {
         $menus = Menu::all();
