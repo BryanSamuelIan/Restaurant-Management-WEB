@@ -16,50 +16,37 @@
     <div class="flex flex-col min-h-screen">
         <div class="flex-grow">
             <header>
-                <div class="bg-gray-800 text-white text-center y-4 banner h-20 overflow-hidden" onclick="window.location.href='/'">
-
+                <div class="bg-gray-800 text-white text-center banner h-20 overflow-hidden" onclick="window.location.href='/'">
                     <img src="\images\BannerHeader1.jpeg" alt="Banner Image" class="w-full h-full object-cover" style="object-position: center;">
-
                 </div>
 
+                <nav class="bg-amber-300 dark:bg-teal-300 shadow-lg  navbar">
+                    <div class="container mx-auto py-2 flex items-center justify-between">
 
+                        <div class="pl-4 hidden sm:block">
+                            <a href="/">
+                                <img src="/images/LogoYellow.jpeg" alt="logo" class="w-12 h-12 rounded-full hidden sm:block mr-4">
+                            </a>
 
-                <nav class="bg-amber-300 dark:bg-teal-300 shadow-lg p-1 navbar">
-                    <div class="container mx-auto py-2">
-                        <!-- Wrap ul and form in the same div with flex property -->
-                        <div class="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:w-full">
-                            <div class="flex flex-row justify-between w-full sm:w-auto">
-                                <a href="/">
-                                    <img src="/images/LogoYellow.jpeg" alt="logo" class="w-12 h-12 rounded-full hidden sm:block mr-4">
-                                    <!-- Spacer -->
-                                </a>
-
-                                <!-- List -->
-                                <ul class="flex items-center">
-                                    <li class="px-2 lg:px-8 {{ request()->is('/') ? 'font-bold' : '' }}">
-                                        <a href="/" class="text-stone-800 text-extrabold hover:text-amber-50">Home</a>
-                                    </li>
-                                    <li class="px-2 lg:px-8  {{ request()->is('ordermenu') ? 'font-bold' : '' }}">
-                                        <a href="{{ route('ordermenu') }}" class="text-stone-800 text-extrabold hover:text-amber-50">Menu</a>
-                                    </li>
-                                    <li class="px-2 lg:px-8 {{ request()->is('about') ? 'font-bold' : '' }}">
-                                        <a href="{{ route('about') }}" class="text-stone-800 text-extrabold hover:text-amber-50">About Us</a>
-                                    </li>
-                                    <li class="px-2 lg:px-8 {{ request()->is('contact') ? 'font-bold' : '' }}">
-                                        <a href="{{ route('contact') }}" class="text-stone-800 text-extrabold hover:text-amber-50">Contact Us</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
+
+
+                        <ul class="flex items-center">
+                            <li class="px-2 lg:px-8 {{ request()->is('home') ? 'font-bold' : '' }}">
+                                <a href="{{ route('home') }}" class="text-stone-800 text-extrabold hover:text-amber-50">Home</a>
+                            </li>
+                            <li class="px-2 lg:px-8  {{ request()->is('ordermenu') ? 'font-bold' : '' }}">
+                                <a href="{{ route('ordermenu') }}" class="text-stone-800 text-extrabold hover:text-amber-50">Menu</a>
+                            </li>
+                            <li class="px-2 lg:px-8 {{ request()->is('about') ? 'font-bold' : '' }}">
+                                <a href="{{ route('about') }}" class="text-stone-800 text-extrabold hover:text-amber-50">About Us</a>
+                            </li>
+                            <li class="px-2 lg:px-8 {{ request()->is('contact') ? 'font-bold' : '' }}">
+                                <a href="{{ route('contact') }}" class="text-stone-800 text-extrabold hover:text-amber50">Contact Us</a>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
-
-
-
-
-
-
-
             </header>
 
             <main>
@@ -68,7 +55,7 @@
                 @yield('content')
             </main>
 
-            <footer class="bg-stone-600 dark:bg-gray-900 mt-16">
+            <footer class="bg-stone-700 dark:bg-gray-900 mt-16">
                 <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                     <div class="md:flex md:justify-between">
                         <div class="mb-6 md:mb-0">
@@ -126,7 +113,7 @@
                             </div> --}}
                         </div>
                     </div>
-                    <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+                    <hr class="my-6 border-black sm:mx-auto dark:border-gray-700 lg:my-8" />
                     <div class="sm:flex sm:items-center sm:justify-between">
                         <span class="text-sm text-black sm:text-center dark:text-gray-400">© 2023 <a href=""
                                 class="hover:underline">Onoe'Iki</a>. All Rights Reserved.

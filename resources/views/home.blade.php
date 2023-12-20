@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-<div id="default-carousel" class="relative w-full pt-4" data-carousel="slide">
+<div id="default-carousel" class="relative w-full pt-4 lg:px-40" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
         <!-- Item  -->
@@ -54,6 +54,29 @@
     </button>
 </div>
 
+<div class="container pt-20 flex flex-col items-center justify-center ">
+<a href="{{ route('ordermenu') }}" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 my-5 lg:w-full lg:mx-20">
+    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/images/LogoYellow.jpeg" alt="">
+    <div class="flex flex-col justify-between p-4 leading-normal">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Mangan</h5>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Kami menyediakan hidangan berat maupun ringan yang lezat dan berenergi!</p>
+    </div>
+</a>
+<a href="{{ route('ordermenu') }}" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 my-5">
+    <div class="flex flex-col justify-between p-4 leading-normal">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Ngombe</h5>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Minuman segar dan klasik untuk menemani harimu!</p>
+    </div>
+    <img class="object-cover w-full rounded-b-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-r-lg" src="/images/LogoWhite.jpeg" alt="">
+</a>
+<a href="{{ route('contact') }}" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 my-5">
+    <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/images/LogoGreen.jpeg" alt="">
+    <div class="flex flex-col justify-between p-4 leading-normal">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Dolan</h5>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Tempat nongkrong asik diiringi pemandangan alam, free WI-FI dan musik!</p>
+    </div>
+</a>
+</div>
 
 
 

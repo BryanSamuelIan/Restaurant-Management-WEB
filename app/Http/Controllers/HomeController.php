@@ -27,6 +27,6 @@ class HomeController extends Controller
 {
     $events = Event::where('is_active', 1)->get();
 
-    return view('home', ['events' => $events, 'pagetitle' => 'Home']);
+    return view('home', ['events' => $events, 'pagetitle' => 'Onoe\'Iki Cafe Pacet']);
 }
 }
