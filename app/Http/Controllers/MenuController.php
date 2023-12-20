@@ -26,7 +26,7 @@ class MenuController extends Controller
 
     public function listMenu() {
         $menus = Menu::all();
-        return view('menu.index', ['menus' => $menus, 'category' => "all"]);
+        return view('ordermenu', ['menus' => $menus, 'category' => "all"]);
     }
 
     public function listFood()

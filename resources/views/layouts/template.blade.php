@@ -31,7 +31,7 @@
                                     <a href="/" class="text-stone-800 text-extrabold hover:text-white">Home</a>
                                 </li>
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
-                                    <a href="{{ route('menu.index') }}" class="text-stone-800 text-extrabold hover:text-white">Menu</a>
+                                    <a href="{{ route('ordermenu') }}" class="text-stone-800 text-extrabold hover:text-white">Menu</a>
                                 </li>
                                 <li class="px-2 lg:px-8">
                                     <a href="{{ route('about') }}"
@@ -70,7 +70,7 @@
                                 </li>
                                 <li class="group relative px-2 lg:px-8 z-50 text-stone-800">
                                     <a href="{{ route('analitics') }}" class="text-stone-800 text-extrabold hover:text-white">Analitics</a>
-                                </li> --}} 
+                                </li> --}}
 
 
                                 {{-- <li class="px-4 lg:px-12">

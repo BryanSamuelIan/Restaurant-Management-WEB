@@ -40,8 +40,9 @@ Route::get('contact', function () {
 })->name('contact');
 
 //guest
-Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+Route::get('/ordermenu', [MenuController::class, 'index'])->name('ordermenu');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 Auth::routes();
 //employee
