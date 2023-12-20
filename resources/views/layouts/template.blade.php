@@ -17,7 +17,9 @@
         <div class="flex-grow">
             <header>
                 <div class="bg-gray-800 text-white text-center y-4 banner h-20 overflow-hidden" onclick="window.location.href='/'">
+
                     <img src="\images\BannerHeader1.jpeg" alt="Banner Image" class="w-full h-full object-cover" style="object-position: center;">
+
                 </div>
 
 
@@ -27,24 +29,24 @@
                         <!-- Wrap ul and form in the same div with flex property -->
                         <div class="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:w-full">
                             <div class="flex flex-row justify-between w-full sm:w-auto">
-
+                                <a href="/">
                                     <img src="/images/LogoYellow.jpeg" alt="logo" class="w-12 h-12 rounded-full hidden sm:block mr-4">
                                     <!-- Spacer -->
-
+                                </a>
 
                                 <!-- List -->
                                 <ul class="flex items-center">
-                                    <li class="{{ request()->is('/') ? 'text-black-500' : '' }} px-2 lg:px-8 {{ request()->is('/') ? 'font-bold' : '' }}">
-                                        <a href="/" class="text-stone-800 text-extrabold hover:text-white">Home</a>
+                                    <li class="px-2 lg:px-8 {{ request()->is('/') ? 'font-bold' : '' }}">
+                                        <a href="/" class="text-stone-800 text-extrabold hover:text-amber-50">Home</a>
                                     </li>
-                                    <li class="group relative px-2 lg:px-8 z-50 text-stone-800 {{ request()->is('ordermenu') ? 'font-bold' : '' }}">
-                                        <a href="{{ route('ordermenu') }}" class="text-stone-800 text-extrabold hover:text-white">Menu</a>
+                                    <li class="px-2 lg:px-8  {{ request()->is('ordermenu') ? 'font-bold' : '' }}">
+                                        <a href="{{ route('ordermenu') }}" class="text-stone-800 text-extrabold hover:text-amber-50">Menu</a>
                                     </li>
                                     <li class="px-2 lg:px-8 {{ request()->is('about') ? 'font-bold' : '' }}">
-                                        <a href="{{ route('about') }}" class="text-stone-800 text-extrabold hover:text-stone-white">About Us</a>
+                                        <a href="{{ route('about') }}" class="text-stone-800 text-extrabold hover:text-amber-50">About Us</a>
                                     </li>
                                     <li class="px-2 lg:px-8 {{ request()->is('contact') ? 'font-bold' : '' }}">
-                                        <a href="{{ route('contact') }}" class="text-stone-800 text-extrabold hover:text-stone-white">Contact Us</a>
+                                        <a href="{{ route('contact') }}" class="text-stone-800 text-extrabold hover:text-amber-50">Contact Us</a>
                                     </li>
                                 </ul>
                             </div>
