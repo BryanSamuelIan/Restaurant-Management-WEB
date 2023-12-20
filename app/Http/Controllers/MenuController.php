@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Menu;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use App\Models\Supplier;
+use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -58,13 +60,16 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+
+        return view('menu.create', ['categories' => $categories, 'suppliers' => $suppliers]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMenuRequest $request)
+    public function store(Request $request)
     {
         //
     }

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests;
 use App\Http\Requests\UpdateEmployeeRequest;
+use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -23,15 +24,32 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEmployeeRequest $request)
+    public function store(Request $request)
     {
-        //
+        if ($request->ktp !=null) {
+            $ktpPath = $request->file('ktp')->store('ktp_images', 'public');
+            Employee::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'sallary' => $request->sallary,
+                'ktp' => $ktpPath
+            ]);    
+        } else {
+            Employee::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'sallary' => $request->sallary
+            ]);
+    
+        }
+        
+        return redirect()->route('employees');
     }
 
     /**

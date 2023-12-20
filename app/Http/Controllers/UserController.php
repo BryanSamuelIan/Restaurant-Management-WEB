@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,5 +23,23 @@ class UserController extends Controller
 
         // You can return a response if needed
         return response()->json(['status' => 'success']);
+    }
+
+    public function create() {
+        $employees = Employee::all();
+        $roles = Role::all();
+
+        return view('user.create', ['employees' => $employees, 'roles' => $roles]);
+    }
+
+    public function store(Request $request) {
+        User::create([
+            'name' => $request->name,
+            'employee_id' => $request->employee_id,
+            'role_id' => $request->role_id,
+            'password' => bcrypt($request->password)
+        ]);
+
+        return redirect()->route('users');
     }
 }

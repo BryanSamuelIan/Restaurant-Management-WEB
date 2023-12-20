@@ -22,7 +22,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ __('Onoe Iki') }}
+                    {{ __('Onoe\' Iki') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -31,6 +31,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        @Auth
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ __('Master') }}
@@ -44,8 +45,28 @@
                                 <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
                                 <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
                                 <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
+                                <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Order') }}</a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ __('Action') }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="nav-link" href="{{ route('user.create') }}">{{ __('Tambah User') }}</a>
+                                <a class="nav-link" href="{{ route('employee.create') }}">{{ __('Tambah Karyawan') }}</a>
+                                <a class="nav-link" href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
+                                <a class="nav-link" href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
+                                <a class="nav-link" href="{{ route('event.create') }}">{{ __('Tammbah Event') }}</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('analytics') }}">{{ __('Buat Order') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('analytics') ? 'active' : '' }}" href="{{ route('analytics') }} ">{{ __('Analytics') }}</a>
+                        </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

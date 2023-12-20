@@ -10,6 +10,10 @@ class Employee extends Model
     use HasFactory;
     public $timestamps = true;
 
+    protected $attributes = [
+        'is_active' => true,
+    ];
+
     protected $fillable = [
         'name',
         'phone',

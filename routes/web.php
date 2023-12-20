@@ -1,11 +1,13 @@
 <?php
 use App\Http\Controllers;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,11 +57,11 @@ Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.in
 
 //owner
 Route::get('/employeesUser', [SupplierController::class, 'index'])->name('employeesUser');
-Route::get('analitics', function () {
-    return view('analitics', [
-        "pagetitle" => "analitics"
-    ]);
-})->name('analitics');
+// Route::get('/analytics', function () {
+//     return view('analitics', [
+//         "pagetitle" => "analitics"
+//     ]);
+// })->name('analitics');
 
 
 Route::get('admin/users', [UserController::class, 'index'])->name('users');
@@ -71,3 +73,17 @@ Route::get('admin/events', [EventController::class, 'index'])->name('events');
 Route::get('admin/foods', [MenuController::class, 'listFood'])->name('foods');
 Route::get('admin/beverages', [MenuController::class, 'listBeverage'])->name('beverages');
 Route::get('admin/alcohols', [MenuController::class, 'listAlcohol'])->name('alcohols');
+
+Route::get('admin/user/create', [UserController::class, 'create'])->name('user.create');
+Route::get('admin/employee/create', [EmployeeController::class, 'create'])->name('employee.create');
+Route::get('admin/menu/create', [MenuController::class, 'create'])->name('menu.create');
+Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
+Route::get('admin/event/create', [EventController::class, 'create'])->name('event.create');
+
+Route::post('admin/user/store', [UserController::class, 'store'])->name('user.store');
+Route::post('admin/employee/store', [EmployeeController::class, 'store'])->name('employee.store');
+Route::post('admin/menu/store', [MenuController::class, 'store'])->name('menu.store');
+Route::post('admin/supplier/store', [SupplierController::class, 'store'])->name('supplier.store');
+Route::post('admin/event/store', [EventController::class, 'store'])->name('event.store');
+
+Route::get('/admin/analytics', [AnalyticsController::class, 'index'])->name('analytics');

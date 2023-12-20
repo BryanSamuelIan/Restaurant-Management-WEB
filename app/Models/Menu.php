@@ -18,6 +18,7 @@ class Menu extends Model
         'price',
         'is_alcohol',
         'alcohol%',
+        'stock',
         'photo'
     ];
 

@@ -53,4 +53,9 @@ class LoginController extends Controller
             $request->filled('remember')
         );
     }
+
+    protected function loggedOut(Request $request)
+    {
+        return redirect('/login'); // Change this line
+    }
 }

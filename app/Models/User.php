@@ -13,6 +13,10 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     public $timestamps = true;
 
+    protected $attributes = [
+        'is_active' => true,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

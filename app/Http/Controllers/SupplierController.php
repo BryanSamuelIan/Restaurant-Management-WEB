@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
+use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
@@ -23,15 +24,23 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('supplier.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSupplierRequest $request)
+    public function store(Request $request)
     {
-        //
+        Supplier::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'email' => $request->email
+        ]);
+
+        // Redirect to the suppliers index page or any other desired route
+        return redirect()->route('suppliers.index');
     }
 
     /**
