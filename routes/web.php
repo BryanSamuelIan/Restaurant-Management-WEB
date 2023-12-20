@@ -1,9 +1,11 @@
 <?php
 use App\Http\Controllers;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
@@ -87,3 +89,7 @@ Route::post('admin/supplier/store', [SupplierController::class, 'store'])->name(
 Route::post('admin/event/store', [EventController::class, 'store'])->name('event.store');
 
 Route::get('/admin/analytics', [AnalyticsController::class, 'index'])->name('analytics');
+
+Route::post('/contact', [ContactController::class, 'sendMessage'])->name('sendEmail');
+
+
