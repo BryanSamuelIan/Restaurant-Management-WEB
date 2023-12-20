@@ -18,8 +18,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app" style="padding-top: 6rem;">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ __('Onoe\' Iki') }}
@@ -61,7 +61,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('analytics') }}">{{ __('Buat Order') }}</a>
+                            <a class="nav-link" href="{{ route('transaction.create') }}">{{ __('Buat Order') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('analytics') ? 'active' : '' }}" href="{{ route('analytics') }} ">{{ __('Analytics') }}</a>
@@ -108,7 +108,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-12">
             @yield('content')
         </main>
     </div>

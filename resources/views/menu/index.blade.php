@@ -27,7 +27,7 @@
                             <td>{{ $menu->{'alcohol%'} }}</td>
                             <td>{{ $menu->stock }}</td>
                         @endif
-                        <td>{{ $menu->price }}</td>
+                        <td>Rp{{ number_format($menu->price, 0, ',', '.') }}</td>
                         @if ($category == 'alcohol')
                             <td>{{ $menu->supplier->name }}</td>
                         @endif
