@@ -14,7 +14,7 @@
         <tbody>
             @foreach ($users as $user)
                 <tr>
-                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->name   }}</td>
                     <td>{{ $user->role->name }}</td>    
                     <td>
                         <span class="active-status" data-user-id="{{ $user->id }}" data-active="{{ $user->is_active ? 'true' : 'false' }}">

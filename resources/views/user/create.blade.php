@@ -1,0 +1,81 @@
+<!-- resources/views/users/create.blade.php -->
+
+@extends('layouts.app') <!-- Assuming you have a layout file, adjust as needed -->
+
+@section('content')
+    <div class="container">
+        <h2>Tambah User Baru</h2>
+
+        <form id="createUserForm" action="{{ route('user.store') }}" method="post">
+            @csrf
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Username</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="role_id" class="form-label">Role</label>
+                <select class="form-select" name="role_id" id="role_id" required>
+                    <option value="">Pilih role</option> <!-- Default option with no value -->
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="employee_id" class="form-label">Karyawan</label>
+                <select class="form-select" name="employee_id" id="employee_id">
+                    <option value="">Pilih Karyawan</option> <!-- Default option with no value -->
+                    @foreach ($employees as $employee)
+                        <option value="{{ $employee->id }}">{{ $employee->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <!-- Add more form fields as needed -->
+
+            <button type="submit" class="btn btn-primary">Tambah User</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Submit the form using AJAX
+            $('#createUserForm').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Handle success, e.g., show a success message
+                        alert('User has been created successfully!');
+                        // You can also redirect to another page or perform other actions
+
+                        // Clear the form if needed
+                        $('#createUserForm')[0].reset();
+                        
+                        window.location.href = '{{ route('users') }}';
+                    },
+                    error: function(error) {
+                        // Handle errors if needed
+                        console.error('Error creating user:', error);
+                        alert('Error creating user. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+@endsection

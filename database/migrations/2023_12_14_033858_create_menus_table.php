@@ -27,6 +27,7 @@ return new class extends Migration {
             $table->integer('price');
             $table->boolean('is_alcohol');
             $table->float('alcohol%')->nullable();
+            $table->integer('stock')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
         });
