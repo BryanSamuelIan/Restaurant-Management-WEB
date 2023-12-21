@@ -13,7 +13,8 @@ class UserController extends Controller
     {
         $users = User::whereIn('role_id', [1, 2])->get();
 
-        return view('user.index', ['users' => $users]);
+        return view('user.index', ['users' => $users,
+        'pagetitle' => "User"]);
     }
 
     public function updateActiveStatus($userId)
@@ -29,7 +30,8 @@ class UserController extends Controller
         $employees = Employee::all();
         $roles = Role::all();
 
-        return view('user.create', ['employees' => $employees, 'roles' => $roles]);
+        return view('user.create', ['employees' => $employees, 'roles' => $roles,
+        'pagetitle' => "Buat User"]);
     }
 
     public function store(Request $request) {

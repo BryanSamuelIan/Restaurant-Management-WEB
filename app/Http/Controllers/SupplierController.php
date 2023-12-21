@@ -16,7 +16,8 @@ class SupplierController extends Controller
     {
         $suppliers = Supplier::all();
 
-        return view('supplier.index', ['suppliers' => $suppliers]);
+        return view('supplier.index', ['suppliers' => $suppliers,
+        'pagetitle' => "Supplier"]);
     }
 
     /**

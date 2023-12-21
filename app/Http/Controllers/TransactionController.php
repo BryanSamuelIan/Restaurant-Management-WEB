@@ -18,7 +18,8 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::all();
-        return view('transaction.index', ['transactions' => $transactions]);
+        return view('transaction.index', ['transactions' => $transactions,
+        'pagetitle' => "Transaksi"]);
     }
 
     /**
@@ -29,7 +30,8 @@ class TransactionController extends Controller
         $categories = Category::all();
         $paymentTypes = Payment_type::all();
 
-        return view('transaction.create', ['categories' => $categories, 'paymentTypes' => $paymentTypes]);
+        return view('transaction.create', ['categories' => $categories, 'paymentTypes' => $paymentTypes,
+        'pagetitle' => "Buat Transaksi"]);
     }
 
     /**
@@ -106,7 +108,8 @@ class TransactionController extends Controller
             'paymentTypes' => $paymentTypes,
             'categories' => $categories,
             'initialCartItems' => $initialCartItems,
-            'id' => $id
+            'id' => $id,
+            'pagetitle' => "Edit Transaksi"
         ]);
     }
 
@@ -164,9 +167,17 @@ class TransactionController extends Controller
         return redirect()->route('transactions')->with('success', 'Transaction updated successfully');
     }
 
-    // Existing methods...
+    public function updateStatus($id)
+    {
+        $transaction = Transaction::find($id);
 
-    // Add this method to update or create transaction_menus
+        // Toggle the status (1 to 2 and 2 to 1)
+        $transaction->status_id = $transaction->status_id == 1 ? 2 : 1;
+        $transaction->save();
+
+        return redirect()->route('transactions.index')->with('success', 'Status updated successfully');
+    }
+
     protected function updateOrCreateTransactionMenus($cartItems, $transactionId)
     {
         foreach ($cartItems as $cartItem) {

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $pagetitle }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -17,6 +18,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
+
 <body>
     <div id="app" style="padding-top: 6rem;">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
@@ -24,7 +26,9 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ __('Onoe\' Iki') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -32,43 +36,50 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @Auth
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ __('Master') }}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('users') }}">{{ __('Data User') }}</a>
-                                <a class="nav-link" href="{{ route('employees') }}">{{ __('Data Karyawan') }}</a>
-                                <a class="nav-link" href="{{ route('menus') }}">{{ __('Data Menu') }}</a>
-                                <a class="nav-link" href="{{ route('suppliers') }}">{{ __('Data Supplier') }}</a>
-                                <a class="nav-link" href="{{ route('events') }}">{{ __('Data Event') }}</a>
-                                <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
-                                <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
-                                <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
-                                <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Order') }}</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ __('Action') }}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="nav-link" href="{{ route('user.create') }}">{{ __('Tambah User') }}</a>
-                                <a class="nav-link" href="{{ route('employee.create') }}">{{ __('Tambah Karyawan') }}</a>
-                                <a class="nav-link" href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
-                                <a class="nav-link" href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
-                                <a class="nav-link" href="{{ route('event.create') }}">{{ __('Tammbah Event') }}</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('transaction.create') ? 'active' : '' }}" href="{{ route('transaction.create') }}">{{ __('Buat Order') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('analytics') ? 'active' : '' }}" href="{{ route('analytics') }} ">{{ __('Analytics') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('transactions') ? 'active' : '' }}" href="{{ route('transactions') }}">{{ __('Lihat Transaksi') }}</a>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ __('Master') }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('users') }}">{{ __('Data User') }}</a>
+                                    <a class="nav-link" href="{{ route('employees') }}">{{ __('Data Karyawan') }}</a>
+                                    <a class="nav-link" href="{{ route('menus') }}">{{ __('Data Menu') }}</a>
+                                    <a class="nav-link" href="{{ route('suppliers') }}">{{ __('Data Supplier') }}</a>
+                                    <a class="nav-link" href="{{ route('events') }}">{{ __('Data Event') }}</a>
+                                    <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
+                                    <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
+                                    <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
+                                    <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Order') }}</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ __('Action') }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('user.create') }}">{{ __('Tambah User') }}</a>
+                                    <a class="nav-link"
+                                        href="{{ route('employee.create') }}">{{ __('Tambah Karyawan') }}</a>
+                                    <a class="nav-link" href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
+                                    <a class="nav-link"
+                                        href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
+                                    <a class="nav-link" href="{{ route('event.create') }}">{{ __('Tammbah Event') }}</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('transaction.create') ? 'active' : '' }}"
+                                    href="{{ route('transaction.create') }}">{{ __('Buat Order') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('analytics') ? 'active' : '' }}"
+                                    href="{{ route('analytics') }} ">{{ __('Analytics') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('transactions') ? 'active' : '' }}"
+                                    href="{{ route('transactions') }}">{{ __('Lihat Transaksi') }}</a>
+                            </li>
                         @endauth
                     </ul>
 
@@ -89,18 +100,20 @@
                             @endif --}}
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -115,4 +128,5 @@
             @yield('content')
         </main>
     </div>
+
 </html>

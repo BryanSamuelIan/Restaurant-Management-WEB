@@ -118,6 +118,7 @@ class AnalyticsController extends Controller
    }
 
     public function index() {
+        $transactions = Transaction::all();
         $transactionCount = $this->countTransactionToday();
         $income = $this->sumTotalTransactions();
 
@@ -135,7 +136,9 @@ class AnalyticsController extends Controller
             'incomeDifference' => $incomeDifference,
             'incomeToday' => $incomeToday,
             'difference' => $differenceYesterday,
-            'transactionsDifference' => $transactionsYesterday
+            'transactionsDifference' => $transactionsYesterday,
+            'pagetitle' => "Analytics",
+            'transactions' => $transactions
         ]);
     }
 }

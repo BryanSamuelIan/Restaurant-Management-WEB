@@ -15,7 +15,8 @@ class EventController extends Controller
     {
         $events = Event::all();
 
-        return view('event.index', ['events' => $events]);
+        return view('event.index', ['events' => $events,
+        'pagetitle' => "events"]);
     }
 
     /**
@@ -23,7 +24,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('event.create');
+        return view('event.create', [
+        'pagetitle' => "Buat Event"]);
     }
 
     /**
