@@ -64,7 +64,7 @@
                 <h3 class="text-3xl md:text-4xl font-bold mb-4 text-amber-500">Misi kami</h3>
                 <ul class="list-disc text-gray-600 text-sm text-justify md:text-lg pl-6">
                     <li class="mb-2">Menghadirkan Hidangan Autentik: Menyajikan hidangan lalapan, ricebox, dan snack yang
-                        autentik, menggugah selera, dan menghadirkan cita rasa khas Indnesia</li>
+                        autentik, menggugah selera, dan menghadirkan cita rasa khas Indonesia</li>
                     <li class="mb-2">Ragam Minuman Berkualitas: Menyediakan berbagai jenis minuman mulai dari kopi yang
                         harum, teh dan mojito yang menyejukkan, hingga minuman khas wedang, dan lainnya untuk memenuhi
                         selera para pengunjung.</li>
