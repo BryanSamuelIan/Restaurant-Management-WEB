@@ -1,64 +1,107 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-9">
-            <!-- Display transaction menu with items in the cart -->
-            <h2>Detail Transaksi</h2>
-            @foreach ($transaction->menus as $menu)
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <div class="menu-item-container">
-                            <p>{{ $menu->name }} - Rp{{ number_format($menu->price, 0, ',', '.') }}</p>
-                        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="container-fluid">
+                    <div class="row">
+                        @foreach ($categories as $category)
+                            <div class="col-md-3 mb-4 d-flex">
+                                <div class="card flex-fill">
+                                    <div class="card-header">
+                                        <div data-category="{{ $category->id }}">
+                                            {{ $category->name }}
+                                        </div>
+                                    </div>
+                                    <div class="card-body d-flex flex-column">
+                                        @if ($category->menus->isNotEmpty())
+                                            <div class="flex-fill">
+                                                @foreach ($category->menus as $menu)
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <div class="menu-item-container">
+                                                                <button
+                                                                    class="btn btn-secondary menu-link menu-button w-100"
+                                                                    data-menu="{{ $menu->id }}"
+                                                                    data-name="{{ $menu->name }}"
+                                                                    data-price="{{ $menu->price }}">
+                                                                    {{ $menu->name }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            <p class="flex-fill text-center">No menus available in this category.</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
 
-        <div class="col-md-3">
-            <!-- Edit form with the existing transaction and cart details -->
-            <form method="POST" action="{{ route('transaction.update', ['id' => $transaction->id]) }}">
-                @csrf
-                @method('PUT')
-
-                <!-- Display the cart items and total price -->
-                <h2>Keranjang Belanja</h2>
-                <div id="cart-items" class="custom-height overflow-y-scroll overflow-x-hidden">
-                    @if (empty($cartItems))
-                        Keranjang Belum Terisi
-                    @endif
+            <div class="col-md-3">
+                <div class="fixed-cart-container position-fixed" style="width: 300px; max-width: 90vw;">
+                    <h2>Transaksi</h2>
+                    <div id="cart-items" class="custom-height overflow-y-scroll overflow-x-hidden">
+                        @if (empty($cartItems))
+                            Keranjang Belum Terisi
+                        @else
+                            @foreach ($cartItems as $item)
+                                <div class="d-flex justify-content-between align-items-center border-bottom py-2 px-2">
+                                    <div class="d-flex flex-column">
+                                        <span class="menu-name fs-6">{{ $item['menuName'] }}</span>
+                                        <div class="quantity d-flex align-items-center mt-2">
+                                            <button class="btn btn-sm btn-primary quantity-btn"
+                                                data-menu="{{ $item['menuId'] }}" data-action="subtract">-</button>
+                                            <span class="fs-6 mx-2">{{ $item['quantity'] }}</span>
+                                            <button class="btn btn-sm btn-primary quantity-btn"
+                                                data-menu="{{ $item['menuId'] }}" data-action="add">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column align-items-end">
+                                        <span class="price fs-6"> Rp
+                                            {{ number_format($item['menuPrice'] * $item['quantity'], 0, ',', '.') }}</span>
+                                        <button class="btn btn-danger btn-sm remove-btn mt-2"
+                                            data-menu="{{ $item['menuId'] }}">Remove</button>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                    <hr>
+                    <div id="cart-total">
+                        @if (!empty($cartItems))
+                            Total: Rp {{ number_format(calculateTotalPrice(), 0, ',', '.') }}
+                        @endif
+                    </div>
+                    <div class="mb-3">
+                        <label for="payment-type">Metode Pembayaran:</label>
+                        <select id="payment-type" class="form-control">
+                            @foreach ($paymentTypes as $paymentType)
+                                <option value="{{ $paymentType->id }}">{{ $paymentType->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button id="pass-all-items-btn" class="btn btn-success mt-3" disabled>Selesaikan Pesanan</button>
                 </div>
-                <hr>
-                <div id="cart-total"></div>
-
-                <!-- Display the payment method dropdown with the selected value -->
-                <div class="mb-3">
-                    <label for="payment-type">Metode Pembayaran:</label>
-                    <select id="payment-type" name="paymentTypeId" class="form-control">
-                        @foreach($paymentTypes as $paymentType)
-                            <option value="{{ $paymentType->id }}" {{ $transaction->payment_type_id == $paymentType->id ? 'selected' : '' }}>
-                                {{ $paymentType->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <!-- Add a submit button to update the transaction -->
-                <button type="submit" class="btn btn-primary mt-3">Update Transaksi</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-
 
     <!-- Add this link to your HTML file's head section -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {
-            let cartItems = [];
+            let cartItems = @json($initialCartItems);
+
+            updateCartUI();
+            updateButtonState();
 
             // Handle category link click
             $('.category-link').click(function(e) {
@@ -75,6 +118,21 @@
 
                 addToCart(menuId, menuName, menuPrice, 1);
                 updateButtonState();
+            });
+
+            // Handle manual add menu click
+            $('#manual-add-menu-btn').click(function(e) {
+                e.preventDefault();
+                let manualMenuName = $('#manual-menu-name').val();
+                let manualMenuPrice = $('#manual-menu-price').val();
+                let manualMenuQuantity = $('#manual-menu-quantity').val();
+
+                if (manualMenuName && manualMenuPrice && manualMenuQuantity) {
+                    addToCart(null, manualMenuName, manualMenuPrice, manualMenuQuantity);
+                    updateButtonState();
+                } else {
+                    alert('Please fill in all the fields.');
+                }
             });
 
             $('#pass-all-items-btn').click(function(e) {
@@ -102,7 +160,9 @@
                     // Create a form dynamically
                     const form = document.createElement('form');
                     form.method = 'POST';
-                    form.action = '{{ route('transaction.store') }}';
+                    form.action = `{{ route('transaction.update', ['id' => $id]) }}`;
+                    form.innerHTML = `@csrf<input type="hidden" name="_method" value="PUT">`;
+
 
                     // Add CSRF token input field
                     const csrfInput = document.createElement('input');
@@ -124,10 +184,15 @@
                     paymentTypeInput.value = $('#payment-type').val();;
                     form.appendChild(paymentTypeInput);
 
+                    const methodInput = document.createElement('input');
+                    methodInput.type = 'hidden';
+                    methodInput.name = '_method';
+                    methodInput.value = 'PUT';
+                    form.appendChild(methodInput);
+
                     // Append the form to the body and submit it
                     document.body.appendChild(form);
                     form.submit();
-
                 });
             });
 
@@ -150,9 +215,14 @@
 
                 return totalPrice;
             }
+
             // Add menu to cart
             function addToCart(menuId, menuName, menuPrice, quantity) {
-                let existingItem = cartItems.find(item => item.menuId === menuId);
+                let existingItem;
+
+                if (menuId) {
+                    existingItem = cartItems.find(item => item.menuId === menuId);
+                }
 
                 if (existingItem) {
                     existingItem.quantity += quantity;
@@ -178,21 +248,20 @@
                 cartItems.forEach(item => {
                     let cartItem = `
                     <div class="d-flex justify-content-between align-items-center border-bottom py-2 px-2">
-    <div class="d-flex flex-column">
-        <span class="menu-name fs-6">${item.menuName}</span>
-        <div class="quantity d-flex align-items-center mt-2">
-            <button class="btn btn-sm btn-primary quantity-btn" data-menu="${item.menuId}" data-action="subtract">-</button>
-            <span class="fs-6 mx-2">${item.quantity}</span>
-            <button class="btn btn-sm btn-primary quantity-btn" data-menu="${item.menuId}" data-action="add">+</button>
-        </div>
-    </div>
-    <div class="d-flex flex-column align-items-end">
-        <span class="price fs-6"> Rp ${number_format(item.menuPrice * item.quantity, 0, ',', '.')}</span>
-        <button class="btn btn-danger btn-sm remove-btn mt-2" data-menu="${item.menuId}">Remove</button>
-    </div>
-</div>
-`;
-
+                        <div class="d-flex flex-column">
+                            <span class="menu-name fs-6">${item.menuName}</span>
+                            <div class="quantity d-flex align-items-center mt-2">
+                                <button class="btn btn-sm btn-primary quantity-btn" data-menu="${item.menuId}" data-action="subtract">-</button>
+                                <span class="fs-6 mx-2">${item.quantity}</span>
+                                <button class="btn btn-sm btn-primary quantity-btn" data-menu="${item.menuId}" data-action="add">+</button>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column align-items-end">
+                            <span class="price fs-6"> Rp ${number_format(item.menuPrice * item.quantity, 0, ',', '.')}</span>
+                            <button class="btn btn-danger btn-sm remove-btn mt-2" data-menu="${item.menuId}">Remove</button>
+                        </div>
+                    </div>
+                `;
 
                     cartList.append(cartItem);
 
@@ -219,8 +288,6 @@
                 let cartTotal = $('#cart-total');
                 if (cartItems.length > 0) {
                     cartTotal.text('Total:  Rp ' + number_format(totalPrice, 0, ',', '.'));
-                } else {
-                    cartTotal.text('Keranjang Belum Terisi');
                 }
             }
 

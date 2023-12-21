@@ -35,7 +35,7 @@ class AnalyticsController extends Controller
 
         return $difference;
     }
-
+    
     public function incomeDifferenceTodayYesterday()
     {
         // Get the date for today and yesterday
@@ -59,6 +59,18 @@ class AnalyticsController extends Controller
         }
 
         return $percentageDifference;
+    }
+
+    public function sumTotalTransactions()
+    {
+        $startOfMonth = Carbon::now('Asia/Jakarta')->startOfMonth();
+        $endOfMonth = Carbon::now('Asia/Jakarta')->endOfMonth();
+
+        $income = Transaction::where('status_id', 2)
+            ->whereBetween('transaction_time', [$startOfMonth, $endOfMonth])
+            ->sum('total');
+
+        return $income;
     }
 
     public function incomeToday()
@@ -92,9 +104,9 @@ class AnalyticsController extends Controller
             ->whereBetween('transaction_time', [$startOfLastMonth, $endOfLastMonth])
             ->sum('total');
 
-        if ($incomeLastMonth == 0) {
-            return $incomeCurrentMonth;
-        }
+            if ($incomeLastMonth == 0) {
+                return $incomeCurrentMonth;
+            }
 
         // Calculate the percentage difference
         $percentageDifference = 0;
@@ -103,12 +115,11 @@ class AnalyticsController extends Controller
         }
 
         return $percentageDifference;
-    }
+   }
 
-    public function index()
-    {
+    public function index() {
         $transactionCount = $this->countTransactionToday();
-        $income = $this->countTransactionToday();
+        $income = $this->sumTotalTransactions();
 
         $incomeDifference = $this->incomeComparison();
 

@@ -21,12 +21,18 @@
                                 data-payment-type-id="{{ $transaction->payment_type_id }}">
                                 <td>{{ $transaction->id }}</td>
                                 <td>{{ $transaction->transaction_time }}</td>
-                                <td class="payment-type-color-{{ $transaction->payment_type_id }}">{{ $transaction->payment_type->name }}</td>
-                                <td class="status-color-{{ $transaction->status_id }}">{{ $transaction->status->status_state }}</td>                                
+                                <td>{{ $transaction->payment_type->name }}</td>
+                                <td>
+                                    <button class="btn btn-block @if ($transaction->status_id == 1) btn-danger @elseif($transaction->status_id == 2) btn-success @endif">
+                                        {{ $transaction->status->status_state }}
+                                    </button>
+                                </td>
+                                
                                 <td>Rp{{ number_format($transaction->subtotal, 0, ',', '.') }}</td>
                                 <td>Rp{{ number_format($transaction->total, 0, ',', '.') }}</td>
                                 <td>
-                                    <a href="{{ route('transaction.edit', ['transactionId' => $transaction->id]) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('transaction.edit', ['id' => $transaction->id]) }}"
+                                        class="btn btn-primary">Edit</a>
                                 </td>
                             </tr>
                         @endforeach
