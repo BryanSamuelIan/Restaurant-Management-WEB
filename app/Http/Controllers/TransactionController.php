@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Category;
+use App\Models\Payment_type;
 use App\Models\Transaction_menu;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transaction::all();
+        return view('transaction.index', ['transactions' => $transactions]);
     }
 
     /**
@@ -25,8 +27,9 @@ class TransactionController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $paymentTypes = Payment_type::all();
 
-        return view('transaction.index', ['categories' => $categories]);
+        return view('transaction.create', ['categories' => $categories, 'paymentTypes' => $paymentTypes]);
     }
 
     /**
@@ -40,11 +43,22 @@ class TransactionController extends Controller
         $transaction = new Transaction([
             'user_id' => auth()->user()->id, // Assuming you have authentication and a user is logged in
             'transaction_time' => now(), // You might want to adjust this based on your requirements
-            'payment_type_id' => 1, // Adjust as needed
-            'status_id' => 1, // Adjust as needed
-            'subtotal' => 10000, // Adjust as needed
-            'total' => 10000, // Adjust as needed
+            'payment_type_id' => $request->input('paymentTypeId'), 
+            'status_id' => 2,
         ]);
+
+        $subtotal = 0;
+        foreach ($cartItems as $item) {
+            $subtotal += $item['quantity'] * $item['menuPrice'];
+        }
+
+        // Assuming no additional charges for now
+        $total = $subtotal;
+
+        $transaction->subtotal = $subtotal;
+        $transaction->total = $total;
+
+        $transaction->save();
 
         $transaction->save();
 
@@ -54,6 +68,7 @@ class TransactionController extends Controller
                 'transaction_id' => $transaction->id,
                 'menu_id' => $item['menuId'],
                 'amount' => $item['quantity'],
+                'price' => $item['menuPrice']
             ]);
 
             $transactionMenu->save();
@@ -74,9 +89,10 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
-        //
+        $transaction = Transaction::find($id);
+        return view('transaction.edit', ['transaction' => $transaction]);
     }
 
     /**

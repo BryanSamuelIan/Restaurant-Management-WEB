@@ -13,7 +13,8 @@ class Transaction_menu extends Model
     protected $fillable = [
         'transaction_id',
         'menu_id',
-        'amount'
+        'amount',
+        'price'
     ];
 
     public function menu() {

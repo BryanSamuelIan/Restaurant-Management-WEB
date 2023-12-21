@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             SupplierSeeder::class,
             MenuSeeder::class,
-
+            PaymentTypeSeeder::class,
+            StatusSeeder::class
 
         ]);
     }

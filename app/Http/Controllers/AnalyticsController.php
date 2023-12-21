@@ -5,51 +5,96 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnalyticsController extends Controller
 {
     public function countTransactionToday()
     {
-        $today = Carbon::now()->toDateString();
+        $today = Carbon::now('Asia/Jakarta')->toDateString();
 
-        $orderCount = Transaction::whereDate('created_at', $today)
-            ->where('status_id', 1)
+        $orderCount = Transaction::whereDate('transaction_time', $today)
+            ->where('status_id', 2)
             ->count();
 
         return $orderCount;
     }
 
-    public function sumTotalTransactions()
+    public function transactionsDifferenceTodayYesterday()
     {
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
+        // Get today's and yesterday's date
+        $today = Carbon::now('Asia/Jakarta')->toDateString();
+        $yesterday = Carbon::yesterday('Asia/Jakarta')->toDateString();
 
-        $income = Transaction::where('status_id', 1)
-            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+        // Query transactions for today and yesterday
+        $transactionsToday = Transaction::whereDate('transaction_time', $today)->where('status_id', 2)->count();
+        $transactionsYesterday = Transaction::whereDate('transaction_time', $yesterday)->where('status_id', 2)->count();
+
+        // Calculate the difference
+        $difference = $transactionsToday - $transactionsYesterday;
+
+        return $difference;
+    }
+
+    public function incomeDifferenceTodayYesterday()
+    {
+        // Get the date for today and yesterday
+        $today = Carbon::now('Asia/Jakarta')->toDateString();
+        $yesterday = Carbon::yesterday('Asia/Jakarta')->toDateString();
+
+        // Calculate income for today
+        $incomeToday = Transaction::where('status_id', 2)
+            ->whereDate('transaction_time', $today)
             ->sum('total');
 
-        return $income;
+        // Calculate income for yesterday
+        $incomeYesterday = Transaction::where('status_id', 2)
+            ->whereDate('transaction_time', $yesterday)
+            ->sum('total');
+
+        // Calculate the percentage difference
+        $percentageDifference = 0;
+        if ($incomeYesterday != 0) {
+            $percentageDifference = (($incomeToday - $incomeYesterday) / $incomeYesterday) * 100;
+        }
+
+        return $percentageDifference;
+    }
+
+    public function incomeToday()
+    {
+        $currentDate = Carbon::now('Asia/Jakarta')->toDateString();
+
+        $incomePerDay = Transaction::where('status_id', 2)
+            ->whereDate('transaction_time', $currentDate)
+            ->sum('total');
+
+        return $incomePerDay;
     }
 
     public function incomeComparison()
     {
         // Get the start and end dates for the current month
-        $startOfCurrentMonth = Carbon::now()->startOfMonth();
-        $endOfCurrentMonth = Carbon::now()->endOfMonth();
+        $startOfCurrentMonth = Carbon::now('Asia/Jakarta')->startOfMonth();
+        $endOfCurrentMonth = Carbon::now('Asia/Jakarta')->endOfMonth();
 
         // Get the start and end dates for the last month
-        $startOfLastMonth = Carbon::now()->subMonth()->startOfMonth();
-        $endOfLastMonth = Carbon::now()->subMonth()->endOfMonth();
+        $startOfLastMonth = Carbon::now('Asia/Jakarta')->subMonth()->startOfMonth();
+        $endOfLastMonth = Carbon::now('Asia/Jakarta')->subMonth()->endOfMonth();
 
         // Calculate income for the current month
-        $incomeCurrentMonth = Transaction::where('status_id', 1)
-            ->whereBetween('created_at', [$startOfCurrentMonth, $endOfCurrentMonth])
+        $incomeCurrentMonth = Transaction::where('status_id', 2)
+            ->whereBetween('transaction_time', [$startOfCurrentMonth, $endOfCurrentMonth])
             ->sum('total');
 
         // Calculate income for the last month
-        $incomeLastMonth = Transaction::where('status_id', 1)
-            ->whereBetween('created_at', [$startOfLastMonth, $endOfLastMonth])
+        $incomeLastMonth = Transaction::where('status_id', 2)
+            ->whereBetween('transaction_time', [$startOfLastMonth, $endOfLastMonth])
             ->sum('total');
+
+        if ($incomeLastMonth == 0) {
+            return $incomeCurrentMonth;
+        }
 
         // Calculate the percentage difference
         $percentageDifference = 0;
@@ -60,16 +105,26 @@ class AnalyticsController extends Controller
         return $percentageDifference;
     }
 
-    public function index() {
+    public function index()
+    {
         $transactionCount = $this->countTransactionToday();
-        $income = $this->sumTotalTransactions();
+        $income = $this->countTransactionToday();
 
         $incomeDifference = $this->incomeComparison();
+
+        $incomeToday = $this->incomeToday();
+
+        $differenceYesterday = $this->incomeDifferenceTodayYesterday();
+
+        $transactionsYesterday = $this->transactionsDifferenceTodayYesterday();
 
         return view('analitics', [
             'transactionCount' => $transactionCount,
             'income' => $income,
-            'incomeDifference' => $incomeDifference
+            'incomeDifference' => $incomeDifference,
+            'incomeToday' => $incomeToday,
+            'difference' => $differenceYesterday,
+            'transactionsDifference' => $transactionsYesterday
         ]);
     }
 }

@@ -61,10 +61,13 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('transaction.create') }}">{{ __('Buat Order') }}</a>
+                            <a class="nav-link {{ request()->routeIs('transaction.create') ? 'active' : '' }}" href="{{ route('transaction.create') }}">{{ __('Buat Order') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('analytics') ? 'active' : '' }}" href="{{ route('analytics') }} ">{{ __('Analytics') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('transactions') ? 'active' : '' }}" href="{{ route('transactions') }}">{{ __('Lihat Transaksi') }}</a>
                         </li>
                         @endauth
                     </ul>
