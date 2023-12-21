@@ -8,8 +8,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Employee;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -90,9 +92,12 @@ Route::post('admin/employee/store', [EmployeeController::class, 'store'])->name(
 Route::post('admin/menu/store', [MenuController::class, 'store'])->name('menu.store');
 Route::post('admin/supplier/store', [SupplierController::class, 'store'])->name('supplier.store');
 Route::post('admin/event/store', [EventController::class, 'store'])->name('event.store');
+Route::post('admin/transaction/store', [TransactionController::class, 'store'])->name('transaction.store');
 
 Route::get('/admin/analytics', [AnalyticsController::class, 'index'])->name('analytics');
 
 Route::post('/contact', [ContactController::class, 'sendMessage'])->name('sendEmail');
 
 
+Route::get('admin/transaction/create', [TransactionController::class, 'create'])->name('transaction.create');
+Route::get('/admin/analytics', [AnalyticsController::class, 'index'])->name('analytics');
