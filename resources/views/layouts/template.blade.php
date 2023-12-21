@@ -10,9 +10,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css"  rel="stylesheet" />
     @vite(['resources/css/app.css','resources/js/app.js'])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Diphylleia&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      </style>
+
 </head>
 
-<body class="bg-stone-200">
+<body class="bg-stone-200" style="font-family: 'Poppins', sans-serif">
     <div class="flex flex-col min-h-screen">
         <div class="flex-grow">
             <header>
@@ -20,7 +24,7 @@
                     <img src="\images\BannerHeader1.jpeg" alt="Banner Image" class="w-full h-full object-cover" style="object-position: center;">
                 </div>
 
-                <nav class="bg-amber-300 dark:bg-teal-300 shadow-lg  navbar">
+                <nav class="bg-amber-300 dark:bg-amber-300 shadow-lg  navbar">
                     <div class="container mx-auto py-2 flex items-center justify-between">
 
                         <div class="pl-4 hidden sm:block">
@@ -50,7 +54,9 @@
             </header>
 
             <main>
-                <h1 class="text-4xl text-green-tosca font-bold mb-4 text-center pt-8 ">{{$pagetitle }}</h1>
+                <h1 class="text-4xl text-green-tosca font-semibold mb-4 text-center pt-8" style="font-family: 'Diphylleia', sans-serif">
+                    {{$pagetitle}}
+                </h1>
 
                 @yield('content')
             </main>
@@ -62,7 +68,7 @@
                             <a href="/" class="flex items-center">
                                 <img src="\images\LogoYellow.jpeg" alt="Company Logo" class="w-24 h-24 rounded-full">
                                 <h2 class="ml-4 font-bold text-xl dark:text-white"
-                                    style="font-family: 'Poppins', sans-serif;">Onoe'Iki</h2>
+                                style="font-family: 'Diphylleia', sans-serif">Onoe'Iki</h2>
                             </a>
                         </div>
                         <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
