@@ -71,11 +71,11 @@
                     <li class="mb-2">Memberikan Pengalaman Berbeda: Menjadi tempat yang tidak hanya menyajikan makanan dan
                         minuman, tetapi juga memberikan pengalaman yang tak terlupakan melalui suasana hangat, keramahan,
                         dan keakraban.</li>
-                    <li class="mb-2">Menjaga Lingkungan: Berkomitmen untuk menjaga kelestarian lingkungan sekitar dengan
+                    {{-- <li class="mb-2">Menjaga Lingkungan: Berkomitmen untuk menjaga kelestarian lingkungan sekitar dengan
                         praktik bisnis yang bertanggung jawab, seperti pengelolaan sampah yang baik dan penekanan pada
                         penggunaan bahan ramah lingkungan.</li>
                     <li>Membangun Komunitas: Menciptakan ruang yang memungkinkan pertemuan, percakapan, dan konektivitas di
-                        antara pengunjung, membangun komunitas yang menghargai keindahan alam dan warisan budaya.</li>
+                        antara pengunjung, membangun komunitas yang menghargai keindahan alam dan warisan budaya.</li> --}}
             </div>
         </div>
     </div>

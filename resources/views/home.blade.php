@@ -59,6 +59,7 @@
         <img class="object-cover w-full rounded-t-lg h-120 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="/images/tes3.jpeg" alt="">
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" style="font-family: 'Diphylleia', sans-serif">Mangan</h5>
+            <p class="mb-3 font-light  text-gray-700 dark:text-gray-400">/`ma·ngan`/ v memasukkan makanan pokok ke dalam mulut serta mengunyah dan menelannya.</p>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Hidangan berat maupun ringan yang lezat dan berenergi!</p>
         </div>
     </a>
@@ -67,6 +68,7 @@
     <a href="{{ route('ordermenu') }}" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 my-5 lg:w-full lg:mx-20">
         <div class="flex flex-col justify-between p-4 leading-normal flex-grow">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" style="font-family: 'Diphylleia', sans-serif">Ngombe</h5>
+            <p class="mb-3 font-light  text-gray-700 dark:text-gray-400">/`ngom·be`/ v memasukkan air (atau benda cair) ke dalam mulut dan meneguknya.</p>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Minuman segar dan klasik untuk menemani harimu!</p>
         </div>
         <div class="flex-shrink-0">
@@ -79,6 +81,7 @@
         <img class="object-cover w-full rounded-t-lg h-120 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg" src="/images/tes4.jpeg" alt="">
         <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" style="font-family: 'Diphylleia', sans-serif">Dolan</h5>
+            <p class="mb-3 font-light  text-gray-700 dark:text-gray-400">/`do·lan`/ v pergi menikmati perjalanan yang menyenangkan; pergi bersenang-senang hati (melihat-lihat) keindahan alam dan sebagainya.</p>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Tempat nongkrong asik diiringi pemandangan alam, free WI-FI dan musik!</p>
         </div>
     </a>
