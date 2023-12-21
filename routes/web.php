@@ -103,5 +103,5 @@ Route::get('admin/transaction/create', [TransactionController::class, 'create'])
 Route::get('admin/transactions', [TransactionController::class, 'index'])->name('transactions');
 Route::get('/admin/analytics', [AnalyticsController::class, 'index'])->name('analytics');
 
-Route::get('/transactions/{transactionId}/edit', [TransactionController::class, 'edit'])->name('transaction.edit');
-Route::put('/transactions/{transactionId}', [TransactionController::class, 'update'])->name('transaction.update');
+Route::get('/transactions/{id}/edit', [TransactionController::class, 'edit'])->name('transaction.edit');
+Route::put('/transactions/{id}', [TransactionController::class, 'update'])->name('transaction.update');
