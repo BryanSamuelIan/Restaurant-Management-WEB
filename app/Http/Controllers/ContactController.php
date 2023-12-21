@@ -3,8 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Mail\Message;
-use Symfony\Component\Mime\Part\TextPart;
+
 
 class ContactController extends Controller
 {

@@ -77,7 +77,7 @@
             </header>
 
             <main>
-                <h1 class="text-4xl text-green-tosca font-semibold mb-4 text-center pt-8"
+                <h1 class="text-4xl text-green-tosca font-bold mb-4 text-center pt-8"
                     style="font-family: 'Diphylleia', sans-serif">
                     {{ $pagetitle }}
                 </h1>

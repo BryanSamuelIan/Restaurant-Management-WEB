@@ -17,11 +17,13 @@
                         @foreach ($menus as $menu)
                             @if ($menu->category_id == $category->id && $menu->is_alcohol == 0)
                                 <div class="relative bg-gray-100 rounded-md p-2 menu-item my-2 border-b border-gray-300">
-                                    <div
-                                        class="popup hidden bg-white border border-gray-300 shadow-lg rounded-md p-4 absolute bottom-0 right-0 lg:right-40 ">
-                                        <img class="w-20 h-20 object-scale-down"
-                                            src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">
-                                    </div>
+                                    @if (isset($menu->photo))
+                                        <div
+                                            class="popup hidden bg-white border border-gray-300 shadow-lg rounded-md p-4 absolute bottom-0 right-0 lg:right-40 ">
+                                            <img class="w-20 h-20 object-scale-down"
+                                                src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">
+                                        </div>
+                                    @endif
 
                                     <div class="grid grid-cols-3 gap-2 items-center">
                                         <img class="hidden w-24 h-24 object-scale-down"
@@ -52,14 +54,14 @@
                                     </div>
                                 </div>
                             @elseif ($menu->category_id == $category->id && $menu->is_alcohol == 1)
-
                                 <div class="relative bg-gray-100 rounded-md p-2 menu-item my-2 border-b border-gray-300">
-                                    <div
-                                        class="popup hidden bg-white border border-gray-300 shadow-lg rounded-md p-4 absolute bottom-0 right-0 lg:right-40 ">
-                                        <img class="w-20 h-20 object-scale-down"
-                                            src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">
-                                    </div>
-
+                                    @if (isset($menu->photo))
+                                        <div
+                                            class="popup hidden bg-white border border-gray-300 shadow-lg rounded-md p-4 absolute bottom-0 right-0 lg:right-40 ">
+                                            <img class="w-20 h-20 object-scale-down"
+                                                src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">
+                                        </div>
+                                    @endif
                                     <div class="grid grid-cols-3 gap-2 items-center">
                                         <img class="hidden w-24 h-24 object-scale-down"
                                             src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">

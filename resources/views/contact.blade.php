@@ -6,7 +6,7 @@
             class="mx-2 lg:mx-20 flex flex-col lg:flex-row lg:h-96 bg-white lg:h-auto border border-gray-300 shadow-lg rounded-lg overflow-hidden">
             <div class="w-full lg:w-1/2">
                 <div class="h-full p-8">
-                    <p class="mb-4 lg:mb-8 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Punya masalah?
+                    <p class="mb-4 lg:mb-8 font-light text-left text-gray-500 dark:text-gray-400 sm:text-xl">Punya masalah?
                         Mau beri saran? Beri tahu kami.</p>
 
                     <form action="{{ route('sendEmail') }}" method="POST" class="space-y-2">
@@ -26,7 +26,7 @@
                                     anda</label>
                                 <input type="email" id="email" name="email"
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-                                    placeholder="Contoh: onoeikipacet@gmail.com" required>
+                                    placeholder="Cth:onoeikipacet@gmail.com" required>
                             </div>
                         </div>
                         <div>
@@ -59,5 +59,9 @@
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </div>
+        <div class="mx-auto mt-4 mb-16 lg:px-20 lg:mt-12 w-full items-center">
+            <p class="font-light font-xs text-center">Phone: 0812-3826-3969</p>
+        </div>
+
     </div>
 @endsection
