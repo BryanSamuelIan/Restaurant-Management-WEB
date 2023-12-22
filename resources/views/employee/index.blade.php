@@ -10,6 +10,7 @@
                 <th>Phone Number</th>
                 <th>Gaji</th>
                 <th>KTP</th>
+                <th>Actions</th> <!-- New column for actions -->
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,14 @@
                         @else
                             Tidak ada ktp
                         @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('employee.destroy', $employee->id) }}" method="post" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

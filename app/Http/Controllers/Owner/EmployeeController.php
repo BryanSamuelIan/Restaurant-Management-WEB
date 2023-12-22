@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Owner;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Http\Requests;
 use App\Http\Requests\UpdateEmployeeRequest;
