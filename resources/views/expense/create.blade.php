@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Tambah Expense</div>
+                    <div class="card-header">Tambah Pengeluaran</div>
 
                     <div class="card-body">
                         <form action="{{ route('expenses.store') }}" method="post">

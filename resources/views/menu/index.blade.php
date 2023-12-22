@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
     <div class="container mt-4">
         <table id="myTable" class="display">
@@ -15,6 +16,7 @@
                     @if ($category == 'alcohol')
                         <th>Supplier</th>
                     @endif
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +33,14 @@
                         @if ($category == 'alcohol')
                             <td>{{ $menu->supplier->name }}</td>
                         @endif
+                        <td>
+                            <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('menu.destroy', $menu->id) }}" method="post" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
