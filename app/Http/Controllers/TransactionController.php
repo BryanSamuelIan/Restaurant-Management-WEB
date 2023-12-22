@@ -92,7 +92,7 @@ class TransactionController extends Controller
         }
 
         // Redirect or respond as needed
-        return redirect()->route('analytics');
+        return redirect()->route('transaction');
     }
 
     /**
@@ -178,7 +178,7 @@ class TransactionController extends Controller
             'total' => $total,
         ]);
 
-        return redirect()->route('transactions')->with('success', 'Transaction updated successfully');
+        return redirect()->route('transaction')->with('success', 'Transaction updated successfully');
     }
 
     public function updateStatus($id)
