@@ -69,6 +69,9 @@ Route::post('/storeorder', [OrderMenuController::class, 'store'])->name('store_o
 
 Auth::routes();
 //employee
+Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
+Route::put('/menus/{id}', [MenuController::class, 'update'])->name('menu.update');
+Route::delete('/menus/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
 Route::post('/transaction/store', [TransactionController::class, 'store'])->middleware('auth')->name('transaction.store');
 Route::get('/transaction/create', [TransactionController::class, 'create'])->middleware('auth')->name('transaction.create');
 Route::get('/transactions', [TransactionController::class, 'index'])->middleware('auth')->name('transactions');
@@ -83,6 +86,12 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.'
 ], function () {
+    Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
+    Route::put('/menus/{id}', [MenuController::class, 'update'])->name('menu.update');
+    Route::delete('/menus/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
+    Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
+    Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('employee.update');
+    Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     Route::get('/menuEdit', [AMenuController::class, 'index'])->name('menuEdit');
     Route::get('/event', [AEventController::class, 'index'])->name('event');
     Route::get('/supplier', [ASupplierController::class, 'index'])->name('supplier.index');

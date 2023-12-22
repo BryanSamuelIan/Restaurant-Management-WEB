@@ -13,7 +13,7 @@ class Owner
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            if(Auth::user()->isOwnerr()){
+            if(Auth::user()->isOwner()){
                 return $next($request);
             }
         }
