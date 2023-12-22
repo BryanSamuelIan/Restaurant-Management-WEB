@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::whereIn('role_id', [1, 2])->get();
+        $users = User::all();
 
         return view('user.index', [
             'users' => $users,
