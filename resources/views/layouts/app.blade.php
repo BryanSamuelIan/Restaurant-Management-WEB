@@ -24,7 +24,7 @@
 
 <body>
     <div id="app" style="padding-top: 6rem;">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm fixed-top" style="background-color: #87b874">
             <div class="container">
                 <a class="navbar-brand"style="font-family: 'Diphylleia', sans-serif" href="{{ url('/') }}">
                     {{ __('Onoe\'Iki') }}
@@ -98,8 +98,8 @@
                                         <a class="nav-link" href="{{ route('admin.menu.create') }}">{{ __('Tambah Menu') }}</a>
                                         <a class="nav-link"
                                             href="{{ route('admin.supplier.create') }}">{{ __('Tambah Supplier') }}</a>
-                                        <a class="nav-link"
-                                            href="{{ route('admin.event.create') }}">{{ __('Tambah Event') }}</a>
+                                        {{-- <a class="nav-link"
+                                            href="{{ route('admin.event.create') }}">{{ __('Tambah Event') }}</a> --}}
 
                                     </div>
                                 </li>
@@ -120,8 +120,8 @@
                                             href="{{ route('owner.menu.create') }}">{{ __('Tambah Menu') }}</a>
                                         <a class="nav-link"
                                             href="{{ route('owner.supplier.create') }}">{{ __('Tambah Supplier') }}</a>
-                                        <a class="nav-link"
-                                            href="{{ route('owner.event.create') }}">{{ __('Tambah Event') }}</a>
+                                        {{-- <a class="nav-link"
+                                            href="{{ route('owner.event.create') }}">{{ __('Tambah Event') }}</a> --}}
                                     </div>
                                 </li>
                             @endif

@@ -8,7 +8,12 @@
                     <div class="card-header">Tambah Pembelian</div>
 
                     <div class="card-body">
-                        <form action="{{ route('purchase.store') }}" method="post">
+                        @if (Auth::user()->isAdmin())
+                        <form action="{{ route('admin.purchase.store') }}" method="post">
+                            @endauth
+                            @if (Auth::user()->isOwner())
+                        <form action="{{ route('owner.purchase.store') }}" method="post">
+                            @endauth
                             @csrf
 
                             <div class="form-group">

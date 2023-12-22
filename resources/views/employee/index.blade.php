@@ -17,7 +17,7 @@
             @foreach ($employees as $employee)
                 <tr>
                     <td>{{ $employee->name }}</td>
-                    <td>{{ $employee->phone }}</td>    
+                    <td>{{ $employee->phone }}</td>
                     <td>{{ $employee->sallary }}</td>
                     <td>
                         @if ($employee->ktp)
@@ -27,8 +27,8 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('employee.destroy', $employee->id) }}" method="post" style="display: inline;">
+                        <a href="{{ route('owner.employee.edit', $employee->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('owner.employee.destroy', $employee->id) }}" method="post" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
@@ -37,7 +37,7 @@
                 </tr>
             @endforeach
         </tbody>
-    </table>    
+    </table>
 </div>
 
 @endsection

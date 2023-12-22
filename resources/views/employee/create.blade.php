@@ -6,7 +6,7 @@
     <div class="container">
         <h2>Tambah Karyawan Baru</h2>
 
-        <form id="createUserForm" action="{{ route('employee.store') }}" method="post" enctype="multipart/form-data">
+        <form id="createUserForm" action="{{ route('owner.employee.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
