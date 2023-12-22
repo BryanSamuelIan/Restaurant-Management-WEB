@@ -13,10 +13,20 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+
+    <!-- DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js">
+    </script>
+
+
+    <!-- Bootstrap CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Diphylleia&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
     </style>
@@ -52,11 +62,14 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="nav-link" href="{{ route('admin.menus') }}">{{ __('Data Menu') }}</a>
-                                        <a class="nav-link" href="{{ route('admin.suppliers') }}">{{ __('Data Supplier') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('admin.suppliers') }}">{{ __('Data Supplier') }}</a>
                                         <a class="nav-link" href="{{ route('admin.events') }}">{{ __('Data Event') }}</a>
                                         <a class="nav-link" href="{{ route('admin.foods') }}">{{ __('Data Makanan') }}</a>
-                                        <a class="nav-link" href="{{ route('admin.beverages') }}">{{ __('Data Minuman') }}</a>
-                                        <a class="nav-link" href="{{ route('admin.alcohols') }}">{{ __('Data Alkohol') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('admin.beverages') }}">{{ __('Data Minuman') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('admin.alcohols') }}">{{ __('Data Alkohol') }}</a>
                                     </div>
                                 </li>
                             @endif
@@ -69,13 +82,17 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="nav-link" href="{{ route('owner.users') }}">{{ __('Data User') }}</a>
-                                        <a class="nav-link" href="{{ route('owner.employees') }}">{{ __('Data Karyawan') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('owner.employees') }}">{{ __('Data Karyawan') }}</a>
                                         <a class="nav-link" href="{{ route('owner.menus') }}">{{ __('Data Menu') }}</a>
-                                        <a class="nav-link" href="{{ route('owner.suppliers') }}">{{ __('Data Supplier') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('owner.suppliers') }}">{{ __('Data Supplier') }}</a>
                                         <a class="nav-link" href="{{ route('owner.events') }}">{{ __('Data Event') }}</a>
                                         <a class="nav-link" href="{{ route('owner.foods') }}">{{ __('Data Makanan') }}</a>
-                                        <a class="nav-link" href="{{ route('owner.beverages') }}">{{ __('Data Minuman') }}</a>
-                                        <a class="nav-link" href="{{ route('owner.alcohols') }}">{{ __('Data Alkohol') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('owner.beverages') }}">{{ __('Data Minuman') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('owner.alcohols') }}">{{ __('Data Alkohol') }}</a>
                                     </div>
                                 </li>
                             @endif
@@ -95,7 +112,8 @@
                                         {{ __('Action') }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="nav-link" href="{{ route('admin.menu.create') }}">{{ __('Tambah Menu') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('admin.menu.create') }}">{{ __('Tambah Menu') }}</a>
                                         <a class="nav-link"
                                             href="{{ route('admin.supplier.create') }}">{{ __('Tambah Supplier') }}</a>
                                         <a class="nav-link"
@@ -231,5 +249,19 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        // Use jQuery instead of $ to avoid conflicts
+        jQuery(document).ready(function() {
+            jQuery('#myTable').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+
+    <body>
 
 </html>
