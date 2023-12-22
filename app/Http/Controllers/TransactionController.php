@@ -146,8 +146,7 @@ class TransactionController extends Controller
         $transaction->update([
             'user_id' => auth()->user()->id, // Update user ID if needed
             'transaction_time' => now(), // Update transaction time if needed
-            'payment_type_id' => $request->input('paymentTypeId'),
-            'status_id' => 2,
+            'payment_type_id' => $request->input('paymentTypeId')
         ]);
 
         $cartItems = json_decode($request->input('cartItems'), true);
@@ -175,12 +174,27 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::find($id);
 
-        // Toggle the status (1 to 2 and 2 to 1)
-        $transaction->status_id = $transaction->status_id == 1 ? 2 : 1;
+        // Toggle the status (1 to 2, 2 to 6, 6 to 1)
+        switch ($transaction->status_id) {
+            case 1:
+                $transaction->status_id = 2;
+                break;
+            case 2:
+                $transaction->status_id = 6;
+                break;
+            case 6:
+                $transaction->status_id = 1;
+                break;
+            default:
+                // Handle other cases if needed
+                break;
+        }
+
         $transaction->save();
 
         return response()->json(['status' => $transaction->status]);
     }
+
 
 
     protected function updateOrCreateTransactionMenus($cartItems, $transactionId)

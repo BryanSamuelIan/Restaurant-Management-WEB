@@ -65,7 +65,18 @@
                                     <a class="nav-link" href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
                                     <a class="nav-link"
                                         href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
-                                    <a class="nav-link" href="{{ route('event.create') }}">{{ __('Tammbah Event') }}</a>
+                                    <a class="nav-link" href="{{ route('event.create') }}">{{ __('Tambah Event') }}</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ __('Pengeluaran') }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{{ route('purchases') }}">{{ __('List Pengeluaran') }}</a>
+                                    <a class="nav-link" href="{{ route('expense.create') }}">{{ __('Tambah Pengeluaran') }}</a>
+                                    <a class="nav-link" href="{{ route('purchase.create') }}">{{ __('Tambah Alkohol') }}</a>
                                 </div>
                             </li>
                             <li class="nav-item">

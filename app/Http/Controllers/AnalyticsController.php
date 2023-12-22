@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
+use App\Models\Purchase;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr;
 
 class AnalyticsController extends Controller
 {
@@ -117,6 +120,27 @@ class AnalyticsController extends Controller
         return $percentageDifference;
    }
 
+   public function calculateTotalThisMonth()
+    {
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        // Calculate total from Expense model for the current month
+        $expenseTotalThisMonth = Expense::whereYear('transaction_time', $currentYear)
+            ->whereMonth('transaction_time', $currentMonth)
+            ->sum('total');
+
+        // Calculate total from Purchase model for the current month
+        $purchaseTotalThisMonth = Purchase::whereYear('transaction_time', $currentYear)
+            ->whereMonth('transaction_time', $currentMonth)
+            ->sum('total');
+
+        // Sum of total from both models for the current month
+        $totalThisMonth = $expenseTotalThisMonth + $purchaseTotalThisMonth;
+
+        return $totalThisMonth;
+    }
+
     public function index() {
         $transactions = Transaction::all();
         $transactionCount = $this->countTransactionToday();
@@ -130,6 +154,8 @@ class AnalyticsController extends Controller
 
         $transactionsYesterday = $this->transactionsDifferenceTodayYesterday();
 
+        $pengeluaran = $this->calculateTotalThisMonth();
+
         return view('analitics', [
             'transactionCount' => $transactionCount,
             'income' => $income,
@@ -138,7 +164,8 @@ class AnalyticsController extends Controller
             'difference' => $differenceYesterday,
             'transactionsDifference' => $transactionsYesterday,
             'pagetitle' => "Analytics",
-            'transactions' => $transactions
+            'transactions' => $transactions,
+            'purchase' => $pengeluaran
         ]);
     }
 }
