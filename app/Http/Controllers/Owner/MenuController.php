@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Owner;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Menu;
 use App\Http\Requests\StoreMenuRequest;
