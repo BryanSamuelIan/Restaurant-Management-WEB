@@ -8,7 +8,7 @@
             @foreach ($categories as $category)
                 <div class="bg-white border border-gray-300 shadow-lg rounded-lg p-4 mb-4">
                     <h2 class="text-2xl font-semibold mb-2" style="font-family: 'Diphylleia', sans-serif">
-                        <button class="category-toggle focus:outline-none">
+                        <button class="category-toggle focus:outline-none w-full">
                             {{ $category->name }}
                         </button>
                     </h2>
