@@ -18,8 +18,10 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::all();
-        return view('transaction.index', ['transactions' => $transactions,
-        'pagetitle' => "Transaksi"]);
+        return view('transaction.index', [
+            'transactions' => $transactions,
+            'pagetitle' => "Transaksi"
+        ]);
     }
 
     /**
@@ -30,8 +32,10 @@ class TransactionController extends Controller
         $categories = Category::all();
         $paymentTypes = Payment_type::all();
 
-        return view('transaction.create', ['categories' => $categories, 'paymentTypes' => $paymentTypes,
-        'pagetitle' => "Buat Transaksi"]);
+        return view('transaction.create', [
+            'categories' => $categories, 'paymentTypes' => $paymentTypes,
+            'pagetitle' => "Buat Transaksi"
+        ]);
     }
 
     /**
@@ -175,8 +179,9 @@ class TransactionController extends Controller
         $transaction->status_id = $transaction->status_id == 1 ? 2 : 1;
         $transaction->save();
 
-        return redirect()->route('transactions.index')->with('success', 'Status updated successfully');
+        return response()->json(['status' => $transaction->status]);
     }
+
 
     protected function updateOrCreateTransactionMenus($cartItems, $transactionId)
     {

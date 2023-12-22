@@ -106,4 +106,4 @@ Route::get('admin/analytics', [AnalyticsController::class, 'index'])->name('anal
 Route::get('admin/transactions/{id}/edit', [TransactionController::class, 'edit'])->name('transaction.edit');
 Route::put('admin/transactions/{id}', [TransactionController::class, 'update'])->name('transaction.update');
 
-Route::put('admin/transactions/{id}/update-status', 'TransactionController@updateStatus')->name('transaction.update-status');
+Route::put('admin/transactions/{id}/update-status', [TransactionController::class, 'updateStatus'])->name('transaction.update-status');

@@ -43,30 +43,37 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#transactionsTable').on('click', 'button.status-btn', function() {
+            $('#transactionsTable').on('click', '.status-btn', function() {
                 const transactionId = $(this).closest('tr').data('transaction-id');
                 updateStatus(transactionId);
             });
 
             function updateStatus(transactionId) {
-                const button = $(`tr[data-transaction-id="${transactionId}"] button.status-btn`);
+                $.ajax({
+                    method: 'PUT',
+                    url: `/admin/transactions/${transactionId}/update-status`,
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        // Handle success, e.g., update the UI or show a success message
+                        console.log(response);
 
-                console.log('Button:', button); // Check if the button is correctly selected
-
-                if (button.length === 1) {
-                    button.toggleClass('btn-danger btn-success');
-                    console.log('Class toggled successfully');
-                } else {
-                    console.error('Button not found or multiple buttons found');
-                }
+                        const newStatus = response.status.status_state;
+                        const button = $(
+                        `tr[data-transaction-id="${transactionId}"] button.status-btn`);
+                        button.html(newStatus);
+                        button.toggleClass('btn-danger btn-success');
+                    },
+                    error: function(error) {
+                        // Handle error, e.g., show an error message
+                        console.error(error);
+                    },
+                });
             }
-
         });
     </script>
 @endsection
