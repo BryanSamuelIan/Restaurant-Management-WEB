@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Category;
 use App\Models\Payment_type;
 use App\Models\Transaction_menu;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -18,6 +19,15 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::all();
+        return view('transaction.index', [
+            'transactions' => $transactions,
+            'pagetitle' => "Transaksi"
+        ]);
+    }
+
+    public function indexToday()
+    {
+        $transactions = Transaction::whereDate('transaction_time', Carbon::today())->get();
         return view('transaction.index', [
             'transactions' => $transactions,
             'pagetitle' => "Transaksi"

@@ -21,7 +21,7 @@ class OrderMenuController extends Controller{
         // Validate and store the transaction
         $transaction = new Transaction([
             'payment_type_id' =>1,
-            'status_id' => 2,
+            'status_id' => 1,
             'table_no'=>$tableNumber??0,
             'user_id'=>null
         ]);

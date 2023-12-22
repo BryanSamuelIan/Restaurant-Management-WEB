@@ -111,6 +111,7 @@ Route::post('/contact', [ContactController::class, 'sendMessage'])->name('sendEm
 
 Route::get('admin/transaction/create', [TransactionController::class, 'create'])->name('transaction.create');
 Route::get('admin/transactions', [TransactionController::class, 'index'])->name('transactions');
+Route::get('admin/todaystransactions', [TransactionController::class, 'indexToday'])->name('transaction');
 Route::get('admin/analytics', [AnalyticsController::class, 'index'])->name('analytics');
 
 Route::get('admin/transactions/{id}/edit', [TransactionController::class, 'edit'])->name('transaction.edit');

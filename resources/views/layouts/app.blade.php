@@ -94,6 +94,10 @@
                                 <a class="nav-link {{ request()->routeIs('transactions') ? 'active' : '' }}"
                                     href="{{ route('transactions') }}">{{ __('Lihat Transaksi') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('transaction') ? 'active' : '' }}"
+                                    href="{{ route('transaction') }}">{{ __('Transaksi Hari Ini') }}</a>
+                            </li>
                         @endauth
                     </ul>
 

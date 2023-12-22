@@ -59,6 +59,8 @@ class AnalyticsController extends Controller
         $percentageDifference = 0;
         if ($incomeYesterday != 0) {
             $percentageDifference = (($incomeToday - $incomeYesterday) / $incomeYesterday) * 100;
+        } else {
+            $percentageDifference = $incomeToday * 100;
         }
 
         return $percentageDifference;
@@ -115,6 +117,8 @@ class AnalyticsController extends Controller
         $percentageDifference = 0;
         if ($incomeLastMonth != 0) {
             $percentageDifference = (($incomeCurrentMonth - $incomeLastMonth) / $incomeLastMonth) * 100;
+        } else {
+            $percentageDifference = $incomeCurrentMonth * 100;
         }
 
         return $percentageDifference;
