@@ -7,7 +7,7 @@
                     <div class="card-header p-3 pt-2">
                         <div
                             class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">weekend</i>
+                            <i class="material-icons opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Transaksi Hari Ini</p>
@@ -34,7 +34,7 @@
                     <div class="card-header p-3 pt-2">
                         <div
                             class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">person</i>
+                            <i class="material-icons opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Pemasukkan Hari Ini</p>
@@ -59,7 +59,7 @@
                         <div class="position-relative">
                             <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl position-absolute top-0 start-0"
                                 style="width: 70px; height: 70px;">
-                                <img src="{{ asset('storage/images/money-bag.png') }}" alt="Your Image" class="img-fluid">
+                                <img src="{{ asset('/images/money-bag.png') }}" alt="Your Image" class="img-fluid">
                             </div>
                         </div>
 
@@ -85,7 +85,7 @@
                     <div class="card-header p-3 pt-2">
                         <div
                             class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">weekend</i>
+                            <i class="material-icons opacity-10"></i>
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Pengeluaran Bulan Ini</p>
@@ -123,8 +123,8 @@
                                         <td>{{ $transaction->payment_type->name }}</td>
                                         <td>
                                             <button type="button"
-                                                class="btn btn-block status-btn @if ($transaction->status_id == 1) btn-warning 
-                                                @elseif($transaction->status_id == 2) btn-success 
+                                                class="btn btn-block status-btn @if ($transaction->status_id == 1) btn-warning
+                                                @elseif($transaction->status_id == 2) btn-success
                                                 @elseif($transaction->status_id == 6) btn-danger @endif">
                                                 {{ $transaction->status->status_state }}
                                             </button>
