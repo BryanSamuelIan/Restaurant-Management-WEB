@@ -43,12 +43,8 @@ Route::get('/about', function () {
 Route::get('/admin', function () {
     return redirect('/login');
 });
-Route::get('/employee', function () {
-    return redirect('/login');
-});
-Route::get('/owner', function () {
-    return redirect('/login');
-});
+
+
 Route::get('/contact', function () {
     return view('contact', [
         "pagetitle" => "Contact Us"
@@ -128,9 +124,13 @@ Route::group([
     Route::post('/employee/store', [EmployeeController::class, 'store'])->name('employee.store');
     Route::put('/users/{id}/update-active-status', [UserController::class, 'updateActiveStatus'])->name('user.update-isactive');
     Route::put('/users/{id}/update-password', [UserController::class, 'updatePassword'])->name('admin.users.update-password');
+    Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
+    Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('employee.update');
+    Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 
-
-
+    Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
+    Route::put('/menus/{id}', [MenuController::class, 'update'])->name('menu.update');
+    Route::delete('/menus/{id}', [MenuController::class, 'destroy'])->name('menu.destroy');
     Route::get('/menuEdit', [MenuController::class, 'index'])->name('menuEdit');
     Route::get('/event', [EventController::class, 'index'])->name('event');
     Route::get('/supplier', [ASupplierController::class, 'index'])->name('supplier.index');

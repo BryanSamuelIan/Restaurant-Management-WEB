@@ -8,7 +8,12 @@
                     <div class="card-header">Tambah Pengeluaran</div>
 
                     <div class="card-body">
-                        <form action="{{ route('expenses.store') }}" method="post">
+                        @if (Auth::user()->isAdmin())
+                        <form action="{{ route('admin.expenses.store') }}" method="post">
+                            @endauth
+                            @if (Auth::user()->isOwner())
+                            <form action="{{ route('owner.expenses.store') }}" method="post">
+                                @endauth
                             @csrf
 
                             <div class="form-group">

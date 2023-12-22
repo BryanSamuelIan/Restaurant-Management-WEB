@@ -6,7 +6,7 @@
     <div class="container">
         <h2>Tambah User Baru</h2>
 
-        <form id="createUserForm" action="{{ route('user.store') }}" method="post">
+        <form id="createUserForm" action="{{ route('owner.user.store') }}" method="post">
             @csrf
 
             <div class="mb-3">
@@ -66,8 +66,8 @@
 
                         // Clear the form if needed
                         $('#createUserForm')[0].reset();
-                        
-                        window.location.href = '{{ route('users') }}';
+
+                        window.location.href = '{{ route('owner.users') }}';
                     },
                     error: function(error) {
                         // Handle errors if needed

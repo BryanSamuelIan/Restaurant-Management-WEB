@@ -57,7 +57,7 @@
             function updateStatus(transactionId) {
                 $.ajax({
                     method: 'PUT',
-                    url: `/admin/transactions/${transactionId}/update-status`,
+                    url: `/transactions/${transactionId}/update-status`,
                     data: {
                         _token: '{{ csrf_token() }}',
                     },

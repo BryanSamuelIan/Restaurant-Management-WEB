@@ -34,12 +34,24 @@
                             <td>{{ $menu->supplier->name }}</td>
                         @endif
                         <td>
-                            <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('menu.destroy', $menu->id) }}" method="post" style="display: inline;">
+
+                            @if (Auth::user()->isAdmin())
+                            <a href="{{ route('admin.menu.edit', $menu->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('admin.menu.destroy', $menu->id) }}" method="post" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                             </form>
+                            @endauth
+                            @if (Auth::user()->isOwner())
+                            <a href="{{ route('owner.menu.edit', $menu->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('owner.menu.destroy', $menu->id) }}" method="post" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                            @endauth
+
                         </td>
                     </tr>
                 @endforeach

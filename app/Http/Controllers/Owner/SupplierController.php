@@ -26,7 +26,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('supplier.create');
+        return view('supplier.create' ,['pagetitle' => "Tambah Supplier"]);
     }
 
     /**

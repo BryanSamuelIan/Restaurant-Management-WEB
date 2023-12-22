@@ -8,7 +8,7 @@
             @foreach ($categories as $category)
                 <div class="bg-white border border-gray-300 shadow-lg rounded-lg p-4 mb-4">
                     <h2 class="text-2xl font-semibold mb-2" style="font-family: 'Diphylleia', sans-serif">
-                        <button class="category-toggle focus:outline-none">
+                        <button class="category-toggle focus:outline-none w-full">
                             {{ $category->name }}
                         </button>
                     </h2>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="ml-4 pb-4 md:pb-0">
                         <button id="pass-all-items-btn" type="submit"
-                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Order</button>
+                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 " disabled>Order</button>
                     </div>
                 </div>
             </form>
@@ -212,18 +212,31 @@
                     totalPrice += item.menuPrice * item.quantity;
                 });
 
+
                 return totalPrice;
             }
 
             function updateTotalAmount() {
                 const totalAmount = calculateTotalPrice();
                 document.getElementById('totalAmountValue').textContent = number_format(totalAmount, 0, ',', '.');
+                if (totalAmount === 0) {
+                    // If the total amount is zero, disable the submit button and prevent form submission
+                    $('#pass-all-items-btn').prop('disabled', true);
+                    return; // Exit the function, preventing further execution
+                }
+                if (totalAmount != 0) {
+                    // If the total amount is zero, disable the submit button and prevent form submission
+                    $('#pass-all-items-btn').prop('disabled', false);
+                    return; // Exit the function, preventing further execution
+                }
             }
 
             $('#pass-all-items-btn').click(function(e) {
                 e.preventDefault();
 
                 const tableNumber = $('#table_no').val();
+
+
 
                 let alertMessage = '<div style="text-align: left;">';
                 alertMessage += '<h5>Detail Menu:</h5>';
