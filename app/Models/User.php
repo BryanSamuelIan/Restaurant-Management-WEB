@@ -25,7 +25,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'password',
-        'role_id'
+        'role_id',
+        'is_active'
     ];
 
     /**
@@ -55,6 +56,7 @@ class User extends Authenticatable
     public function role() {
         return $this->belongsTo(Role::class);
     }
+
     public function isAdmin():bool{
         if($this->role_id==2){
             return true;

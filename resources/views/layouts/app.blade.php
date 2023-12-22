@@ -51,12 +51,12 @@
                                         {{ __('Master') }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="nav-link" href="{{ route('menus') }}">{{ __('Data Menu') }}</a>
-                                        <a class="nav-link" href="{{ route('suppliers') }}">{{ __('Data Supplier') }}</a>
-                                        <a class="nav-link" href="{{ route('events') }}">{{ __('Data Event') }}</a>
-                                        <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
-                                        <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
-                                        <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
+                                        <a class="nav-link" href="{{ route('admin.menus') }}">{{ __('Data Menu') }}</a>
+                                        <a class="nav-link" href="{{ route('admin.suppliers') }}">{{ __('Data Supplier') }}</a>
+                                        <a class="nav-link" href="{{ route('admin.events') }}">{{ __('Data Event') }}</a>
+                                        <a class="nav-link" href="{{ route('admin.foods') }}">{{ __('Data Makanan') }}</a>
+                                        <a class="nav-link" href="{{ route('admin.beverages') }}">{{ __('Data Minuman') }}</a>
+                                        <a class="nav-link" href="{{ route('admin.alcohols') }}">{{ __('Data Alkohol') }}</a>
                                     </div>
                                 </li>
                             @endif
@@ -68,14 +68,14 @@
                                         {{ __('Master') }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="nav-link" href="{{ route('users') }}">{{ __('Data User') }}</a>
-                                        <a class="nav-link" href="{{ route('employees') }}">{{ __('Data Karyawan') }}</a>
-                                        <a class="nav-link" href="{{ route('menus') }}">{{ __('Data Menu') }}</a>
-                                        <a class="nav-link" href="{{ route('suppliers') }}">{{ __('Data Supplier') }}</a>
-                                        <a class="nav-link" href="{{ route('events') }}">{{ __('Data Event') }}</a>
-                                        <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
-                                        <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
-                                        <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
+                                        <a class="nav-link" href="{{ route('owner.users') }}">{{ __('Data User') }}</a>
+                                        <a class="nav-link" href="{{ route('owner.employees') }}">{{ __('Data Karyawan') }}</a>
+                                        <a class="nav-link" href="{{ route('owner.menus') }}">{{ __('Data Menu') }}</a>
+                                        <a class="nav-link" href="{{ route('owner.suppliers') }}">{{ __('Data Supplier') }}</a>
+                                        <a class="nav-link" href="{{ route('owner.events') }}">{{ __('Data Event') }}</a>
+                                        <a class="nav-link" href="{{ route('owner.foods') }}">{{ __('Data Makanan') }}</a>
+                                        <a class="nav-link" href="{{ route('owner.beverages') }}">{{ __('Data Minuman') }}</a>
+                                        <a class="nav-link" href="{{ route('owner.alcohols') }}">{{ __('Data Alkohol') }}</a>
                                     </div>
                                 </li>
                             @endif
@@ -95,11 +95,11 @@
                                         {{ __('Action') }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="nav-link" href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
+                                        <a class="nav-link" href="{{ route('admin.menu.create') }}">{{ __('Tambah Menu') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
+                                            href="{{ route('admin.supplier.create') }}">{{ __('Tambah Supplier') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('event.create') }}">{{ __('Tambah Event') }}</a>
+                                            href="{{ route('admin.event.create') }}">{{ __('Tambah Event') }}</a>
 
                                     </div>
                                 </li>
@@ -113,15 +113,15 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                                         <a class="nav-link"
-                                            href="{{ route('user.create') }}">{{ __('Tambah User') }}</a>
+                                            href="{{ route('owner.user.create') }}">{{ __('Tambah User') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('employee.create') }}">{{ __('Tambah Karyawan') }}</a>
+                                            href="{{ route('owner.employee.create') }}">{{ __('Tambah Karyawan') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
+                                            href="{{ route('owner.menu.create') }}">{{ __('Tambah Menu') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
+                                            href="{{ route('owner.supplier.create') }}">{{ __('Tambah Supplier') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('event.create') }}">{{ __('Tambah Event') }}</a>
+                                            href="{{ route('owner.event.create') }}">{{ __('Tambah Event') }}</a>
                                     </div>
                                 </li>
                             @endif
@@ -151,11 +151,11 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="nav-link"
-                                            href="{{ route('purchases') }}">{{ __('List Pengeluaran') }}</a>
+                                            href="{{ route('admin.purchases') }}">{{ __('List Pengeluaran') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('expense.create') }}">{{ __('Tambah Pengeluaran') }}</a>
+                                            href="{{ route('admin.expense.create') }}">{{ __('Tambah Pengeluaran') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('purchase.create') }}">{{ __('Tambah Alkohol') }}</a>
+                                            href="{{ route('admin.purchase.create') }}">{{ __('Tambah Alkohol') }}</a>
                                     </div>
                                 </li>
                             @endif
@@ -168,16 +168,16 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="nav-link"
-                                            href="{{ route('purchases') }}">{{ __('List Pengeluaran') }}</a>
+                                            href="{{ route('owner.purchases') }}">{{ __('List Pengeluaran') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('expense.create') }}">{{ __('Tambah Pengeluaran') }}</a>
+                                            href="{{ route('owner.expense.create') }}">{{ __('Tambah Pengeluaran') }}</a>
                                         <a class="nav-link"
-                                            href="{{ route('purchase.create') }}">{{ __('Tambah Alkohol') }}</a>
+                                            href="{{ route('owner.purchase.create') }}">{{ __('Tambah Alkohol') }}</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->routeIs('analytics') ? 'active' : '' }}"
-                                        href="{{ route('analytics') }} ">{{ __('Analytics') }}</a>
+                                        href="{{ route('owner.analytics') }} ">{{ __('Analytics') }}</a>
                                 </li>
                             @endif
 

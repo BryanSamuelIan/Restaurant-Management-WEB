@@ -79,7 +79,7 @@ Route::put('/transactions/{id}/update-status', [TransactionController::class, 'u
 
 //admin
 Route::group([
-    'Middleware' => 'Admin',
+    'middleware' => 'admin',
     'prefix' => 'admin',
     'as' => 'admin.'
 ], function () {
@@ -110,7 +110,7 @@ Route::group([
 //owner
 
 Route::group([
-    'Middleware' => 'Owner',
+    'middleware' => 'owner',
     'prefix' => 'owner',
     'as' => 'owner.'
 ], function () {

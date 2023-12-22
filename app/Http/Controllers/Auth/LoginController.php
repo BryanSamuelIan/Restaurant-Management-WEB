@@ -39,13 +39,39 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
     public function username()
     {
         return 'name';
     }
 
-    // Override the attemptLogin method to use the "name" field
+    // public function login($request)
+    // {
+    //     $admin = [
+    //         'username' => $request->name,
+    //         'password' => $request->password,
+    //         'role_id' => 2,
+    //         'is_active'=>1
+    //     ];
+
+
+    //     $owner = [
+    //         'username' => $request->name,
+    //         'password' => $request->password,
+    //         'role_id' => 3,
+    //         'is_active'=>1
+
+    //     ];
+    //     if (Auth::attempt($admin)) {
+    //         return redirect()->route('admin.transactions');
+    //     }
+    //     elseif (Auth::attempt($owner)) {
+    //         return redirect()->route('owner.transactions');
+    //     }
+
+
+
+    // }
+
     protected function attemptLogin(Request $request)
     {
         return Auth::attempt(
