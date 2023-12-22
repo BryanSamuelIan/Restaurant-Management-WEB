@@ -7,6 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderMenuController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -50,6 +51,7 @@ Route::get('contact', function () {
 
 //guest
 Route::get('/ordermenu', [MenuController::class, 'index'])->name('ordermenu');
+Route::post('/storeorder',[OrderMenuController::class,'store'])->name('store_order');
 
 
 Auth::routes();

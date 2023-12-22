@@ -1,0 +1,64 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Transaction;
+use App\Http\Requests\StoreTransactionRequest;
+use App\Http\Requests\UpdateTransactionRequest;
+use App\Models\Category;
+use App\Models\Payment_type;
+use App\Models\Transaction_menu;
+use Illuminate\Http\Request;
+
+class OrderMenuController extends Controller{
+
+    public function store(Request $request)
+    {
+        $cartItems = json_decode($request->input('cartItems'), true);
+
+        $tableNumber = $request->input('tableNumber');
+
+        // Validate and store the transaction
+        $transaction = new Transaction([
+            'payment_type_id' =>1,
+            'status_id' => 2,
+            'table_no'=>$tableNumber??0,
+            'user_id'=>null
+        ]);
+
+        $subtotal = 0;
+        foreach ($cartItems as $item) {
+            $subtotal += $item['quantity'] * $item['menuPrice'];
+        }
+
+        // Assuming no additional charges for now
+        $total = $subtotal;
+
+        $transaction->subtotal = $subtotal;
+        $transaction->total = $total;
+
+
+        $transaction->save();
+
+        // Attach menu items to the transaction
+        foreach ($cartItems as $item) {
+            if($item['quantity']>0){
+            $transactionMenu = new Transaction_menu([
+                'transaction_id' => $transaction->id,
+                'menu_id' => $item['menuId'],
+                'amount' => $item['quantity'],
+                'price' => $item['menuPrice']
+            ]);
+
+            $transactionMenu->save();
+        }
+        }
+
+        // Redirect or respond as needed
+        return redirect()->route('home');
+    }
+
+
+
+
+}

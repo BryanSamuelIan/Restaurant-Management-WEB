@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Kalnia';
+    src: url('/fonts/Kalnia-Regular.woff2') format('woff2'),
+         url('/fonts/Kalnia-Regular.woff') format('woff');
+    /* Add other font weights and styles if needed */
+}
+
+.font-family-Kalnia {
+    font-family: 'Kalnia', sans-serif;
+    /* Additional styles for the font class if needed */
+}

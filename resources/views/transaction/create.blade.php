@@ -21,10 +21,11 @@
                                                     <div class="row mb-3">
                                                         <div class="col-md-12">
                                                             <div class="menu-item-container">
-                                                                <button class="btn btn-secondary menu-link menu-button w-100" 
-                                                                        data-menu="{{ $menu->id }}"
-                                                                        data-name="{{ $menu->name }}"
-                                                                        data-price="{{ $menu->price }}">
+                                                                <button
+                                                                    class="btn btn-secondary menu-link menu-button w-100"
+                                                                    data-menu="{{ $menu->id }}"
+                                                                    data-name="{{ $menu->name }}"
+                                                                    data-price="{{ $menu->price }}">
                                                                     {{ $menu->name }}
                                                                 </button>
                                                             </div>
@@ -41,7 +42,7 @@
                         @endforeach
                     </div>
                 </div>
-                
+
             </div>
 
             <div class="col-md-3">
@@ -54,12 +55,12 @@
                     </div>
                     <hr>
                     <div id="cart-total">
-                        
+
                     </div>
                     <div class="mb-3">
                         <label for="payment-type">Metode Pembayaran:</label>
                         <select id="payment-type" class="form-control">
-                            @foreach($paymentTypes as $paymentType)
+                            @foreach ($paymentTypes as $paymentType)
                                 <option value="{{ $paymentType->id }}">{{ $paymentType->name }}</option>
                             @endforeach
                         </select>

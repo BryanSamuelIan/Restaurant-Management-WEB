@@ -45,6 +45,7 @@ class TransactionController extends Controller
             'transaction_time' => now(), // You might want to adjust this based on your requirements
             'payment_type_id' => $request->input('paymentTypeId'),
             'status_id' => 2,
+            'table_no'=>0,
         ]);
 
         $subtotal = 0;

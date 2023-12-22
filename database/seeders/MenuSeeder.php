@@ -416,7 +416,7 @@ class MenuSeeder extends Seeder
                 'description' => 'Bir Konig Ludwig 500ml',
                 'price' => 55000,'is_alcohol'=>true,
                 'alcohol%' => 4.3,
-                'photo' => 'images/4.jpg',
+                'photo' => 'images/4.jpeg',
             ], [
                 'category_id' => 10,
                 'supplier_id' => 1,

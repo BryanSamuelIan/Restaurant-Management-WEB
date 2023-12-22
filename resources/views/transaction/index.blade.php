@@ -11,6 +11,7 @@
                             <th>Waktu Transaksi</th>
                             <th>Metode Pembayaran</th>
                             <th>Status Pembayaran</th>
+                            <th>No Meja</th>
                             <th>Subtotal</th>
                             <th>Total</th>
                         </tr>
@@ -27,7 +28,7 @@
                                         {{ $transaction->status->status_state }}
                                     </button>
                                 </td>
-                                
+                                <td>{{ $transaction->table_no }}</td>
                                 <td>Rp{{ number_format($transaction->subtotal, 0, ',', '.') }}</td>
                                 <td>Rp{{ number_format($transaction->total, 0, ',', '.') }}</td>
                                 <td>

@@ -15,7 +15,8 @@ class Transaction extends Model
         'payment_type_id',
         'status_id',
         'subtotal',
-        'total'
+        'total',
+        'table_no'
     ];
 
     public function transaction_menus() {
