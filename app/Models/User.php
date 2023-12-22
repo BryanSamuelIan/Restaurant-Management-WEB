@@ -55,4 +55,16 @@ class User extends Authenticatable
     public function role() {
         return $this->belongsTo(Role::class);
     }
+    public function isAdmin():bool{
+        if($this->role_id==2){
+            return true;
+        }
+        return false;
+    }
+    public function isOwner():bool{
+        if($this->role_id==3){
+            return true;
+        }
+        return false;
+    }
 }

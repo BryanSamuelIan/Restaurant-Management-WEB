@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Owner;
 
+use App\Http\Controllers\Controller;
 use App\Models\Expense;
 use App\Models\Purchase;
 use App\Models\Transaction;
@@ -38,7 +39,7 @@ class AnalyticsController extends Controller
 
         return $difference;
     }
-    
+
     public function incomeDifferenceTodayYesterday()
     {
         // Get the date for today and yesterday
@@ -59,8 +60,6 @@ class AnalyticsController extends Controller
         $percentageDifference = 0;
         if ($incomeYesterday != 0) {
             $percentageDifference = (($incomeToday - $incomeYesterday) / $incomeYesterday) * 100;
-        } else {
-            $percentageDifference = $incomeToday * 100;
         }
 
         return $percentageDifference;
@@ -117,8 +116,6 @@ class AnalyticsController extends Controller
         $percentageDifference = 0;
         if ($incomeLastMonth != 0) {
             $percentageDifference = (($incomeCurrentMonth - $incomeLastMonth) / $incomeLastMonth) * 100;
-        } else {
-            $percentageDifference = $incomeCurrentMonth * 100;
         }
 
         return $percentageDifference;

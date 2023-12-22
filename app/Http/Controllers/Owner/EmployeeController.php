@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Owner;
 
+use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Http\Requests;
 use App\Http\Requests\UpdateEmployeeRequest;
@@ -41,16 +42,16 @@ class EmployeeController extends Controller
                 'phone' => $request->phone,
                 'sallary' => $request->sallary,
                 'ktp' => $ktpPath
-            ]);    
+            ]);
         } else {
             Employee::create([
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'sallary' => $request->sallary
             ]);
-    
+
         }
-        
+
         return redirect()->route('employees');
     }
 

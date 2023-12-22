@@ -15,12 +15,12 @@
                 <tr>
                     <td>{{ $event->name }}</td>
                     <td>
-                        <img src="{{ asset($event->banner) }}" alt="Event Banner" width="100" height="100">
+                        <img src="{{ asset('storage/'.$event->banner) }}" alt="Event Banner" width="100" height="100">
                     </td>
                 </tr>
             @endforeach
         </tbody>
-    </table>    
+    </table>
 </div>
 
 @endsection

@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Event;
-use App\Http\Requests\StoreEventRequest;
-use App\Http\Requests\UpdateEventRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Menu_purchased;
+use App\Http\Requests\StoreMenu_purchasedRequest;
+use App\Http\Requests\UpdateMenu_purchasedRequest;
 
-class EventController extends Controller
+class MenuPurchasedController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $events = Event::all();
-
-        return view('event.index', ['events' => $events,
-        'pagetitle' => "events"]);
+        //
     }
 
     /**
@@ -24,14 +22,13 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('event.create', [
-        'pagetitle' => "Buat Event"]);
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEventRequest $request)
+    public function store(StoreMenu_purchasedRequest $request)
     {
         //
     }
@@ -39,7 +36,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show(Menu_purchased $menu_purchased)
     {
         //
     }
@@ -47,7 +44,7 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event)
+    public function edit(Menu_purchased $menu_purchased)
     {
         //
     }
@@ -55,7 +52,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(UpdateMenu_purchasedRequest $request, Menu_purchased $menu_purchased)
     {
         //
     }
@@ -63,7 +60,7 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(Menu_purchased $menu_purchased)
     {
         //
     }

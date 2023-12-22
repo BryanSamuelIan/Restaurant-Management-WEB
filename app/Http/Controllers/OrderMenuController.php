@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
@@ -12,6 +13,18 @@ use Illuminate\Http\Request;
 
 class OrderMenuController extends Controller{
 
+
+    public function index()
+    {
+        $menus = Menu::all();
+        $categories = Category::all();
+        return view('ordermenu', [
+            "pagetitle" => "Order Menu",
+            "maintitle" => "Menu",
+            "menus" => $menus,
+            "categories" => $categories
+        ]);
+    }
     public function store(Request $request)
     {
         $cartItems = json_decode($request->input('cartItems'), true);

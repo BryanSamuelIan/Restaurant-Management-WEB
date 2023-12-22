@@ -39,56 +39,99 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @Auth
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ __('Master') }}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link" href="{{ route('users') }}">{{ __('Data User') }}</a>
-                                    <a class="nav-link" href="{{ route('employees') }}">{{ __('Data Karyawan') }}</a>
-                                    <a class="nav-link" href="{{ route('menus') }}">{{ __('Data Menu') }}</a>
-                                    <a class="nav-link" href="{{ route('suppliers') }}">{{ __('Data Supplier') }}</a>
-                                    <a class="nav-link" href="{{ route('events') }}">{{ __('Data Event') }}</a>
-                                    <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
-                                    <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
-                                    <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
-                                    <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Order') }}</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ __('Action') }}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link" href="{{ route('user.create') }}">{{ __('Tambah User') }}</a>
-                                    <a class="nav-link"
-                                        href="{{ route('employee.create') }}">{{ __('Tambah Karyawan') }}</a>
-                                    <a class="nav-link" href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
-                                    <a class="nav-link"
-                                        href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
-                                    <a class="nav-link" href="{{ route('event.create') }}">{{ __('Tambah Event') }}</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ __('Pengeluaran') }}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link" href="{{ route('purchases') }}">{{ __('List Pengeluaran') }}</a>
-                                    <a class="nav-link" href="{{ route('expense.create') }}">{{ __('Tambah Pengeluaran') }}</a>
-                                    <a class="nav-link" href="{{ route('purchase.create') }}">{{ __('Tambah Alkohol') }}</a>
-                                </div>
-                            </li>
+
+
+
+
+
+                            @if (Auth::user()->isAdmin())
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ __('Master') }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="nav-link" href="{{ route('menus') }}">{{ __('Data Menu') }}</a>
+                                        <a class="nav-link" href="{{ route('suppliers') }}">{{ __('Data Supplier') }}</a>
+                                        <a class="nav-link" href="{{ route('events') }}">{{ __('Data Event') }}</a>
+                                        <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
+                                        <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
+                                        <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
+                                    </div>
+                                </li>
+                            @endif
+
+                            @if (Auth::user()->isOwner())
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ __('Master') }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="nav-link" href="{{ route('users') }}">{{ __('Data User') }}</a>
+                                        <a class="nav-link" href="{{ route('employees') }}">{{ __('Data Karyawan') }}</a>
+                                        <a class="nav-link" href="{{ route('menus') }}">{{ __('Data Menu') }}</a>
+                                        <a class="nav-link" href="{{ route('suppliers') }}">{{ __('Data Supplier') }}</a>
+                                        <a class="nav-link" href="{{ route('events') }}">{{ __('Data Event') }}</a>
+                                        <a class="nav-link" href="{{ route('foods') }}">{{ __('Data Makanan') }}</a>
+                                        <a class="nav-link" href="{{ route('beverages') }}">{{ __('Data Minuman') }}</a>
+                                        <a class="nav-link" href="{{ route('alcohols') }}">{{ __('Data Alkohol') }}</a>
+                                    </div>
+                                </li>
+                            @endif
+
+
+
+
+                        @endauth
+
+
+
+                        @auth
+                            @if (Auth::user()->isAdmin())
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ __('Action') }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="nav-link" href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('event.create') }}">{{ __('Tambah Event') }}</a>
+
+                                    </div>
+                                </li>
+                            @endif
+                            @if (Auth::user()->isOwner())
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ __('Action') }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <a class="nav-link"
+                                            href="{{ route('user.create') }}">{{ __('Tambah User') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('employee.create') }}">{{ __('Tambah Karyawan') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('menu.create') }}">{{ __('Tambah Menu') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('supplier.create') }}">{{ __('Tambah Supplier') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('event.create') }}">{{ __('Tambah Event') }}</a>
+                                    </div>
+                                </li>
+                            @endif
+                        @endauth
+
+
+                        @auth
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('transaction.create') ? 'active' : '' }}"
                                     href="{{ route('transaction.create') }}">{{ __('Buat Order') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('analytics') ? 'active' : '' }}"
-                                    href="{{ route('analytics') }} ">{{ __('Analytics') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('transactions') ? 'active' : '' }}"
@@ -98,6 +141,46 @@
                                 <a class="nav-link {{ request()->routeIs('transaction') ? 'active' : '' }}"
                                     href="{{ route('transaction') }}">{{ __('Transaksi Hari Ini') }}</a>
                             </li>
+
+                            @if (Auth::user()->isAdmin())
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        {{ __('Pengeluaran') }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="nav-link"
+                                            href="{{ route('purchases') }}">{{ __('List Pengeluaran') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('expense.create') }}">{{ __('Tambah Pengeluaran') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('purchase.create') }}">{{ __('Tambah Alkohol') }}</a>
+                                    </div>
+                                </li>
+                            @endif
+                            @if (Auth::user()->isOwner())
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        {{ __('Pengeluaran') }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="nav-link"
+                                            href="{{ route('purchases') }}">{{ __('List Pengeluaran') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('expense.create') }}">{{ __('Tambah Pengeluaran') }}</a>
+                                        <a class="nav-link"
+                                            href="{{ route('purchase.create') }}">{{ __('Tambah Alkohol') }}</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->routeIs('analytics') ? 'active' : '' }}"
+                                        href="{{ route('analytics') }} ">{{ __('Analytics') }}</a>
+                                </li>
+                            @endif
+
                         @endauth
                     </ul>
 
@@ -109,13 +192,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
-                            @endif
 
-                            {{-- @if (Route::has('register'))
+
+                                {{-- @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif --}}
+                               @endif --}}
+                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -136,6 +220,7 @@
                                     </form>
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Supplier;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
@@ -25,9 +26,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('supplier.create', [
-            'pagetitle' => "Buat Supplier"
-        ]);
+        return view('supplier.create');
     }
 
     /**

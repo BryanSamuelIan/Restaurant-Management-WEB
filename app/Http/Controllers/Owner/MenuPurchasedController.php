@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Owner;
 
+use App\Http\Controllers\Controller;
 use App\Models\Menu_purchased;
 use App\Http\Requests\StoreMenu_purchasedRequest;
 use App\Http\Requests\UpdateMenu_purchasedRequest;
