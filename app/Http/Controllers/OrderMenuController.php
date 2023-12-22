@@ -68,7 +68,7 @@ class OrderMenuController extends Controller{
         }
 
         // Redirect or respond as needed
-        return redirect()->route('home');
+        return redirect()->back()->with('transactionId', $transaction->id);
     }
 
 
