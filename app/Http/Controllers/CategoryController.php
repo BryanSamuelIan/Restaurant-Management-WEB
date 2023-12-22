@@ -17,7 +17,8 @@ class CategoryController extends Controller
         return view('layouts.template', [
             "pagetitle" => "categories",
             "maintitle" => "categories",
-            "categories" => $categories
+            "categories" => $categories,
+            'pagetitle' => "Kategori"
         ]);
     }
 

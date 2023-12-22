@@ -23,7 +23,7 @@ class Purchase extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function menu_purchased() {
+    public function menu_purchaseds() {
         return $this->hasMany(Menu_purchased::class);
     }
 }

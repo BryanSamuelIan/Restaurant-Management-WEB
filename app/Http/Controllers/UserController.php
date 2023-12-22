@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,26 +14,25 @@ class UserController extends Controller
     {
         $users = User::whereIn('role_id', [1, 2])->get();
 
-        return view('user.index', ['users' => $users]);
+        return view('user.index', [
+            'users' => $users,
+            'pagetitle' => "User"
+        ]);
     }
 
-    public function updateActiveStatus($userId)
+    public function create()
     {
-        $user = User::findOrFail($userId);
-        $user->update(['is_active' => request('is_active')]);
-
-        // You can return a response if needed
-        return response()->json(['status' => 'success']);
-    }
-
-    public function create() {
         $employees = Employee::all();
         $roles = Role::all();
 
-        return view('user.create', ['employees' => $employees, 'roles' => $roles]);
+        return view('user.create', [
+            'employees' => $employees, 'roles' => $roles,
+            'pagetitle' => "Buat User"
+        ]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         User::create([
             'name' => $request->name,
             'employee_id' => $request->employee_id,
@@ -41,5 +41,31 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users');
+    }
+
+    public function updateActiveStatus($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->is_active = !$user->is_active;
+            $user->save();
+
+            return response()->json(['is_active' => $user->is_active]);
+        }
+
+        return response()->json(['error' => 'User not found'], 404);
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+
+        $user = User::findOrFail($id);
+
+        // Update the user's password
+        $user->password = Hash::make($request->input('new_password'));
+        $user->save();
+
+        return response()->json(['message' => 'Password updated successfully'], 200);
     }
 }
