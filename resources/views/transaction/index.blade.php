@@ -46,8 +46,26 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
+        function fetchTransactionsData() {
+            $.ajax({
+                method: 'GET',
+                url: '/transactions', // Update the URL based on your route
+                success: function(response) {
+                    // Update the table body with the new transactions data
+                    $('#transactionsTable').html(response);
+                },
+                error: function(error) {
+                    console.error(error);
+                },
+            });
+        }
+
+        // Initial fetch when the page loads
+        fetchTransactionsData();
+
+        // Set up interval to fetch data every 5 seconds (adjust as needed)
+        setInterval(fetchTransactionsData, 5000);
         $(document).ready(function() {
             $('#transactionsTable').on('click', '.status-btn', function() {
                 const transactionId = $(this).closest('tr').data('transaction-id');
