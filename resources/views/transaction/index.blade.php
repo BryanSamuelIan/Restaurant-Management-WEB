@@ -23,30 +23,33 @@
         </div>
     </div>
     <script>
-        function fetchTransactionsData() {
-            var currentRoute = $('meta[name="current-route"]').attr('content');
-            var url;
-            if (currentRoute === 'transactions') {
-                url = '{{ route('transaction.data') }}';
-            } else if (currentRoute === 'transactions.today') {
-                url = '{{ route('transaction.data.today') }}'; /
-            }
+        var currentRoute;
 
+        function fetchTransactionsData() {
+            var url;
+            if (currentRoute === '/transactions') {
+                url = '/transactions/data';
+            } else if (currentRoute=== '/transactions/today') {
+                url = '/transactions/data/today';
+            }
+            console.log(currentRoute);
+            console.log(url);
             $.ajax({
                 method: 'GET',
                 url: url, // Use the new route
                 success: function(response) {
                     console.log(response);
-                    $('#transactionsTable tbody').html(response);
+                    $('#transactionsTable tbody').empty().append(response);
                 },
                 error: function(error) {
                     console.error(error);
                 },
             });
         }
-        fetchTransactionsData();
-        setInterval(fetchTransactionsData, 5000);
         $(document).ready(function() {
+            currentRoute = window.location.pathname;
+            fetchTransactionsData();
+            setInterval(fetchTransactionsData, 5000);
             $('#transactionsTable').on('click', '.status-btn', function() {
                 const transactionId = $(this).closest('tr').data('transaction-id');
                 updateStatus(transactionId);

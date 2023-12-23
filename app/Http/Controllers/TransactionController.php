@@ -97,7 +97,7 @@ class TransactionController extends Controller
 
     public function getTransactionData()
     {
-        $transactions = Transaction::all(); // Adjust this query based on your needs
+        $transactions = Transaction::all();
 
         return view('transaction.partial.table', compact('transactions'));
     }
@@ -108,6 +108,7 @@ class TransactionController extends Controller
 
         return view('transaction.partial.table', compact('transactions'));
     }
+
 
     /**
      * Display the specified resource.
