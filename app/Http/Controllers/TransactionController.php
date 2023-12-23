@@ -30,7 +30,7 @@ class TransactionController extends Controller
         $transactions = Transaction::whereDate('transaction_time', Carbon::today())->get();
         return view('transaction.index', [
             'transactions' => $transactions,
-            'pagetitle' => "Transaksi"
+            'pagetitle' => "Transaksi Hari Ini"
         ]);
     }
 
@@ -61,7 +61,7 @@ class TransactionController extends Controller
             'transaction_time' => now(), // You might want to adjust this based on your requirements
             'payment_type_id' => $request->input('paymentTypeId'),
             'status_id' => 2,
-            'table_no'=>0,
+            'table_no' => 0,
         ]);
 
         $subtotal = 0;
@@ -93,6 +93,20 @@ class TransactionController extends Controller
 
         // Redirect or respond as needed
         return redirect()->route('transaction');
+    }
+
+    public function getTransactionData()
+    {
+        $transactions = Transaction::all(); // Adjust this query based on your needs
+
+        return view('transaction.partial.table', compact('transactions'));
+    }
+
+    public function getTransactionDataToday()
+    {
+        $transactions = Transaction::whereDate('transaction_time', Carbon::today())->get();
+
+        return view('transaction.partial.table', compact('transactions'));
     }
 
     /**

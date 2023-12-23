@@ -11,36 +11,12 @@
                             <th class="text-center">Waktu Transaksi</th>
                             <th class="text-center">Metode Pembayaran</th>
                             <th class="text-center">Status Pembayaran</th>
-                            <th class="text-center">No Meja</th>
                             <th class="text-center">Subtotal</th>
                             <th class="text-center">Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($transactions as $transaction)
-                            <tr data-status-id="{{ $transaction->status_id }}"
-                                data-payment-type-id="{{ $transaction->payment_type_id }}"
-                                data-transaction-id="{{ $transaction->id }}">
-                                <td class="text-center">{{ $transaction->id }}</td>
-                                <td class="text-center">{{ $transaction->transaction_time }}</td>
-                                <td class="text-center">{{ $transaction->payment_type->name }}</td>
-                                <td class="text-center">
-                                    <button type="button"
-                                        class="btn btn-block status-btn @if ($transaction->status_id == 1) btn-warning
-                                        @elseif($transaction->status_id == 2) btn-success
-                                        @elseif($transaction->status_id == 6) btn-danger @endif">
-                                        {{ $transaction->status->status_state }}
-                                    </button>
-                                </td>
-
-                                <td>Rp{{ number_format($transaction->subtotal, 0, ',', '.') }}</td>
-                                <td>Rp{{ number_format($transaction->total, 0, ',', '.') }}</td>
-                                <td>
-                                    <a href="{{ route('transaction.edit', ['id' => $transaction->id]) }}"
-                                        class="btn btn-primary">Edit</a>
-                                </td>
-                            </tr>
-                        @endforeach
+                        @include('transaction.partial.table')
                     </tbody>
                 </table>
             </div>
@@ -48,23 +24,27 @@
     </div>
     <script>
         function fetchTransactionsData() {
+            var currentRoute = $('meta[name="current-route"]').attr('content');
+            var url;
+            if (currentRoute === 'transactions') {
+                url = '{{ route('transaction.data') }}';
+            } else if (currentRoute === 'transactions.today') {
+                url = '{{ route('transaction.data.today') }}'; /
+            }
+
             $.ajax({
                 method: 'GET',
-                url: '/transactions', // Update the URL based on your route
+                url: url, // Use the new route
                 success: function(response) {
-                    // Update the table body with the new transactions data
-                    $('#transactionsTable').html(response);
+                    console.log(response);
+                    $('#transactionsTable tbody').html(response);
                 },
                 error: function(error) {
                     console.error(error);
                 },
             });
         }
-
-        // Initial fetch when the page loads
         fetchTransactionsData();
-
-        // Set up interval to fetch data every 5 seconds (adjust as needed)
         setInterval(fetchTransactionsData, 5000);
         $(document).ready(function() {
             $('#transactionsTable').on('click', '.status-btn', function() {
@@ -84,7 +64,8 @@
                         console.log(response);
 
                         const newStatus = response.status.status_state;
-                        const button = $(`tr[data-transaction-id="${transactionId}"] button.status-btn`);
+                        const button = $(
+                            `tr[data-transaction-id="${transactionId}"] button.status-btn`);
 
                         // Remove existing classes
                         button.removeClass('btn-danger btn-success btn-warning');
@@ -115,5 +96,4 @@
             }
         });
     </script>
-
 @endsection

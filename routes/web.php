@@ -69,10 +69,14 @@ Auth::routes();
 Route::post('/transaction/store', [TransactionController::class, 'store'])->middleware('auth')->name('transaction.store');
 Route::get('/transaction/create', [TransactionController::class, 'create'])->middleware('auth')->name('transaction.create');
 Route::get('/transactions', [TransactionController::class, 'index'])->middleware('auth')->name('transactions');
-Route::get('/todaystransactions', [TransactionController::class, 'indexToday'])->middleware('auth')->name('transaction');
+Route::get('/transactions/today', [TransactionController::class, 'indexToday'])->middleware('auth')->name('transactions.today');
 Route::get('/transactions/{id}/edit', [TransactionController::class, 'edit'])->middleware('auth')->name('transaction.edit');
 Route::put('/transactions/{id}', [TransactionController::class, 'update'])->middleware('auth')->name('transaction.update');
 Route::put('/transactions/{id}/update-status', [TransactionController::class, 'updateStatus'])->middleware('auth')->name('transaction.update-status');
+
+Route::get('/transactions/data', [TransactionController::class, 'getTransactionData'])->middleware('auth')->name('transaction.data');
+Route::get('/transactions/data/today', [TransactionController::class, 'getTransactionDataToday'])->middleware('auth')->name('transaction.data.today');
+
 
 //admin
 Route::group([

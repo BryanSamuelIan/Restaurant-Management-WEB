@@ -25,11 +25,18 @@
     <!-- Bootstrap CSS and JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
     <!-- Scripts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Diphylleia&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
     </style>
+    @if (request()->is('transactions*'))
+        <meta name="current-route" content="transactions">
+    @elseif(request()->is('transactions.today*'))
+        <meta name="current-route" content="transaction">
+    @endif
 </head>
 
 <body>
@@ -124,8 +131,9 @@
                             @endif
                             @if (Auth::user()->isOwner())
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                        role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         {{ __('Action') }}
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -157,7 +165,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('transaction') ? 'active' : '' }}"
-                                    href="{{ route('transaction') }}">{{ __('Transaksi Hari Ini') }}</a>
+                                    href="{{ route('transactions.today') }}">{{ __('Transaksi Hari Ini') }}</a>
                             </li>
 
                             @if (Auth::user()->isAdmin())
@@ -257,9 +265,6 @@
                 responsive: true
             });
         });
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
 
     <body>
