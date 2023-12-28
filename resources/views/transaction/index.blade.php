@@ -10,6 +10,7 @@
                             <th class="text-center">ID Transaksi</th>
                             <th class="text-center">Waktu Transaksi</th>
                             <th class="text-center">Metode Pembayaran</th>
+                            <th class="text-center">No.Meja</th>
                             <th class="text-center">Status Pembayaran</th>
                             <th class="text-center">Subtotal</th>
                             <th class="text-center">Total</th>

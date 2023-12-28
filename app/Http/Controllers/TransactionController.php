@@ -54,6 +54,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         $cartItems = json_decode($request->input('cartItems'), true);
+        $tableNumber = $request->input('tableNumber');
 
         // Validate and store the transaction
         $transaction = new Transaction([
@@ -61,7 +62,7 @@ class TransactionController extends Controller
             'transaction_time' => now(), // You might want to adjust this based on your requirements
             'payment_type_id' => $request->input('paymentTypeId'),
             'status_id' => 2,
-            'table_no' => 0,
+            'table_no' => $tableNumber ?? 0,
         ]);
 
         $subtotal = 0;
@@ -92,7 +93,7 @@ class TransactionController extends Controller
         }
 
         // Redirect or respond as needed
-        return redirect()->route('transaction');
+        return redirect()->route('transactions.today');
     }
 
     public function getTransactionData()
@@ -168,6 +169,8 @@ class TransactionController extends Controller
         // Find the existing transaction
         $transaction = Transaction::find($id);
 
+        $tableNumber = $request->input('tableNumber');
+
         // Update the transaction details
         $transaction->update([
             'user_id' => auth()->user()->id, // Update user ID if needed
@@ -191,9 +194,10 @@ class TransactionController extends Controller
         $transaction->update([
             'subtotal' => $subtotal,
             'total' => $total,
+            'table_no' => $tableNumber ?? 0,
         ]);
 
-        return redirect()->route('transaction')->with('success', 'Transaction updated successfully');
+        return redirect()->route('transactions.today')->with('success', 'Transaction updated successfully');
     }
 
     public function updateStatus($id)

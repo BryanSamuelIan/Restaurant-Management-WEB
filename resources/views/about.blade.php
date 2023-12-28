@@ -2,6 +2,7 @@
 
 @section('content')
 <div  class="container  lg:px-40">
+    
     <div id="history" class="container mx-auto py-8 ">
 
         <div

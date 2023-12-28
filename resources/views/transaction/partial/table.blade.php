@@ -4,6 +4,7 @@
         <td class="text-center">{{ $transaction->id }}</td>
         <td class="text-center">{{ $transaction->transaction_time }}</td>
         <td class="text-center">{{ $transaction->payment_type->name }}</td>
+        <td class="text-center">{{ $transaction->table_no }}</td>
         <td class="text-center">
             <button type="button"
                 class="btn btn-block status-btn @if ($transaction->status_id == 1) btn-warning

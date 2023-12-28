@@ -87,6 +87,11 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="no-meja">Nomor Meja:</label>
+                        <input type="number" id="no-meja" name="no-meja" class="form-control"
+                            value="{{ $transaction->table_no }}">
+                    </div>
                     <button id="pass-all-items-btn" class="btn btn-success mt-3" disabled>Selesaikan Pesanan</button>
                 </div>
             </div>
@@ -137,6 +142,8 @@
 
             $('#pass-all-items-btn').click(function(e) {
                 e.preventDefault();
+
+                const tableNumber = $('#no-meja').val();
 
                 let alertMessage = '<div style="text-align: left;">';
                 alertMessage += '<h5>Detail Menu:</h5>';
@@ -189,6 +196,13 @@
                     methodInput.name = '_method';
                     methodInput.value = 'PUT';
                     form.appendChild(methodInput);
+
+                    // Add table number to form data
+                    const tableNumberInput = document.createElement('input');
+                    tableNumberInput.type = 'hidden';
+                    tableNumberInput.name = 'tableNumber';
+                    tableNumberInput.value = tableNumber; // Set the table number value here
+                    form.appendChild(tableNumberInput);
 
                     // Append the form to the body and submit it
                     document.body.appendChild(form);
