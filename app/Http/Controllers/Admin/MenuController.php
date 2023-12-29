@@ -61,10 +61,12 @@ class MenuController extends Controller
     public function listAlcohol()
     {
         $menus = Menu::whereIn('category_id', [10, 11, 12])->get();;
+        $suppliers = Supplier::all();
 
         return view('menu.index', [
             'menus' => $menus, 'category' => "alcohol",
-            'pagetitle' => "Alkohol"
+            'pagetitle' => "Alkohol",
+            'suppliers' => $suppliers,
         ]);
     }
 
@@ -108,12 +110,14 @@ class MenuController extends Controller
             $menuData['supplier_id'] = $request->input('supplier_id');
             $menuData['alcohol_percentage'] = $request->input('alcohol_percentage');
             $menuData['stock'] = $request->input('stock');
+            $menuData['is_alcohol'] = 1;
         }
 
         // Create a new menu using create method
         $menu = Menu::create($menuData);
 
-        return redirect()->route('menu.index')->with('success', 'Menu created successfully');
+
+        return redirect()->route('admin.foods')->with('success', 'Menu created successfully');
     }
 
     public function update(Request $request, $id)
@@ -140,19 +144,19 @@ class MenuController extends Controller
         // Update the category and supplier information for alcohol categories
         if (in_array($request->input('category_id'), [10, 11, 12])) {
             $menu->supplier_id = $request->input('supplier_id');
-            $menu->alcohol_percentage = $request->input('alcohol_percentage');
+            $menu['alcohol%'] = $request->input('alcohol_percentage');
             $menu->stock = $request->input('stock');
         } else {
             // Clear alcohol-related fields if the category is not alcohol
             $menu->supplier_id = null;
-            $menu->alcohol_percentage = null;
+            $menu['alcohol%'] = null;
             $menu->stock = null;
         }
 
         // Save the changes
         $menu->save();
 
-        return redirect()->route('menu.index')->with('success', 'Menu updated successfully');
+        return redirect()->route('admin.foods')->with('success', 'Menu updated successfully');
     }
 
 
@@ -161,8 +165,9 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
         $pagetitle = "Edit Menu";
         $suppliers = Supplier::all();
+        $categories = Category::all();
         // You may need to fetch additional data if required for the edit view
-        return view('menu.edit', compact('menu', 'pagetitle', 'suppliers'));
+        return view('menu.edit', compact('menu', 'pagetitle', 'suppliers','categories'));
     }
 
     public function destroy($id)
@@ -174,6 +179,6 @@ class MenuController extends Controller
         // Delete the menu
         $menu->delete();
 
-        return redirect()->route('menu.index')->with('success', 'Menu deleted successfully');
+        return redirect()->route('admin.menu.foods')->with('success', 'Menu deleted successfully');
     }
 }

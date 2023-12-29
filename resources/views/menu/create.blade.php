@@ -46,7 +46,7 @@
                 <div id="alkohol-fields" style="display: none;">
                     <div class="mb-3">
                         <label for="supplier_id" class="form-label">Supplier (Khusus Kategori Alkohol)</label>
-                        <select class="form-select" name="supplier_id" id="supplier_id">
+                        <select class="form-select" name="supplier_id" id="supplier_id" required>
                             <option value="">Pilih Supplier</option> <!-- Default option with no value -->
                             @foreach ($suppliers as $supplier)
                                 <option value="{{ $supplier->id }}" data-alkohol="{{ $category->is_alcohol }}">
