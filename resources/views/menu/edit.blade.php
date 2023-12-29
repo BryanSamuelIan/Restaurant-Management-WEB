@@ -112,22 +112,28 @@
 
 
         document.addEventListener('DOMContentLoaded', function() {
-            var alkoholFields = document.getElementById('alkohol-fields');
+    var alkoholFields = document.getElementById('alkohol-fields');
 
-            function updateAlkoholFieldsDisplay() {
-                var selectedCategoryId = parseInt(document.getElementById('category_id').value);
-                var isAlcoholCategory = [10, 11, 12].includes(selectedCategoryId);
+    function updateAlkoholFieldsDisplay() {
+        var selectedCategoryId = parseInt(document.getElementById('category_id').value);
+        var isAlcoholCategory = [10, 11, 12].includes(selectedCategoryId);
 
-                alkoholFields.style.display = isAlcoholCategory ? 'block' : 'none';
-            }
+        alkoholFields.style.display = isAlcoholCategory ? 'block' : 'none';
 
-            // Initial update on page load
-            updateAlkoholFieldsDisplay();
-
-            // Add event listener to update display on category change
-            document.getElementById('category_id').addEventListener('change', function() {
-                updateAlkoholFieldsDisplay();
-            });
+        // Update alcohol-related fields' "required" attribute based on the category
+        var alcoholFields = document.querySelectorAll('#alcohol_percentage, #stock');
+        alcoholFields.forEach(function(field) {
+            field.required = isAlcoholCategory;
         });
+    }
+
+    // Initial update on page load
+    updateAlkoholFieldsDisplay();
+
+    // Add event listener to update display on category change
+    document.getElementById('category_id').addEventListener('change', function() {
+        updateAlkoholFieldsDisplay();
+    });
+});
     </script>
 @endsection
