@@ -4,15 +4,20 @@
         <h2>Edit Event</h2>
 
         @if (Auth::user()->isOwner())
-            <form id="createEventForm" action="{{ route('owner.event.update', $eventEdit['id']) }}" method="post"enctype="multipart/form-data">
+            <form id="createEventForm" action="{{ route('owner.event.update', $eventEdit['id']) }}"
+                method="post"enctype="multipart/form-data">
             @elseif (Auth::user()->isAdmin())
-            <form id="createEventForm" action="{{ route('admin.event.update', $eventEdit['id']) }}" method="post" enctype="multipart/form-data">
+                <form id="createEventForm" action="{{ route('admin.event.update', $eventEdit['id']) }}" method="post"
+                    enctype="multipart/form-data">
         @endif
+
         @csrf
+
 
         <div class="mb-3">
             <label for="name" class="form-label">Event name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ $eventEdit->name }}" required>
+            <input type="text" class="form-control" id="name" name="name" value="{{ $eventEdit->name }}"
+                required>
         </div>
 
         <div class="mb-3">
@@ -31,9 +36,10 @@
         <div class="mb-3">
             <label for="banner" class="form-label">Upload Image</label>
             <br>
-            <img src="{{ asset('storage/' . $eventEdit->banner) }}" alt="{{ $eventEdit->name }}" class="img-preview img-fluid mb-3 col-sm-5" style="display: block;">
+            <img src="{{ asset('storage/' . $eventEdit->banner) }}" alt="{{ $eventEdit->name }}"
+                class="img-preview img-fluid mb-3 col-sm-5" style="display: block;">
             <input type="file" class="form-control" id="banner" name="banner"
-                accept="image/jpg, image/png, image/jpeg" onchange="previewImage()" required>
+                accept="image/jpg, image/png, image/jpeg" onchange="previewImage()">
         </div>
 
         <button type="submit" class="btn btn-primary">Edit Event</button>
@@ -54,6 +60,5 @@
                 imgPreview.attr("src", oFREvent.target.result);
             }
         }
-
     </script>
 @endsection

@@ -87,23 +87,37 @@ class EventController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $old=Event::find($id);
-        if($old->banner){
-            Storage::disk('public')->delete($old->banner);
-        }
+
         $validatedData = $request->validate([
-            'banner' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required|string',
             'is_active' => 'required',
+            'banner' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        $imagePath = $request->file('banner')->store('images', 'public');
 
-        Event::find($id)->update([
-            'name' => $validatedData['name'],
-            'banner' => $imagePath,
-            'is_active' => $validatedData['is_active'],
+        $event = Event::find($id);
 
-        ]);
+        if ($request->hasFile('banner')) {
+
+            if ($event->banner) {
+                Storage::disk('public')->delete($event->banner);
+            }
+
+
+            $bannerPath = $request->file('banner')->store('images', 'public');
+
+            $event->update([
+                'name' => $validatedData['name'],
+                'banner' => $bannerPath,
+                'is_active' => $validatedData['is_active'],
+            ]);
+        } else {
+
+            $event->update([
+                'name' => $validatedData['name'],
+                'is_active' => $validatedData['is_active'],
+            ]);
+        }
+
         return redirect()->route('admin.events');
     }
 
