@@ -107,6 +107,9 @@ Route::group([
     Route::post('/menu/store', [AMenuController::class, 'store'])->name('menu.store');
     Route::post('/supplier/store', [ASupplierController::class, 'store'])->name('supplier.store');
     Route::post('/event/store', [AEventController::class, 'store'])->name('event.store');
+    Route::get('/event/{id}/edit', [AEventController::class, 'edit'])->name('event.edit');
+    Route::post('/event/{id}/update', [AEventController::class, 'update'])->name('event.update');
+    Route::delete('/event/{id}/destroy', [AEventController::class, 'destroy'])->name('event.destroy');
     Route::post('/expense/store', [AExpenseController::class, 'store'])->name('expenses.store');
     Route::post('/purchase/store', [APurchaseController::class, 'store'])->name('purchase.store');
 }
@@ -132,6 +135,10 @@ Route::group([
     Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
     Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('employee.update');
     Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+
+    Route::get('/event/{id}/edit', [AEventController::class, 'edit'])->name('event.edit');
+    Route::post('/event/{id}/update', [AEventController::class, 'update'])->name('event.update');
+    Route::delete('/event/{id}/destroy', [AEventController::class, 'destroy'])->name('event.destroy');
 
     Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
     Route::put('/menus/{id}', [MenuController::class, 'update'])->name('menu.update');

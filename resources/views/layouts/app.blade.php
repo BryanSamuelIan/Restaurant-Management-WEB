@@ -122,8 +122,8 @@
                                             href="{{ route('admin.menu.create') }}">{{ __('Tambah Menu') }}</a>
                                         <a class="nav-link"
                                             href="{{ route('admin.supplier.create') }}">{{ __('Tambah Supplier') }}</a>
-                                        {{-- <a class="nav-link"
-                                            href="{{ route('admin.event.create') }}">{{ __('Tambah Event') }}</a> --}}
+                                        <a class="nav-link"
+                                            href="{{ route('admin.event.create') }}">{{ __('Tambah Event') }}</a>
 
                                     </div>
                                 </li>
@@ -145,8 +145,8 @@
                                             href="{{ route('owner.menu.create') }}">{{ __('Tambah Menu') }}</a>
                                         <a class="nav-link"
                                             href="{{ route('owner.supplier.create') }}">{{ __('Tambah Supplier') }}</a>
-                                        {{-- <a class="nav-link"
-                                            href="{{ route('owner.event.create') }}">{{ __('Tambah Event') }}</a> --}}
+                                        <a class="nav-link"
+                                            href="{{ route('owner.event.create') }}">{{ __('Tambah Event') }}</a>
                                     </div>
                                 </li>
                             @endif

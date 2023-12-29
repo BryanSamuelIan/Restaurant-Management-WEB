@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-use App\Http\Requests\StoreEventRequest;
-use App\Http\Requests\UpdateEventRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -17,7 +17,7 @@ class EventController extends Controller
         $events = Event::all();
 
         return view('event.index', ['events' => $events,
-        'pagetitle' => "events"]);
+            'pagetitle' => "events"]);
     }
 
     /**
@@ -25,17 +25,44 @@ class EventController extends Controller
      */
     public function create()
     {
+
         return view('event.create', [
-        'pagetitle' => "Buat Event"]);
+            'pagetitle' => "Buat Event"]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEventRequest $request)
-    {
-        //
+    public function store(Request $request)
+{
+    // Validate the request
+    $validatedData = $request->validate([
+        'banner' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'name' => 'required|string',
+        'is_active' => 'required',
+    ]);
+
+    // Check if the file was uploaded successfully
+    if ($request->hasFile('banner')) {
+        $imagePath = $request->file('banner')->store('images', 'public');
+
+        // Create Event using validated data
+        $event = Event::create([
+            'name' => $validatedData['name'],
+            'banner' => $imagePath, // Store the path to the uploaded image
+            'is_active' => $validatedData['is_active'],
+        ]);
+
+        if ($event) {
+            return redirect()->route('owner.events')->with('success', 'Event created successfully');
+        } else {
+            return redirect()->back()->withInput()->withErrors(['Failed to create event']);
+        }
     }
+
+    return redirect()->back()->withInput()->withErrors(['banner' => 'Failed to upload image']);
+}
+
 
     /**
      * Display the specified resource.
@@ -48,24 +75,46 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event)
+    public function edit(string $id)
     {
-        //
+        $eventEdit = Event::find($id);
+        return view('event.edit',['eventEdit' => $eventEdit,
+        'pagetitle' => "Edit Event"]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(Request $request, string $id)
     {
-        //
+        $old=Event::find($id);
+        if($old->banner){
+            Storage::disk('public')->delete($old->banner);
+        }
+
+        Event::find($id)->update([
+            'name' => $request->input['name'],
+            'banner' => $request->input['banner'],
+            'is_active' => $request->input['is_active'],
+
+        ]);
+        return redirect()->route('owner.events');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(string $id)
     {
-        //
+        $old=Event::find($id);
+
+        if($old->banner){
+            if(Storage::disk('public')->exists($old->banner)){
+            Storage::disk('public')->delete($old->banner);
+            }
+        }
+        Event::find($id)->delete();
+        return redirect()->route('owner.events');
+
     }
 }
