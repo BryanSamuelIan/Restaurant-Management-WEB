@@ -100,8 +100,13 @@
 
 
 
+
+
+
         $(document).ready(function() {
             currentRoute = window.location.pathname;
+
+           
             fetchTransactionsData();
             setInterval(fetchTransactionsData, 5000);
             $('#transactionsTable').on('click', '.status-btn', function() {

@@ -96,12 +96,22 @@ class TransactionController extends Controller
         return redirect()->route('transactions.today');
     }
 
+
+
     public function getTransactionData()
     {
         $transactions = Transaction::all();
 
         return view('transaction.partial.table', compact('transactions'));
     }
+    public function getTransactionDataDetail($id)
+{
+    $transactionMenus = Transaction_menu::where('transaction_id', $id)->get();
+    // Use 'where' method with correct syntax: where('column_name', 'operator', 'value')
+
+    return view('transaction.partial.tableDetail', compact('transactionMenus'));
+    // Pass the retrieved data to the view
+}
 
     public function getTransactionDataToday()
     {
@@ -143,6 +153,26 @@ class TransactionController extends Controller
             'pagetitle' => "Edit Transaksi"
         ]);
     }
+    public function detail($id)
+    {
+        $transaction = Transaction::find($id);
+        $paymentTypeName = $transaction->payment_type->name;
+        $transactionMenus = Transaction_menu::where('transaction_id', $id)->get();
+
+        // Assuming you have a method to format menus data in the desired format
+
+
+        // dd($initialCartItems);
+
+        return view('transaction.detail', [
+            'transaction' => $transaction,
+            'paymentTypeName' => $paymentTypeName,
+            'transaction_menus' => $transactionMenus,
+            'id' => $id,
+            'pagetitle' => "Detail Transaksi"
+        ]);
+    }
+
 
     // Add a method to format menus data
     protected function formatMenus($transactionMenus)

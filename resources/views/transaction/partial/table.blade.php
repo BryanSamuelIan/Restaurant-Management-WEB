@@ -1,4 +1,6 @@
 @foreach ($transactions as $transaction)
+
+
     <tr data-status-id="{{ $transaction->status_id }}" data-payment-type-id="{{ $transaction->payment_type_id }}"
         data-transaction-id="{{ $transaction->id }}">
         <td class="text-center">{{ $transaction->id }}</td>
@@ -18,5 +20,12 @@
         <td>
             <a href="{{ route('transaction.edit', ['id' => $transaction->id]) }}" class="btn btn-primary">Edit</a>
         </td>
+        <td>
+            <a href="{{ route('transaction.detail', ['id' => $transaction->id]) }}" class="btn btn-info">Detail</a>
+        </td>
+
     </tr>
+
+
+
 @endforeach

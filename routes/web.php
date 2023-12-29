@@ -71,6 +71,7 @@ Route::get('/transaction/create', [TransactionController::class, 'create'])->mid
 Route::get('/transactions', [TransactionController::class, 'index'])->middleware('auth')->name('transactions');
 Route::get('/transactions/today', [TransactionController::class, 'indexToday'])->middleware('auth')->name('transactions.today');
 Route::get('/transactions/{id}/edit', [TransactionController::class, 'edit'])->middleware('auth')->name('transaction.edit');
+Route::get('/transactions/{id}/detail', [TransactionController::class, 'detail'])->middleware('auth')->name('transaction.detail');
 Route::put('/transactions/{id}', [TransactionController::class, 'update'])->middleware('auth')->name('transaction.update');
 Route::put('/transactions/{id}/update-status', [TransactionController::class, 'updateStatus'])->middleware('auth')->name('transaction.update-status');
 

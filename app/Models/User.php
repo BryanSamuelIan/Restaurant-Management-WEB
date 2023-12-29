@@ -52,6 +52,10 @@ class User extends Authenticatable
     public function employees() {
         return $this->hasMany(Employee::class);
     }
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'user_id');
+    }
 
     public function role() {
         return $this->belongsTo(Role::class);

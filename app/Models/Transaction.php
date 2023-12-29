@@ -18,6 +18,9 @@ class Transaction extends Model
         'total',
         'table_no'
     ];
+    public function adminname() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function transaction_menus() {
         return $this->hasMany(Transaction_menu::class);
