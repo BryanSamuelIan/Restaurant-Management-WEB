@@ -4,22 +4,24 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 px-5">
-                <table id="transactionsTable" class="table">
-                    <thead>
-                        <tr>
-                            <th class="text-center">ID Transaksi</th>
-                            <th class="text-center">Waktu Transaksi</th>
-                            <th class="text-center">Metode Pembayaran</th>
-                            <th class="text-center">No.Meja</th>
-                            <th class="text-center">Status Pembayaran</th>
-                            <th class="text-center">Subtotal</th>
-                            <th class="text-center">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @include('transaction.partial.table')
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table id="transactionsTable" class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ID Transaksi</th>
+                                <th class="text-center">Waktu Transaksi</th>
+                                <th class="text-center">Metode Pembayaran</th>
+                                <th class="text-center">No.Meja</th>
+                                <th class="text-center">Status Pembayaran</th>
+                                <th class="text-center">Subtotal</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @include('transaction.partial.table')
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -106,7 +108,7 @@
         $(document).ready(function() {
             currentRoute = window.location.pathname;
 
-           
+
             fetchTransactionsData();
             setInterval(fetchTransactionsData, 5000);
             $('#transactionsTable').on('click', '.status-btn', function() {

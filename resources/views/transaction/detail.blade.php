@@ -67,8 +67,8 @@
                 </div>
             </div>
 
-            <!-- On small and medium screens: Table above Recap -->
-            <div class="col-12 mt-4 d-lg-none"> <!-- Show only on small and medium screens -->
+         
+            {{-- <div class="col-12 mt-4 d-lg-none"> <!-- Show only on small and medium screens -->
                 <div class="table-for-small-screens">
                     <table class="table">
                         <thead>
@@ -109,7 +109,7 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection
