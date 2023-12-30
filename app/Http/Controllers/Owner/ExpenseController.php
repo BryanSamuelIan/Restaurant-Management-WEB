@@ -33,7 +33,7 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         Expense::create($request->all());
-        return redirect()->route('expense.create')->with('success', 'Expense added successfully');
+        return redirect()->route('owner.purchases')->with('success', 'Expense added successfully');
     }
 
     /**
@@ -47,24 +47,33 @@ class ExpenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Expense $expense)
+    public function edit(string $id)
     {
-        //
+        $expenseEdit = Expense::find($id);
+        return view('expense.edit', ['expense' => $expenseEdit,
+            'pagetitle' => "Edit Expense"]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateExpenseRequest $request, Expense $expense)
-    {
-        //
-    }
+    public function update(Request $request, $id)
+{
+    $expense = Expense::findOrFail($id);
+
+    // Update expense attributes
+    $expense->update($request->all());
+
+    return redirect()->route('owner.purchases')->with('success', 'Expense updated successfully');
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Expense $expense)
+    public function destroy(string $id)
     {
-        //
+        Expense::find($id)->delete();
+        return redirect()->route('owner.purchases');
+
     }
 }

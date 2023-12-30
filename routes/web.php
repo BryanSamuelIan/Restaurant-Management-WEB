@@ -112,6 +112,13 @@ Route::group([
     Route::delete('/event/{id}/destroy', [AEventController::class, 'destroy'])->name('event.destroy');
     Route::post('/expense/store', [AExpenseController::class, 'store'])->name('expenses.store');
     Route::post('/purchase/store', [APurchaseController::class, 'store'])->name('purchase.store');
+
+    Route::get('/expense/{id}/edit', [AExpenseController::class, 'edit'])->name('expense.edit');
+    Route::post('/expense/{id}/update', [AExpenseController::class, 'update'])->name('expense.update');
+    Route::delete('/expense/{id}/destroy', [AExpenseController::class, 'destroy'])->name('expense.destroy');
+    Route::get('/purchase/{id}/edit', [APurchaseController::class, 'edit'])->name('purchase.edit');
+    Route::post('/purchase/{id}/update', [APurchaseController::class, 'update'])->name('purchase.update');
+    Route::delete('/purchase/{id}/destroy', [APurchaseController::class, 'destroy'])->name('purchase.destroy');
 }
 );
 
@@ -136,9 +143,16 @@ Route::group([
     Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('employee.update');
     Route::delete('/employees/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-    Route::get('/event/{id}/edit', [AEventController::class, 'edit'])->name('event.edit');
-    Route::post('/event/{id}/update', [AEventController::class, 'update'])->name('event.update');
-    Route::delete('/event/{id}/destroy', [AEventController::class, 'destroy'])->name('event.destroy');
+    Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.edit');
+    Route::post('/event/{id}/update', [EventController::class, 'update'])->name('event.update');
+    Route::delete('/event/{id}/destroy', [EventController::class, 'destroy'])->name('event.destroy');
+
+    Route::get('/expense/{id}/edit', [ExpenseController::class, 'edit'])->name('expense.edit');
+    Route::post('/expense/{id}/update', [ExpenseController::class, 'update'])->name('expense.update');
+    Route::delete('/expense/{id}/destroy', [ExpenseController::class, 'destroy'])->name('expense.destroy');
+    Route::get('/purchase/{id}/edit', [PurchaseController::class, 'edit'])->name('purchase.edit');
+    Route::post('/purchase/{id}/update', [PurchaseController::class, 'update'])->name('purchase.update');
+    Route::delete('/purchase/{id}/destroy', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
 
     Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
     Route::put('/menus/{id}', [MenuController::class, 'update'])->name('menu.update');

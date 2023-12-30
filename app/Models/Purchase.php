@@ -26,4 +26,8 @@ class Purchase extends Model
     public function menu_purchaseds() {
         return $this->hasMany(Menu_purchased::class);
     }
+    public function menus()
+    {
+        return $this->belongsToMany(Menu::class, 'menu_purchaseds'); // Specify the custom pivot table name
+    }
 }
