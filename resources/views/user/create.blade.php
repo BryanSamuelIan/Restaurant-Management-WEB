@@ -25,9 +25,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="employee_id" class="form-label">Karyawan</label>
-                <select class="form-select" name="employee_id" id="employee_id">
-                    <option value="">Pilih Karyawan</option> <!-- Default option with no value -->
+                <label for="employee_id" class="form-label">Employee</label>
+                <select class="form-select" name="employee_id" id="employee_id" required>
+                    <option value="">Pilih karyawan yang tersedia</option> <!-- Default option with no value -->
                     @foreach ($employees as $employee)
                         <option value="{{ $employee->id }}">{{ $employee->name }}</option>
                     @endforeach
@@ -49,33 +49,31 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Submit the form using AJAX
-            $('#createUserForm').on('submit', function(e) {
-                e.preventDefault();
+    $('#createUserForm').on('submit', function(e) {
+        e.preventDefault();
 
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: new FormData(this),
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        // Handle success, e.g., show a success message
-                        alert('User has been created successfully!');
-                        // You can also redirect to another page or perform other actions
+        var formData = new FormData(this);
+        formData.append('_token', '{{ csrf_token() }}'); // Include CSRF token
 
-                        // Clear the form if needed
-                        $('#createUserForm')[0].reset();
-
-                        window.location.href = '{{ route('owner.users') }}';
-                    },
-                    error: function(error) {
-                        // Handle errors if needed
-                        console.error('Error creating user:', error);
-                        alert('Error creating user. Please try again.');
-                    }
-                });
-            });
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Handle success
+                alert('User has been created successfully!');
+                $('#createUserForm')[0].reset();
+                window.location.href = '{{ route('owner.users') }}';
+            },
+            error: function(error) {
+                // Handle errors
+                console.error('Error creating user:', error);
+                alert('Error creating user. Please try again.');
+            }
         });
+    });
+});
     </script>
 @endsection

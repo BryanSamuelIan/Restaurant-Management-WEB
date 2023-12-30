@@ -22,15 +22,16 @@ class UserController extends Controller
     }
 
     public function create()
-    {
-        $employees = Employee::all();
-        $roles = Role::all();
+{
+    $employeesWithoutUsers = Employee::whereDoesntHave('user')->get();
+    $roles = Role::all();
 
-        return view('user.create', [
-            'employees' => $employees, 'roles' => $roles,
-            'pagetitle' => "Buat User"
-        ]);
-    }
+    return view('user.create', [
+        'employees' => $employeesWithoutUsers,
+        'roles' => $roles,
+        'pagetitle' => "Buat User"
+    ]);
+}
 
     public function store(Request $request)
     {
@@ -41,7 +42,7 @@ class UserController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        return redirect()->route('users');
+        return redirect()->route('owner.users');
     }
 
     public function updateActiveStatus($id)
@@ -68,5 +69,14 @@ class UserController extends Controller
         $user->save();
 
         return response()->json(['message' => 'Password updated successfully'], 200);
+    }
+    public function destroy(string $id)
+    {
+        $old = User::find($id);
+
+
+        User::find($id)->delete();
+        return redirect()->route('owner.users');
+
     }
 }

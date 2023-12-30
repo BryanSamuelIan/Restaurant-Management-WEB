@@ -74,10 +74,22 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-        return Auth::attempt(
-            $this->credentials($request),
-            $request->filled('remember')
-        );
+        $credentials = $this->credentials($request);
+
+        // Attempt to authenticate the user based on email and password
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            $user = Auth::user();
+
+            if ($user->is_active) {
+                // User is active, proceed with login
+                return true;
+            } else {
+                // User is inactive, logout and prevent login
+                Auth::logout();
+            }
+        }
+
+        return false;
     }
 
     protected function loggedOut(Request $request)

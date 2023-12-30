@@ -1,10 +1,10 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
         <h2>Edit Karyawan</h2>
 
-        <form id="editUserForm" action="{{ route('employee.update', $employee->id) }}" method="post" enctype="multipart/form-data">
+        <form id="editUserForm" action="{{ route('owner.employee.update', $employee->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

@@ -55,7 +55,7 @@ class EmployeeController extends Controller
             ]);
         }
 
-        return redirect()->route('employees');
+        return redirect()->route('owner.employees');
     }
 
     public function edit($id)
@@ -76,7 +76,7 @@ class EmployeeController extends Controller
 
         $employee->delete();
 
-        return redirect()->route('employees')->with('success', 'Employee deleted successfully.');
+        return redirect()->route('owner.employees')->with('success', 'Employee deleted successfully.');
     }
     public function update(Request $request, $id)
     {
@@ -102,6 +102,6 @@ class EmployeeController extends Controller
         // Save the changes to the employee
         $employee->save();
 
-        return redirect()->route('employees')->with('success', 'Employee updated successfully');
+        return redirect()->route('owner.employees')->with('success', 'Employee updated successfully');
     }
 }

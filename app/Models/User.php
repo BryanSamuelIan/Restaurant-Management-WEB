@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -26,7 +27,8 @@ class User extends Authenticatable
         'name',
         'password',
         'role_id',
-        'is_active'
+        'is_active',
+        'employee_id'
     ];
 
     /**
@@ -49,26 +51,32 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function employees() {
-        return $this->hasMany(Employee::class);
-    }
+    public function employee()
+{
+    return $this->belongsTo(Employee::class, 'employee_id', 'id');
+}
+
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class, 'user_id');
     }
 
-    public function role() {
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
 
-    public function isAdmin():bool{
-        if($this->role_id==2){
+    public function isAdmin(): bool
+    {
+        if ($this->role_id == 2) {
             return true;
         }
         return false;
     }
-    public function isOwner():bool{
-        if($this->role_id==3){
+    public function isOwner(): bool
+    {
+        if ($this->role_id == 3) {
             return true;
         }
         return false;
