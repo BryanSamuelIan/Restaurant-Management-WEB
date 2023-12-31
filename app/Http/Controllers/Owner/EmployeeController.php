@@ -58,6 +58,35 @@ class EmployeeController extends Controller
         return redirect()->route('owner.employees');
     }
 
+
+
+
+
+    public function updateActiveStatus($id)
+    {
+        $employee = Employee::find($id);
+
+        if ($employee) {
+            $employee->is_active = !$employee->is_active;
+            $employee->save();
+
+            // Deactivate linked user if employee is inactive
+            if (!$employee->is_active) {
+                $user = $employee->user; // Retrieve linked user
+                if ($user) {
+                    $user->is_active = false;
+                    $user->save();
+                }
+            }
+
+            return response()->json(['is_active' => $employee->is_active]);
+        }
+
+        return response()->json(['error' => 'Employee not found'], 404);
+    }
+
+
+
     public function edit($id)
     {
         $employee = Employee::findOrFail($id);

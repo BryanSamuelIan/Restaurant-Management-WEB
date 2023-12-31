@@ -137,6 +137,7 @@ Route::group([
     Route::get('/employee/create', [EmployeeController::class, 'create'])->name('employee.create');
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
     Route::post('/employee/store', [EmployeeController::class, 'store'])->name('employee.store');
+    Route::put('/employees/{id}/update-active-status', [EmployeeController::class, 'updateActiveStatus'])->name('employee.update-isactive');
     Route::put('/users/{id}/update-active-status', [UserController::class, 'updateActiveStatus'])->name('user.update-isactive');
     Route::put('/users/{id}/update-password', [UserController::class, 'updatePassword'])->name('admin.users.update-password');
     Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
