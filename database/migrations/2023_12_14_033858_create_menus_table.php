@@ -29,6 +29,16 @@ return new class extends Migration {
             $table->float('alcohol%')->nullable();
             $table->integer('stock')->nullable();
             $table->string('photo')->nullable();
+            $table->boolean('is_combo');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('menus')
+                ->onDelete('cascade');
+            $table->integer('combo_quantity')->nullable();
+        //     'is_combo',
+        // 'parent_id',
+        // 'combo_quantity'
             $table->timestamps();
         });
     }

@@ -83,10 +83,30 @@
                     value="{{ $menu['alcohol%'] }}" required>
             </div>
 
+
             <div class="mb-3">
-                <label for="stock" class="form-label">Jumlah (Khusus Kategori Alkohol)</label>
+                <label for="parent_id" class="form-label">Combo dari</label>
+                <select class="form-select" id="parent_id" name="parent_id">
+                    <option value="">Pilih menu parent</option> <!-- Default option with no value -->
+                    @foreach ($parentMenus as $parentMenu)
+                        @if (old('parent_id', $menu->parent_id) === $parentMenu->id)
+                        <option value="{{ $parentMenu->id }}" selected>{{ $parentMenu->name }}</option>
+                        @else
+                            <option value="{{ $parentMenu->id }}">{{ $parentMenu->name }}</option>
+                            @endif
+                        @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="combo_quantity" class="form-label">Combo Quantity</label>
+                <input type="number" value="{{ $menu->combo_quantity }}" class="form-control" id="combo_quantity" name="combo_quantity">
+            </div>
+
+            <div class="mb-3">
+                <label for="stock" class="form-label">Jumlah (Khusus Kategori Alkohol bijian)</label>
                 <input type="number" class="form-control" id="stock" name="stock" value="{{ $menu->stock }}"
-                    required>
+                    >
             </div>
         </div>
 
@@ -112,28 +132,28 @@
 
 
         document.addEventListener('DOMContentLoaded', function() {
-    var alkoholFields = document.getElementById('alkohol-fields');
+            var alkoholFields = document.getElementById('alkohol-fields');
 
-    function updateAlkoholFieldsDisplay() {
-        var selectedCategoryId = parseInt(document.getElementById('category_id').value);
-        var isAlcoholCategory = [10, 11, 12].includes(selectedCategoryId);
+            function updateAlkoholFieldsDisplay() {
+                var selectedCategoryId = parseInt(document.getElementById('category_id').value);
+                var isAlcoholCategory = [10, 11, 12].includes(selectedCategoryId);
 
-        alkoholFields.style.display = isAlcoholCategory ? 'block' : 'none';
+                alkoholFields.style.display = isAlcoholCategory ? 'block' : 'none';
 
-        // Update alcohol-related fields' "required" attribute based on the category
-        var alcoholFields = document.querySelectorAll('#alcohol_percentage, #stock');
-        alcoholFields.forEach(function(field) {
-            field.required = isAlcoholCategory;
+                // Update alcohol-related fields' "required" attribute based on the category
+                var alcoholFields = document.querySelectorAll('#alcohol_percentage');
+                alcoholFields.forEach(function(field) {
+                    field.required = isAlcoholCategory;
+                });
+            }
+
+            // Initial update on page load
+            updateAlkoholFieldsDisplay();
+
+            // Add event listener to update display on category change
+            document.getElementById('category_id').addEventListener('change', function() {
+                updateAlkoholFieldsDisplay();
+            });
         });
-    }
-
-    // Initial update on page load
-    updateAlkoholFieldsDisplay();
-
-    // Add event listener to update display on category change
-    document.getElementById('category_id').addEventListener('change', function() {
-        updateAlkoholFieldsDisplay();
-    });
-});
     </script>
 @endsection

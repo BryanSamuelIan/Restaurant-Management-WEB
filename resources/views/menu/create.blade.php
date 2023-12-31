@@ -30,7 +30,7 @@
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Deskripsi Menu</label>
-                    <textarea class="form-control" id="description" name="description"></textarea>
+                    <textarea class="form-control" id="description" name="description" required></textarea>
                 </div>
 
                 <div class="mb-3">
@@ -42,6 +42,9 @@
                     <label for="photo" class="form-label">Foto produk</label>
                     <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
                 </div>
+
+
+
 
                 <div id="alkohol-fields" style="display: none;">
                     <div class="mb-3">
@@ -62,9 +65,21 @@
                             step="0.01">
                     </div>
 
+
+
                     <div class="mb-3">
-                        <label for="stock" class="form-label">Jumlah (Khusus Kategori Alkohol)</label>
-                        <input type="number" class="form-control" id="stock" name="stock" required>
+                        <label for="parent_id" class="form-label">Combo dari</label>
+                        <select class="form-select" id="parent_id" name="parent_id">
+                            <option value="">Pilih menu parent</option> <!-- Default option with no value -->
+                            @foreach ($parentMenus as $parentMenu)
+                                <option value="{{ $parentMenu->id }}">{{ $parentMenu->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="combo_quantity" class="form-label">Combo Quantity</label>
+                        <input type="number" class="form-control" id="combo_quantity" name="combo_quantity">
                     </div>
                 </div>
 

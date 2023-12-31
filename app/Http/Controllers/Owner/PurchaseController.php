@@ -58,7 +58,12 @@ class PurchaseController extends Controller
 
         // Attach menus with quantities and prices to the purchase
         foreach ($request->menus as $index => $menuId) {
+            $menu = Menu::find($menuId);
+            $quantity = $request->quantities[$index];
 
+            // Update the menu's stock
+            $menu->stock += $quantity;
+            $menu->save();
             // Create menu_purchased record
             Menu_purchased::create([
                 'purchase_id' => $purchase->id,
@@ -139,7 +144,12 @@ class PurchaseController extends Controller
 
         // Attach updated menus with quantities and prices to the purchase
         foreach ($request->menus as $index => $menuId) {
+            $menu = Menu::find($menuId);
+            $quantity = $request->quantities[$index];
 
+            // Update the menu's stock
+            $menu->stock += $quantity;
+            $menu->save();
             // Create menu_purchased record
             Menu_purchased::create([
                 'purchase_id' => $purchase->id,

@@ -80,8 +80,14 @@ class MenuController extends Controller
     {
         $categories = Category::all();
         $suppliers = Supplier::all();
+        $parentMenus = Menu::where('category_id', 10)->get();
 
-        return view('menu.create', ['categories' => $categories, 'suppliers' => $suppliers, 'pagetitle' => "Buat Menu"]);
+        return view('menu.create', [
+            'categories' => $categories,
+            'suppliers' => $suppliers,
+            'parentMenus' => $parentMenus,
+            'pagetitle' => "Buat Menu"
+        ]);
     }
 
     /**
@@ -102,15 +108,19 @@ class MenuController extends Controller
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'photo' => $photoPath,
+            'is_combo' => ($request->input('category_id') == 11 || $request->input('category_id') == 12) ? 1 : 0,
+
+
             // Add more common fields as needed
         ];
 
         // Handle specific fields for alcohol categories (10, 11, 12)
         if (in_array($menuData['category_id'], [10, 11, 12])) {
             $menuData['supplier_id'] = $request->input('supplier_id');
-            $menuData['alcohol_percentage'] = $request->input('alcohol_percentage');
-            $menuData['stock'] = $request->input('stock');
+            $menuData['alcohol%'] = $request->input('alcohol_percentage');
             $menuData['is_alcohol'] = 1;
+            $menuData['parent_id'] = $request->input('parent_id'); // Include parent_id from form
+            $menuData['combo_quantity'] = $request->input('combo_quantity'); // Include combo_quantity from form
         }
 
         // Create a new menu using create method
@@ -130,6 +140,7 @@ class MenuController extends Controller
         $menu->description = $request->input('description');
         $menu->price = $request->input('price');
 
+
         // Check if a new photo is provided
         if ($request->hasFile('photo')) {
             // Delete the old photo, if exists
@@ -146,12 +157,17 @@ class MenuController extends Controller
             $menu->supplier_id = $request->input('supplier_id');
             $menu['alcohol%'] = $request->input('alcohol_percentage');
             $menu->stock = $request->input('stock');
+            $menu['parent_id'] = $request->input('parent_id'); // Include parent_id from form
+            $menu['combo_quantity'] = $request->input('combo_quantity'); // Include combo_quantity from form
         } else {
             // Clear alcohol-related fields if the category is not alcohol
             $menu->supplier_id = null;
             $menu['alcohol%'] = null;
             $menu->stock = null;
+            $menu['parent_id'] = null;
+            $menu['combo_quantity'] = null;
         }
+        $menu['is_combo'] = ($request->input('category_id') == 11 || $request->input('category_id') == 12) ? 1 : 0;
 
         // Save the changes
         $menu->save();
@@ -166,8 +182,10 @@ class MenuController extends Controller
         $pagetitle = "Edit Menu";
         $suppliers = Supplier::all();
         $categories = Category::all();
+        $parentMenus = Menu::where('category_id', 10)->get();
+
         // You may need to fetch additional data if required for the edit view
-        return view('menu.edit', compact('menu', 'pagetitle', 'suppliers','categories'));
+        return view('menu.edit', compact('menu', 'pagetitle', 'suppliers','categories','parentMenus'));
     }
 
     public function destroy($id)

@@ -19,7 +19,10 @@ class Menu extends Model
         'is_alcohol',
         'alcohol%',
         'stock',
-        'photo'
+        'photo',
+        'is_combo',
+        'parent_id',
+        'combo_quantity'
     ];
 
     public function menu_purchaseds() {
@@ -36,5 +39,12 @@ class Menu extends Model
 
     public function supplier() {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function parent(){
+        return $this->belongsTo(Menu::class);
+    }
+    public function combo(){
+        return $this->hasMany(Menu::class);
     }
 }

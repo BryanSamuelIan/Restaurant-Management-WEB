@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Category;
+use App\Models\Menu;
 use App\Models\Payment_type;
 use App\Models\Transaction_menu;
 use Carbon\Carbon;
@@ -52,49 +53,71 @@ class TransactionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $cartItems = json_decode($request->input('cartItems'), true);
-        $tableNumber = $request->input('tableNumber');
+{
+    $cartItems = json_decode($request->input('cartItems'), true);
+    $tableNumber = $request->input('tableNumber');
 
-        // Validate and store the transaction
-        $transaction = new Transaction([
-            'user_id' => auth()->user()->id, // Assuming you have authentication and a user is logged in
-            'transaction_time' => now(), // You might want to adjust this based on your requirements
-            'payment_type_id' => $request->input('paymentTypeId'),
-            'status_id' => 2,
-            'table_no' => $tableNumber ?? 0,
+    // Validate and store the transaction
+    $transaction = new Transaction([
+        'user_id' => auth()->user()->id,
+        'transaction_time' => now(),
+        'payment_type_id' => $request->input('paymentTypeId'),
+        'status_id' => 2,
+        'table_no' => $tableNumber ?? 0,
+    ]);
+
+    $subtotal = 0;
+
+    // Initialize an array to keep track of decreased stock
+    $decreasedStock = [];
+
+    foreach ($cartItems as $item) {
+        $subtotal += $item['quantity'] * $item['menuPrice'];
+
+        // Decrease the stock of associated menu items
+        $menu = Menu::findOrFail($item['menuId']);
+
+        if ($menu->stock >= $item['quantity']) {
+            $menu->stock -= $item['quantity'];
+            $menu->save();
+
+            // Add menu ID and decreased quantity to the array
+            $decreasedStock[$menu->id] = $item['quantity'];
+        } else {
+            // If there's insufficient stock for any item, revert the stock changes and return an error
+            foreach ($decreasedStock as $menuId => $quantityDecreased) {
+                $menu = Menu::findOrFail($menuId);
+                $menu->stock += $quantityDecreased;
+                $menu->save();
+            }
+
+            return redirect()->back()->with('error', 'Insufficient stock for some items!');
+        }
+    }
+
+    // Assuming no additional charges for now
+    $total = $subtotal;
+
+    $transaction->subtotal = $subtotal;
+    $transaction->total = $total;
+
+    $transaction->save();
+
+    // Attach menu items to the transaction
+    foreach ($cartItems as $item) {
+        $transactionMenu = new Transaction_menu([
+            'transaction_id' => $transaction->id,
+            'menu_id' => $item['menuId'],
+            'amount' => $item['quantity'],
+            'price' => $item['menuPrice']
         ]);
 
-        $subtotal = 0;
-        foreach ($cartItems as $item) {
-            $subtotal += $item['quantity'] * $item['menuPrice'];
-        }
-
-        // Assuming no additional charges for now
-        $total = $subtotal;
-
-        $transaction->subtotal = $subtotal;
-        $transaction->total = $total;
-
-        $transaction->save();
-
-        $transaction->save();
-
-        // Attach menu items to the transaction
-        foreach ($cartItems as $item) {
-            $transactionMenu = new Transaction_menu([
-                'transaction_id' => $transaction->id,
-                'menu_id' => $item['menuId'],
-                'amount' => $item['quantity'],
-                'price' => $item['menuPrice']
-            ]);
-
-            $transactionMenu->save();
-        }
-
-        // Redirect or respond as needed
-        return redirect()->route('transactions.today');
+        $transactionMenu->save();
     }
+
+    // Redirect or respond as needed
+    return redirect()->route('transactions.today');
+}
 
 
 
@@ -234,26 +257,65 @@ class TransactionController extends Controller
     {
         $transaction = Transaction::find($id);
 
-        // Toggle the status (1 to 2, 2 to 6, 6 to 1)
-        switch ($transaction->status_id) {
+        // Store the current status for comparison
+        $currentStatus = $transaction->status_id;
+
+        // Update the status as required
+        // ... (existing code)
+
+        // Assuming status transition from 1 to 2 decreases stock and from 2 to 6 increases stock
+        switch ($currentStatus) {
             case 1:
-                $transaction->status_id = 2;
+                // Check if the updated status is 2
+                if ($transaction->status_id === 2) {
+                    $this->decreaseStock($id);
+                }
                 break;
             case 2:
-                $transaction->status_id = 6;
-                break;
-            case 6:
-                $transaction->status_id = 1;
+                // Check if the updated status is 6
+                if ($transaction->status_id === 6) {
+                    $this->increaseStock($id);
+                }
                 break;
             default:
-                // Handle other cases if needed
+                // Handle other status changes if needed
                 break;
         }
 
-        $transaction->save();
-
-        return response()->json(['status' => $transaction->status]);
+        // ... (remaining code)
     }
+
+    protected function decreaseStock($transactionId)
+    {
+        $transactionMenus = Transaction_menu::where('transaction_id', $transactionId)->get();
+
+        foreach ($transactionMenus as $transactionMenu) {
+            $menu = Menu::findOrFail($transactionMenu->menu_id);
+
+            if ($menu->stock >= $transactionMenu->amount) {
+                $menu->stock -= $transactionMenu->amount;
+                $menu->save();
+            } else {
+                // Handle insufficient stock scenario
+                // You can either revert the status change or handle it based on your requirements
+                return response()->json(['error' => 'Insufficient stock for some items!'], 400);
+            }
+        }
+    }
+
+    protected function increaseStock($transactionId)
+    {
+        $transactionMenus = Transaction_menu::where('transaction_id', $transactionId)->get();
+
+        foreach ($transactionMenus as $transactionMenu) {
+            $menu = Menu::findOrFail($transactionMenu->menu_id);
+
+            // Increase stock by the amount of items originally sold
+            $menu->stock += $transactionMenu->amount;
+            $menu->save();
+        }
+    }
+
 
 
 

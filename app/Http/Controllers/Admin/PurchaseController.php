@@ -28,25 +28,15 @@ class PurchaseController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function edit(string $id)
-{
-    $menus = Menu::where('category_id', 10)->get();
-    $purchaseEdit = Purchase::with(['menus' => function ($query) {
-        $query->withPivot('quantity', 'price'); // Load pivot data
-    }])->find($id);
+    public function create()
+    {
+        $menus = Menu::where('category_id', 10)->get();
 
-    // Check if the purchase was found
-    if ($purchaseEdit) {
-        return view('purchase.edit', [
-            'purchase' => $purchaseEdit,
-            'pagetitle' => "Edit Purchase",
-            'menus' => $menus
+        return view('purchase.create', [
+            'pagetitle' => "Tambah Alkohol",
+            'menus' => $menus,
         ]);
-    } else {
-        // Handle the case where the purchase is not found
-        return redirect()->route('error.page')->with('error', 'Purchase not found');
     }
-}
 
     /**
      * Store a newly created resource in storage.
@@ -68,7 +58,12 @@ class PurchaseController extends Controller
 
         // Attach menus with quantities and prices to the purchase
         foreach ($request->menus as $index => $menuId) {
+            $menu = Menu::find($menuId);
+            $quantity = $request->quantities[$index];
 
+            // Update the menu's stock
+            $menu->stock += $quantity;
+            $menu->save();
             // Create menu_purchased record
             Menu_purchased::create([
                 'purchase_id' => $purchase->id,
@@ -105,58 +100,78 @@ class PurchaseController extends Controller
      */
     public function edit(string $id)
     {
-        $purchaseEdit = Purchase::find($id);
-        return view('purchase.edit', ['purchase' => $purchaseEdit,
-            'pagetitle' => "Edit Purchase"]);
+        $menus = Menu::where('category_id', 10)->get();
+        $purchaseEdit = Purchase::with([
+            'menus' => function ($query) {
+                $query->withPivot('quantity', 'price'); // Load pivot data
+            }
+        ])->find($id);
+
+        // Check if the purchase was found
+        if ($purchaseEdit) {
+            return view('purchase.edit', [
+                'purchase' => $purchaseEdit,
+                'pagetitle' => "Edit Purchase",
+                'menus' => $menus
+            ]);
+        } else {
+            // Handle the case where the purchase is not found
+            return redirect()->route('error.page')->with('error', 'Purchase not found');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    // Validate the request data as needed
+    {
+        // Validate the request data as needed
 
-    // Find the purchase record to update
-    $purchase = Purchase::findOrFail($id);
+        // Find the purchase record to update
+        $purchase = Purchase::findOrFail($id);
 
-    // Update the purchase record
-    $purchase->update([
-        'user_id' => $request->user_id,
-        'name' => $request->name,
-        'description' => $request->description,
-        'transaction_time' => $request->transaction_time,
-        'payment' => $request->payment,
-    ]);
-
-    // Remove existing menu_purchased records for this purchase
-    Menu_purchased::where('purchase_id', $purchase->id)->delete();
-
-    // Attach updated menus with quantities and prices to the purchase
-    foreach ($request->menus as $index => $menuId) {
-
-        // Create menu_purchased record
-        Menu_purchased::create([
-            'purchase_id' => $purchase->id,
-            'menu_id' => $menuId,
-            'quantity' => $request->quantities[$index],
-            'price' => $request->prices[$index],
+        // Update the purchase record
+        $purchase->update([
+            'user_id' => $request->user_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'transaction_time' => $request->transaction_time,
+            'payment' => $request->payment,
         ]);
+
+        // Remove existing menu_purchased records for this purchase
+        Menu_purchased::where('purchase_id', $purchase->id)->delete();
+
+        // Attach updated menus with quantities and prices to the purchase
+        foreach ($request->menus as $index => $menuId) {
+            $menu = Menu::find($menuId);
+            $quantity = $request->quantities[$index];
+
+            // Update the menu's stock
+            $menu->stock += $quantity;
+            $menu->save();
+            // Create menu_purchased record
+            Menu_purchased::create([
+                'purchase_id' => $purchase->id,
+                'menu_id' => $menuId,
+                'quantity' => $request->quantities[$index],
+                'price' => $request->prices[$index],
+            ]);
+        }
+
+        $menuPurchasedRecords = Menu_purchased::where('purchase_id', $purchase->id)->get();
+
+        // Calculate the total from the sum of quantities and prices
+        $total = $menuPurchasedRecords->sum(function ($menuPurchased) {
+            return $menuPurchased->quantity * $menuPurchased->price;
+        });
+
+        // Update the total in the purchase record
+        $purchase->update(['total' => $total]);
+
+        // Redirect or do any additional processing
+        return redirect()->route('admin.purchases');
     }
-
-    $menuPurchasedRecords = Menu_purchased::where('purchase_id', $purchase->id)->get();
-
-    // Calculate the total from the sum of quantities and prices
-    $total = $menuPurchasedRecords->sum(function ($menuPurchased) {
-        return $menuPurchased->quantity * $menuPurchased->price;
-    });
-
-    // Update the total in the purchase record
-    $purchase->update(['total' => $total]);
-
-    // Redirect or do any additional processing
-    return redirect()->route('admin.purchases');
-}
 
     /**
      * Remove the specified resource from storage.
