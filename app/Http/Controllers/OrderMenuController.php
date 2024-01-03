@@ -11,7 +11,8 @@ use App\Models\Payment_type;
 use App\Models\Transaction_menu;
 use Illuminate\Http\Request;
 
-class OrderMenuController extends Controller{
+class OrderMenuController extends Controller
+{
 
 
     public function index()
@@ -33,15 +34,36 @@ class OrderMenuController extends Controller{
 
         // Validate and store the transaction
         $transaction = new Transaction([
-            'payment_type_id' =>1,
+            'payment_type_id' => 1,
             'status_id' => 1,
-            'table_no'=>$tableNumber??0,
-            'user_id'=>null
+            'table_no' => $tableNumber ?? 0,
+            'user_id' => null,
+            'transaction_time' => now(),
         ]);
 
         $subtotal = 0;
         foreach ($cartItems as $item) {
             $subtotal += $item['quantity'] * $item['menuPrice'];
+
+
+            $menu = Menu::findOrFail($item['menuId']);
+
+            if ($menu->stock >= $item['quantity']) {
+                $menu->stock -= $item['quantity'];
+                $menu->save();
+
+                // Add menu ID and decreased quantity to the array
+                $decreasedStock[$menu->id] = $item['quantity'];
+            } else {
+                // If there's insufficient stock for any item, revert the stock changes and return an error
+                foreach ($decreasedStock as $menuId => $quantityDecreased) {
+                    $menu = Menu::findOrFail($menuId);
+                    $menu->stock += $quantityDecreased;
+                    $menu->save();
+                }
+
+                return redirect()->back()->with('error', 'Insufficient stock for some items!');
+            }
         }
 
         // Assuming no additional charges for now
@@ -55,16 +77,16 @@ class OrderMenuController extends Controller{
 
         // Attach menu items to the transaction
         foreach ($cartItems as $item) {
-            if($item['quantity']>0){
-            $transactionMenu = new Transaction_menu([
-                'transaction_id' => $transaction->id,
-                'menu_id' => $item['menuId'],
-                'amount' => $item['quantity'],
-                'price' => $item['menuPrice']
-            ]);
+            if ($item['quantity'] > 0) {
+                $transactionMenu = new Transaction_menu([
+                    'transaction_id' => $transaction->id,
+                    'menu_id' => $item['menuId'],
+                    'amount' => $item['quantity'],
+                    'price' => $item['menuPrice']
+                ]);
 
-            $transactionMenu->save();
-        }
+                $transactionMenu->save();
+            }
         }
 
         // Redirect or respond as needed
