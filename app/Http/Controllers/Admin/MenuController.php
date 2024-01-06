@@ -160,6 +160,7 @@ class MenuController extends Controller
             $menu->stock = $request->input('stock');
             $menu['parent_id'] = $request->input('parent_id'); // Include parent_id from form
             $menu['combo_quantity'] = $request->input('combo_quantity'); // Include combo_quantity from form
+            $menu['is_alcohol']=1;
         } else {
             // Clear alcohol-related fields if the category is not alcohol
             $menu->supplier_id = null;
@@ -167,6 +168,7 @@ class MenuController extends Controller
             $menu->stock = null;
             $menu['parent_id'] = null;
             $menu['combo_quantity'] = null;
+            $menu['is_alcohol']=0;
         }
         $menu['is_combo'] = ($request->input('category_id') == 11 || $request->input('category_id') == 12) ? 1 : 0;
 
