@@ -36,7 +36,7 @@
         <div class="mb-3">
             <label for="banner" class="form-label">Upload Image</label>
             <br>
-            <img src="{{ asset('storage/' . $eventEdit->banner) }}" alt="{{ $eventEdit->name }}"
+            <img src="{{ asset( $eventEdit->banner) }}" alt="{{ $eventEdit->name }}"
                 class="img-preview img-fluid mb-3 col-sm-5" style="display: block;">
             <input type="file" class="form-control" id="banner" name="banner"
                 accept="image/jpg, image/png, image/jpeg" onchange="previewImage()">

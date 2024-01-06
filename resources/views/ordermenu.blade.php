@@ -23,13 +23,13 @@
                                         <div
                                             class="popup hidden bg-white border border-gray-300 shadow-lg rounded-md p-4 absolute bottom-0 right-0 lg:right-40 ">
                                             <img class="w-20 h-20 object-scale-down"
-                                                src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">
+                                                src="{{ asset( $menu->photo) }}" alt="Menu Image">
                                         </div>
                                     @endif
 
                                     <div class="grid grid-cols-3 gap-2 items-center">
                                         <img class="hidden w-24 h-24 object-scale-down"
-                                            src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">
+                                            src="{{ asset( $menu->photo) }}" alt="Menu Image">
                                         <div class="col-span-2">
                                             <span class="font-semibold">{{ $menu->name }}</span>
                                             <p class="text-gray-600 text-xs mt-1">
@@ -61,12 +61,12 @@
                                         <div
                                             class="popup hidden bg-white border border-gray-300 shadow-lg rounded-md p-4 absolute bottom-0 right-0 lg:right-40 ">
                                             <img class="w-20 h-20 object-scale-down"
-                                                src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">
+                                                src="{{ asset( $menu->photo) }}" alt="Menu Image">
                                         </div>
                                     @endif
                                     <div class="grid grid-cols-3 gap-2 items-center">
                                         <img class="hidden w-24 h-24 object-scale-down"
-                                            src="{{ asset('storage/' . $menu->photo) }}" alt="Menu Image">
+                                            src="{{ asset( $menu->photo) }}" alt="Menu Image">
                                         <div class="col-span-2">
                                             <span class="font-semibold">{{ $menu->name }}</span>
                                             <p class="text-gray-600 text-xs mt-1">

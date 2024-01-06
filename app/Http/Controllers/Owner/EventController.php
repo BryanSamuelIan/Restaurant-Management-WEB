@@ -44,7 +44,10 @@ class EventController extends Controller
 
         // Check if the file was uploaded successfully
         if ($request->hasFile('banner')) {
-            $imagePath = $request->file('banner')->store('images', 'public');
+            $imagePath = $request->file('banner');
+            $imageName = time() . '.' . $imagePath->extension();
+            $imagePath->move(public_path('images'), $imageName);
+            $imagePath = 'images/' . $imageName;
 
             // Create Event using validated data
             $event = Event::create([
@@ -99,11 +102,18 @@ class EventController extends Controller
         if ($request->hasFile('banner')) {
 
             if ($event->banner) {
-                Storage::disk('public')->delete($event->banner);
+                $oldBannerPath = public_path($event->banner);
+
+                if (file_exists($oldBannerPath)) {
+                    unlink($oldBannerPath);
+                }
             }
 
 
-            $bannerPath = $request->file('banner')->store('images', 'public');
+            $bannerPath = $request->file('banner');
+            $bannerName = time() . '.' . $bannerPath->extension();
+            $bannerPath->move(public_path('images'), $bannerName);
+            $bannerPath = 'images/' . $bannerName;
 
             $event->update([
                 'name' => $validatedData['name'],
@@ -129,8 +139,10 @@ class EventController extends Controller
         $old = Event::find($id);
 
         if ($old->banner) {
-            if (Storage::disk('public')->exists($old->banner)) {
-                Storage::disk('public')->delete($old->banner);
+            $oldBannerPath = public_path($old->banner);
+
+            if (file_exists($oldBannerPath)) {
+                unlink($oldBannerPath);
             }
         }
         Event::find($id)->delete();

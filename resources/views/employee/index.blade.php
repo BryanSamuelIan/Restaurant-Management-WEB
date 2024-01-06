@@ -30,7 +30,7 @@
                         </td>
                         <td>
                             @if ($employee->ktp)
-                                <img src="{{ asset('storage/' . $employee->ktp) }}" alt="KTP Image"
+                                <img src="{{ asset( $employee->ktp) }}" alt="KTP Image"
                                     style="max-width: 100px; max-height: 100px;">
                             @else
                                 Tidak ada ktp

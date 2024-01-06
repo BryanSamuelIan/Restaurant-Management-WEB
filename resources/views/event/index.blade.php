@@ -17,7 +17,7 @@
                     <tr>
                         <td>{{ $event->name }}</td>
                         <td>
-                            <img src="{{ asset('storage/' . $event->banner) }}" alt="Event Banner" width="100" height="100">
+                            <img src="{{ asset( $event->banner) }}" alt="Event Banner" width="100" height="100">
                         </td>
                         <td>{{ $event->is_active === 1 ? 'Yes' : 'No' }}</td>
                         @if (Auth::user()->isOwner())

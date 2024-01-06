@@ -26,7 +26,7 @@
             <div class="mb-3">
                 <label for="currentImage" class="form-label">KTP</label>
                 @if ($employee->ktp)
-                    <img id="currentImage" src="{{ asset('storage/' . $employee->ktp) }}" alt="Current KTP Image" style="max-width: 50%;">
+                    <img id="currentImage" src="{{ asset( $employee->ktp) }}" alt="Current KTP Image" style="max-width: 50%;">
                 @endif
             </div>
 
