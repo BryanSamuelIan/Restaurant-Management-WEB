@@ -40,12 +40,16 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         if ($request->ktp != null) {
-            $ktpPath = $request->file('ktp')->store('ktp_images', 'public');
+            $imagePath = $request->file('ktp');
+            $imageName = time() . '.' . $imagePath->extension();
+            $imagePath->move(public_path('images'), $imageName);
+            $imagePath = 'images/' . $imageName;
+
             Employee::create([
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'sallary' => $request->sallary,
-                'ktp' => $ktpPath
+                'ktp' => $imagePath
             ]);
         } else {
             Employee::create([
@@ -96,14 +100,16 @@ class EmployeeController extends Controller
 
     public function destroy($id)
     {
-        $employee = Employee::findOrFail($id);
+        $old = Employee::find($id);
 
-        // Delete the associated KTP image if it exists
-        if ($employee->ktp) {
-            Storage::disk('public')->delete($employee->ktp);
+        if ($old->ktp) {
+            $oldBannerPath = public_path($old->ktp);
+
+            if (file_exists($oldBannerPath)) {
+                unlink($oldBannerPath);
+            }
         }
-
-        $employee->delete();
+        Employee::find($id)->delete();
 
         return redirect()->route('owner.employees')->with('success', 'Employee deleted successfully.');
     }
@@ -118,14 +124,20 @@ class EmployeeController extends Controller
 
         // Check if a new KTP image is provided
         if ($request->hasFile('newKtp')) {
-            // Delete the current KTP image from storage if it exists
-            if ($employee->ktp) {
-                Storage::disk('public')->delete($employee->ktp);
-            }
 
-            // Store the new KTP image and update the path
-            $newKtpPath = $request->file('newKtp')->store('ktp_images', 'public');
-            $employee->ktp = $newKtpPath;
+                $oldBannerPath = public_path($employee->ktp);
+
+                if (file_exists($oldBannerPath)) {
+                    unlink($oldBannerPath);
+                }
+
+
+
+            $bannerPath = $request->file('newKtp');
+            $bannerName = time() . '.' . $bannerPath->extension();
+            $bannerPath->move(public_path('images'), $bannerName);
+            $bannerPath = 'images/' . $bannerName;
+            $employee->ktp=$bannerPath;
         }
 
         // Save the changes to the employee

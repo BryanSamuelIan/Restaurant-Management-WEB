@@ -51,7 +51,7 @@
 
             @if ($menu->photo)
                 <br>
-                <img src="{{ asset('storage/' . $menu->photo) }}" alt="{{ $menu->name }}"
+                <img src="{{ asset( $menu->photo) }}" alt="{{ $menu->name }}"
                     class="img-preview img-fluid mb-3 col-sm-5" style="display: block;">
             @else
                 <img class="img-preview img-fluid mb-3 col-sm-5 mx-auto">

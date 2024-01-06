@@ -98,7 +98,10 @@ class MenuController extends Controller
         // Handle photo upload
         $photoPath = null;
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('menu_photos', 'public');
+            $photoPath = $request->file('photo');
+            $imageName = time() . '.' . $photoPath->extension();
+            $photoPath->move(public_path('images'), $imageName);
+            $photoPath = 'images/' . $imageName;
         }
 
         // Create a new menu using create method
@@ -144,13 +147,19 @@ class MenuController extends Controller
 
         // Check if a new photo is provided
         if ($request->hasFile('photo')) {
-            // Delete the old photo, if exists
             if ($menu->photo) {
-                Storage::disk('public')->delete($menu->photo);
+                $oldBannerPath = public_path($menu->photo);
+
+                if (file_exists($oldBannerPath)) {
+                    unlink($oldBannerPath);
+                }
             }
 
-            // Store the new photo
-            $menu->photo = $request->file('photo')->store('menu_photos', 'public');
+
+            $bannerPath = $request->file('photo');
+            $bannerName = time() . '.' . $bannerPath->extension();
+            $bannerPath->move(public_path('images'), $bannerName);
+            $bannerPath = 'images/' . $bannerName;
         }
 
         // Update the category and supplier information for alcohol categories
@@ -161,6 +170,7 @@ class MenuController extends Controller
             $menu['parent_id'] = $request->input('parent_id'); // Include parent_id from form
             $menu['combo_quantity'] = $request->input('combo_quantity'); // Include combo_quantity from form
             $menu['is_alcohol']=1;
+            $menu['photo']=$bannerPath;
         } else {
             // Clear alcohol-related fields if the category is not alcohol
             $menu->supplier_id = null;
@@ -169,6 +179,7 @@ class MenuController extends Controller
             $menu['parent_id'] = null;
             $menu['combo_quantity'] = null;
             $menu['is_alcohol']=0;
+            $menu['photo']=$bannerPath;
         }
         $menu['is_combo'] = ($request->input('category_id') == 11 || $request->input('category_id') == 12) ? 1 : 0;
 
@@ -193,7 +204,7 @@ class MenuController extends Controller
 
     public function destroy($id)
     {
-        $menu = Menu::findOrFail($id);
+
 
         // You may want to delete related records or perform additional actions
 
@@ -201,12 +212,14 @@ class MenuController extends Controller
 
         $old = Menu::find($id);
 
-        if ($old->banner) {
-            if (Storage::disk('public')->exists($old->photo)) {
-                Storage::disk('public')->delete($old->photo);
+        if ($old->photo) {
+            $oldBannerPath = public_path($old->photo);
+
+            if (file_exists($oldBannerPath)) {
+                unlink($oldBannerPath);
             }
         }
-        $menu->delete();
+        Menu::find($id)->delete();
 
         return redirect()->route('admin.foods')->with('success', 'Menu deleted successfully');
     }
