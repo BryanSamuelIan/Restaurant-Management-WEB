@@ -108,6 +108,7 @@ class MenuController extends Controller
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'photo' => $photoPath,
+            'is_alcohol' => 0,
             'is_combo' => ($request->input('category_id') == 11 || $request->input('category_id') == 12) ? 1 : 0,
 
 
