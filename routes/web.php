@@ -113,6 +113,10 @@ Route::group([
     Route::post('/expense/store', [AExpenseController::class, 'store'])->name('expenses.store');
     Route::post('/purchase/store', [APurchaseController::class, 'store'])->name('purchase.store');
 
+    Route::get('/supplier/{id}/edit', [ASupplierController::class, 'edit'])->name('supplier.edit');
+    Route::post('/supplier/{id}/update', [ASupplierController::class, 'update'])->name('supplier.update');
+    Route::delete('/supplier/{id}/destroy', [ASupplierController::class, 'destroy'])->name('supplier.destroy');
+
     Route::get('/expense/{id}/edit', [AExpenseController::class, 'edit'])->name('expense.edit');
     Route::post('/expense/{id}/update', [AExpenseController::class, 'update'])->name('expense.update');
     Route::delete('/expense/{id}/destroy', [AExpenseController::class, 'destroy'])->name('expense.destroy');
@@ -154,6 +158,12 @@ Route::group([
     Route::get('/purchase/{id}/edit', [PurchaseController::class, 'edit'])->name('purchase.edit');
     Route::post('/purchase/{id}/update', [PurchaseController::class, 'update'])->name('purchase.update');
     Route::delete('/purchase/{id}/destroy', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
+
+
+
+    Route::get('/supplier/{id}/edit', [SupplierController::class, 'edit'])->name('supplier.edit');
+    Route::post('/supplier/{id}/update', [SupplierController::class, 'update'])->name('supplier.update');
+    Route::delete('/supplier/{id}/destroy', [SupplierController::class, 'destroy'])->name('supplier.destroy');
 
     Route::get('/menus/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
     Route::put('/menus/{id}', [MenuController::class, 'update'])->name('menu.update');

@@ -13,6 +13,7 @@ class SupplierSeeder extends Seeder
                 'name' => 'Toko Minuman Horizon',
                 'address' => 'Jl. Rungkut Industri Kidul No.25, Rungkut Kidul, Kec. Rungkut, Surabaya, Jawa Timur 60293',
                 'phone' => '0851-0479-5839',
+
             ],
             [
                 'name' => 'PT. Tirta Investama Pabrik Pandaan (Aqua Danone)',
@@ -28,6 +29,7 @@ class SupplierSeeder extends Seeder
                 'name' => 'Orang Tua Group',
                 'address' => 'Jl. Panjang Jiwo No.48-50, Panjang Jiwo, Kec. Tenggilis Mejoyo, Surabaya, Jawa Timur 60299',
                 'phone' => '031-8437138',
+                'email'=>'customercare@ot.id'
             ],
         ];
 

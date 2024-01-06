@@ -6,11 +6,11 @@
 
         @if (Auth::user()->isAdmin())
             <form action="{{ route('admin.menu.store') }}" method="post" enctype="multipart/form-data">
-            @endauth
-            @if (Auth::user()->isOwner())
-                <form action="{{ route('owner.menu.store') }}" method="post" enctype="multipart/form-data">
-                @endauth
-                @csrf
+        @endif
+        @if (Auth::user()->isOwner())
+            <form action="{{ route('owner.menu.store') }}" method="post" enctype="multipart/form-data">
+        @endif
+        @csrf
 
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Jenis Menu</label>
@@ -40,9 +40,9 @@
 
                 <div class="mb-3">
                     <label for="photo" class="form-label">Foto produk</label>
-                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                    <img class="img-preview img-fluid mb-3 col-sm-5" style="display: none;">
+                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*" onchange="previewImage(this)">
                 </div>
-
 
 
 
@@ -100,5 +100,18 @@
             alkoholFields.style.display = 'none';
         }
     });
+
+
+    function previewImage(input) {
+            const imgPreview = $(".img-preview");
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgPreview.attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                imgPreview.css('display', 'block');
+            }
+        }
 </script>
 @endsection

@@ -42,7 +42,7 @@ class SupplierController extends Controller
         ]);
 
         // Redirect to the suppliers index page or any other desired route
-        return redirect()->route('suppliers.index');
+        return redirect()->route('owner.suppliers');
     }
 
     /**
@@ -56,24 +56,52 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Supplier $supplier)
+    public function show(Supplier $supplier)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $supplierEdit = Supplier::find($id);
+        return view('supplier.edit', [
+            'supplier' => $supplierEdit,
+            'pagetitle' => "Supplier Event"
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSupplierRequest $request, Supplier $supplier)
+    public function update(Request $request, string $id)
     {
-        //
+
+
+
+        $supplier = Supplier::find($id);
+
+
+        $supplier->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'email' => $request->email
+        ]);
+
+
+        return redirect()->route('owner.suppliers');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Supplier $supplier)
+    public function destroy(string $id)
     {
-        //
+        Supplier::find($id)->delete();
+        return redirect()->route('owner.suppliers');
+
     }
 }
