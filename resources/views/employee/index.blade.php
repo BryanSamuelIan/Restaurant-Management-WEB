@@ -9,8 +9,8 @@
                     <th>Nama</th>
                     <th>Phone Number</th>
                     <th>Gaji</th>
-                    <th>KTP</th>
                     <th>Status</th>
+                    <th>KTP</th>
                     <th>Actions</th> <!-- New column for actions -->
                 </tr>
             </thead>

@@ -24,9 +24,14 @@
                             <td>
                                 <a href="{{ route('owner.event.edit', ['id' => $event->id]) }}"
                                     class="btn btn-primary">Edit</a>
-                          
-                                <a href="{{ route('owner.event.destroy', ['id' => $event->id]) }}"
-                                    class="btn btn-danger">Delete</a>
+
+                                    <form action="{{ route('owner.event.destroy', $event->id) }}" method="post"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
                             </td>
                         @else(Auth::user()->isAdmin())
                             <td>
@@ -35,12 +40,13 @@
 
 
 
-                                <form action="{{ route('admin.event.destroy', $event['id']) }}" method="POST">
-                                    @method('delete')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger" id="delete"
-                                        name="delete">Delete</button>
-                                </form>
+                                    <form action="{{ route('admin.event.destroy', $event->id) }}" method="post"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
 
                             </td>
                         @endif
