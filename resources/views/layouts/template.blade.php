@@ -98,7 +98,7 @@
                             <div class="mr-6">
                                 <h2 class="mb-6 text-sm font-semibold text-black uppercase dark:text-white">About
                                 </h2>
-                                <ul class="text-black dark:text-black font-medium">
+                                <ul class="text-black dark:text-gray-400 font-medium">
                                     <li class="mb-4">
                                         <a href="{{ route('about') }}#history" class="hover:underline">History</a>
                                     </li>

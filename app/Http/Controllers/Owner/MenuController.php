@@ -197,7 +197,13 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
 
         // You may want to delete related records or perform additional actions
+        $old = Menu::find($id);
 
+        if ($old->banner) {
+            if (Storage::disk('public')->exists($old->photo)) {
+                Storage::disk('public')->delete($old->photo);
+            }
+        }
         // Delete the menu
         $menu->delete();
 

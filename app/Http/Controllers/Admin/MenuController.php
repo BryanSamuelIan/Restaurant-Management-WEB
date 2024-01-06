@@ -198,6 +198,14 @@ class MenuController extends Controller
         // You may want to delete related records or perform additional actions
 
         // Delete the menu
+
+        $old = Menu::find($id);
+
+        if ($old->banner) {
+            if (Storage::disk('public')->exists($old->photo)) {
+                Storage::disk('public')->delete($old->photo);
+            }
+        }
         $menu->delete();
 
         return redirect()->route('admin.foods')->with('success', 'Menu deleted successfully');
