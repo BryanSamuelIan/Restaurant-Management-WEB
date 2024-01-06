@@ -90,16 +90,16 @@
 <script>
     // JavaScript to toggle fields based on selected category
     document.getElementById('category_id').addEventListener('change', function() {
-        var selectedCategoryId = parseInt(this.value);
-        var isAlcoholCategory = [10, 11, 12].includes(selectedCategoryId);
-        var alkoholFields = document.getElementById('alkohol-fields');
+            var selectedCategoryId = parseInt(this.value);
+            var isAlcoholCategory = [10, 11, 12].includes(selectedCategoryId);
+            var alkoholFields = document.getElementById('alkohol-fields');
 
-        if (isAlcoholCategory) {
-            alkoholFields.style.display = 'block';
-        } else {
-            alkoholFields.style.display = 'none';
-        }
-    });
+            if (isAlcoholCategory) {
+                alkoholFields.style.display = 'block';
+            } else {
+                alkoholFields.style.display = 'none';
+            }
+        });
 
 
     function previewImage(input) {
