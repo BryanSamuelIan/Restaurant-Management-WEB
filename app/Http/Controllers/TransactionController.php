@@ -81,17 +81,13 @@ class TransactionController extends Controller
             $menu->stock -= $item['quantity'];
             $menu->save();
 
-            // Add menu ID and decreased quantity to the array
-            $decreasedStock[$menu->id] = $item['quantity'];
-        } else {
-            // If there's insufficient stock for any item, revert the stock changes and return an error
-            foreach ($decreasedStock as $menuId => $quantityDecreased) {
-                $menu = Menu::findOrFail($menuId);
-                $menu->stock += $quantityDecreased;
-                $menu->save();
-            }
 
-            return redirect()->back()->with('error', 'Insufficient stock for some items!');
+
+        }
+        if ($menu->is_combo == 1) {
+            $parent = Menu::findOrFail($menu->parent_id);
+            $parent->stock -= ($menu->combo_quantity * $item['quantity']);
+            $parent->save();
         }
     }
 
@@ -256,31 +252,42 @@ class TransactionController extends Controller
     public function updateStatus($id)
     {
         $transaction = Transaction::find($id);
-
-        // Store the current status for comparison
-        $currentStatus = $transaction->status_id;
-
-        // Update the status as required
-        // ... (existing code)
-
-        // Assuming status transition from 1 to 2 decreases stock and from 2 to 6 increases stock
-        switch ($currentStatus) {
+        switch ($transaction->status_id) {
             case 1:
-                // Check if the updated status is 2
-                if ($transaction->status_id === 2) {
-                    $this->decreaseStock($id);
-                }
+                $transaction->status_id = 2;
                 break;
             case 2:
-                // Check if the updated status is 6
-                if ($transaction->status_id === 6) {
+                $transaction->status_id = 6;
+                break;
+            case 6:
+                $transaction->status_id = 1;
+                break;
+            default:
+                // Handle other cases if needed
+                break;
+        }
+        $transaction->save();
+        // Store the current status for comparison
+        $currentStatus = $transaction->status_id;
+        switch ($currentStatus) {
+            case 2:
+
+                    $this->decreaseStock($id);
+
+                break;
+            case 6:
+
                     $this->increaseStock($id);
-                }
+
+
                 break;
             default:
                 // Handle other status changes if needed
                 break;
         }
+
+
+        return response()->json(['status' => $transaction->status]);
 
         // ... (remaining code)
     }
@@ -295,10 +302,11 @@ class TransactionController extends Controller
             if ($menu->stock >= $transactionMenu->amount) {
                 $menu->stock -= $transactionMenu->amount;
                 $menu->save();
-            } else {
-                // Handle insufficient stock scenario
-                // You can either revert the status change or handle it based on your requirements
-                return response()->json(['error' => 'Insufficient stock for some items!'], 400);
+            }
+            if ($menu->is_combo == 1) {
+                $parent = Menu::findOrFail($menu->parent_id);
+                $parent->stock -= ($menu->combo_quantity * $transactionMenu['amount']);
+                $parent->save();
             }
         }
     }
@@ -313,6 +321,13 @@ class TransactionController extends Controller
             // Increase stock by the amount of items originally sold
             $menu->stock += $transactionMenu->amount;
             $menu->save();
+
+
+            if ($menu->is_combo == 1) {
+                $parent = Menu::findOrFail($menu->parent_id);
+                $parent->stock += ($menu->combo_quantity * $transactionMenu['amount']);
+                $parent->save();
+            }
         }
     }
 

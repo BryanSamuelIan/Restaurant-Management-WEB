@@ -123,6 +123,7 @@ class MenuController extends Controller
             $menuData['supplier_id'] = $request->input('supplier_id');
             $menuData['alcohol%'] = $request->input('alcohol_percentage');
             $menuData['is_alcohol'] = 1;
+            $menuData['stock'] = $request->input('stock');
             $menuData['parent_id'] = $request->input('parent_id'); // Include parent_id from form
             $menuData['combo_quantity'] = $request->input('combo_quantity'); // Include combo_quantity from form
         }
@@ -160,6 +161,7 @@ class MenuController extends Controller
             $bannerName = time() . '.' . $bannerPath->extension();
             $bannerPath->move(public_path('images'), $bannerName);
             $bannerPath = 'images/' . $bannerName;
+            $menu['photo']=$bannerPath;
         }
 
         // Update the category and supplier information for alcohol categories
@@ -170,7 +172,7 @@ class MenuController extends Controller
             $menu['parent_id'] = $request->input('parent_id'); // Include parent_id from form
             $menu['combo_quantity'] = $request->input('combo_quantity'); // Include combo_quantity from form
             $menu['is_alcohol']=1;
-            $menu['photo']=$bannerPath;
+
         } else {
             // Clear alcohol-related fields if the category is not alcohol
             $menu->supplier_id = null;
@@ -179,7 +181,7 @@ class MenuController extends Controller
             $menu['parent_id'] = null;
             $menu['combo_quantity'] = null;
             $menu['is_alcohol']=0;
-            $menu['photo']=$bannerPath;
+
         }
         $menu['is_combo'] = ($request->input('category_id') == 11 || $request->input('category_id') == 12) ? 1 : 0;
 

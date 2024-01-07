@@ -81,6 +81,10 @@
                         <label for="combo_quantity" class="form-label">Combo Quantity</label>
                         <input type="number" class="form-control" id="combo_quantity" name="combo_quantity">
                     </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input type="number" class="form-control" id="stock" name="stock">
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Create Menu</button>

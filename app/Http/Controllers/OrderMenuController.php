@@ -46,24 +46,19 @@ class OrderMenuController extends Controller
             $subtotal += $item['quantity'] * $item['menuPrice'];
 
 
-            $menu = Menu::findOrFail($item['menuId']);
+            // $menu = Menu::findOrFail($item['menuId']);
 
-            if ($menu->stock >= $item['quantity']) {
-                $menu->stock -= $item['quantity'];
-                $menu->save();
+            // if ($menu->stock >= $item['quantity']) {
+            //     $menu->stock -= $item['quantity'];
+            //     $menu->save();
 
-                // Add menu ID and decreased quantity to the array
-                $decreasedStock[$menu->id] = $item['quantity'];
-            } else {
-                // If there's insufficient stock for any item, revert the stock changes and return an error
-                foreach ($decreasedStock as $menuId => $quantityDecreased) {
-                    $menu = Menu::findOrFail($menuId);
-                    $menu->stock += $quantityDecreased;
-                    $menu->save();
-                }
-
-                return redirect()->back()->with('error', 'Insufficient stock for some items!');
-            }
+            //     // Add menu ID and decreased quantity to the array
+            // }
+            // if ($menu->is_combo == 1) {
+            //     $parent = Menu::findOrFail($menu->parent_id);
+            //     $parent->stock -= ($menu->combo_quantity * $item['quantity']);
+            //     $parent->save();
+            // }
         }
 
         // Assuming no additional charges for now
