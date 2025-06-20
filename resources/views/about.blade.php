@@ -2,7 +2,7 @@
 
 @section('content')
 <div  class="container  lg:px-40">
-    
+
     <div id="history" class="container mx-auto py-8 ">
 
         <div
@@ -15,7 +15,7 @@
 
             <div
                 class="lg:w-1/3 md:pl-0 flex-shrink-0 flex flex-col pt-5 md:pt-0 md:mx-auto sm:text-center lg:text-left sm:mx-auto">
-                <h2 class="text-lg md:text-3xl text-amber-500 font-bold mb-4">Melayani sejak 2022</h2>
+                <h2 class="text-lg md:text-3xl text-amber-500 font-bold mb-4">Tentang Kami</h2>
                 <img src="\images\LogoGreen.jpeg" alt="Onoe iki Logo"
                     class="mb-4 w-full h-auto md:w-48 sm:w-36 rounded-lg shadow-md sm:mx-auto lg:mx-0 hidden sm:block">
             </div>
